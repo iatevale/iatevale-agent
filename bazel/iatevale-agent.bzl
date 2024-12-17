@@ -6,6 +6,7 @@ def iatevale_agent_java_deps():
             "org.json:json:20210307",
             "org.assertj:assertj-core:3.4.1",
             "org.hamcrest:hamcrest:2.2",
+            "com.google.cloud:google-cloud-datastore:2.14.1",
         ],
         repositories = [
             "https://repo1.maven.org/maven2",
