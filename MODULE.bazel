@@ -1,8 +1,18 @@
-###############################################################################
-# Bazel now uses Bzlmod by default to manage external dependencies.
-# Please consider migrating your external dependencies from WORKSPACE to MODULE.bazel.
-#
-# For more details, please check https://github.com/bazelbuild/bazel/issues/18958
-###############################################################################
 
-bazel_dep(name = "rules_java", version = "8.6.2")
+module(
+    name = "iatevale-agent",
+    version = "0.0.1",
+    compatibility_level = 1,
+)
+
+bazel_dep(name = "rules_jvm_external", version = "6.6")
+bazel_dep(name = "googleapis", version = "0.0.0-20240819-fe8ba054a")
+bazel_dep(name = "rules_oci", version = "2.2.0")
+bazel_dep(name = "platforms", version = "0.0.10")
+bazel_dep(name = "rules_pkg", version = "1.0.1")
+
+# Usa un registro local si no quieres depender de Bzlmod Central Registry (BCR)
+# local_path_override(
+#     module_name = "rules_jvm_external",
+#     path = "/path/to/rules_jvm_external", # Reemplaza con la ruta real
+# )

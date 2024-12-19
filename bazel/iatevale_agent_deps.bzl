@@ -9,6 +9,7 @@ def iatevale_agent_deps():
             "org.assertj:assertj-core:3.4.1",
             "org.hamcrest:hamcrest:2.2",
             "com.google.cloud:google-cloud-datastore:2.14.1",
+            "com.google.cloud:google-cloud-storaje:2.45.0",
             "com.google.cloud:google-cloud-aiplatform:3.56.0",
             "com.google.inject:guice:6.0.0",
             "com.moandjiezana.toml:toml4j:0.7.2",
