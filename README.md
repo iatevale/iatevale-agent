@@ -1,7 +1,35 @@
 # iatevale-agent
 
+El objetivo de este repositorio es hacer todo tipo de pruebas con la IA Generative de Gemini
+para explorar su uso practico integrandola en otros desarrollos.
 
-### Despliegue de aplicaciones en gcloud cloud run
+Por tanto es puramente especulativo y puede sufrir refactorizaciones drasticas. 
+
+Para ser productivos se utilizaran los productos de gcloud y por tanto estos productos
+tambien seran parte del proceso de aprendizaje.
+
+El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el sistema nativo de los productos de Google.
+
+## Estructura del repositorio
+
+| Directorio     | Contenido                 |
+|----------------|---------------------------|
+| /bazel         | Scripts bazel en Starlark |
+| /java          | Codigo java               |
+| /java/platform | Componentes que se pueden cablear con los productos mediante inyeccion |
+| /java/products | Productos generados |
+| /java/examples | Ejemplos de usos de las tecnologias |
+| /proto         | Ficheros Protobuf |
+
+## Agente **iatevale-agent**
+
+### Funcionalidades
+
+La idea es que nos permita realizar experimentos de interaccion con Gemini 
+
+### Despliegue en en gcloud cloud run 
+
+de aplicaciones en gcloud cloud run
 
 En el directorio deploy existe dos ficheros encargados para la construcción y despliegue de aplicaciones.
 
