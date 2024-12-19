@@ -103,8 +103,8 @@
     "https://bcr.bazel.build/modules/protobuf/23.1/MODULE.bazel": "88b393b3eb4101d18129e5db51847cd40a5517a53e81216144a8c32dfeeca52a",
     "https://bcr.bazel.build/modules/protobuf/26.0.bcr.2/MODULE.bazel": "62e0b84ca727bdeb55a6fe1ef180e6b191bbe548a58305ea1426c158067be534",
     "https://bcr.bazel.build/modules/protobuf/27.0/MODULE.bazel": "7873b60be88844a0a1d8f80b9d5d20cfbd8495a689b8763e76c6372998d3f64c",
-    "https://bcr.bazel.build/modules/protobuf/29.1/MODULE.bazel": "557c3457560ff49e122ed76c0bc3397a64af9574691cb8201b4e46d4ab2ecb95",
-    "https://bcr.bazel.build/modules/protobuf/29.1/source.json": "04cca85dce26b895ed037d98336d860367fe09919208f2ad383f0df1aff63199",
+    "https://bcr.bazel.build/modules/protobuf/29.2/MODULE.bazel": "5435497c190d86f79b0568698c45044df7c8d97692886cda9fe9cf9053aea712",
+    "https://bcr.bazel.build/modules/protobuf/29.2/source.json": "fe7090cc34072609b26d9beafb122916dabc1d47ba61b242c26c4b06c51384ab",
     "https://bcr.bazel.build/modules/protobuf/3.19.0/MODULE.bazel": "6b5fbb433f760a99a22b18b6850ed5784ef0e9928a72668b66e4d7ccd47db9b0",
     "https://bcr.bazel.build/modules/protobuf/3.19.2/MODULE.bazel": "532ffe5f2186b69fdde039efe6df13ba726ff338c6bc82275ad433013fa10573",
     "https://bcr.bazel.build/modules/protobuf/3.19.6/MODULE.bazel": "9233edc5e1f2ee276a60de3eaa47ac4132302ef9643238f23128fea53ea12858",
@@ -1601,7 +1601,7 @@
     "@@rules_python~//python/extensions:python.bzl%python": {
       "general": {
         "bzlTransitiveDigest": "8vDKUdCc6qEk2/YsFiPsFO1Jqgl+XPFRklapOxMAbE8=",
-        "usagesDigest": "MdtWYgvTGTGyU2XaovZWqU/WHdxoVBFDW6WA8nO5FK4=",
+        "usagesDigest": "OSBSvkYp2ujzs3+CkuxNewWzMxLTaTocrcgy4d8XbDk=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {
