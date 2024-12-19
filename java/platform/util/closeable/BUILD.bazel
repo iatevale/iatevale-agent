@@ -8,6 +8,5 @@ java_library(
     ],
     deps = [
         "@maven//:com_google_inject_guice",
-        "@maven//:javax_inject_javax_inject",
     ],
 )

@@ -2,3 +2,4 @@
 build --tool_java_runtime_version=21
 build --tool_java_language_version=21
 
+common --enable_bzlmod
