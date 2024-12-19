@@ -7,6 +7,11 @@ def iatevale_agent_java_deps():
             "org.assertj:assertj-core:3.4.1",
             "org.hamcrest:hamcrest:2.2",
             "com.google.cloud:google-cloud-datastore:2.14.1",
+            "com.google.inject:guice:6.0.0",
+            "com.moandjiezana.toml:toml4j:0.7.2",
+            "com.google.code.gson:gson:2.10.1",
+            "org.slf4j:slf4j-api:2.0.7",
+            "org.slf4j:slf4j-jdk14:2.0.7",
         ],
         repositories = [
             "https://repo1.maven.org/maven2",

@@ -6,5 +6,8 @@ java_binary(
     main_class = "org.iatevale.app.helloworld.HelloWorld",
     visibility = ["//visibility:public"],
     deps = [
+        "//java/platform/server/helloword:helloworld",
+        "//java/platform/util/closeable",
+        "@maven//:com_google_inject_guice",
     ],
 )

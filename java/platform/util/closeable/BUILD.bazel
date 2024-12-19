@@ -1,0 +1,13 @@
+package(default_visibility = ["//visibility:public"])
+
+java_library(
+    name = "closeable",
+    srcs = glob(["src/main/java/**/*.java"]),
+    exports = [
+        "@maven//:com_google_inject_guice",
+    ],
+    deps = [
+        "@maven//:com_google_inject_guice",
+        "@maven//:javax_inject_javax_inject",
+    ],
+)
