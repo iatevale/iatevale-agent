@@ -8,12 +8,13 @@ import org.iatevale.server.agentserver.AgentServer;
 
 import java.util.logging.Level;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class IatevaleAgent {
 
     final static private String APP_NAME = "IAtevale Agent";
 
-    static final public java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(IatevaleAgent.class.getName().replace("org.iatevale.", ""));
+    static final public java.util.logging.Logger LOGGER = Logger.getLogger(IatevaleAgent.class.getName().replace("org.iatevale.", ""));
 
     static volatile private boolean finishServer = false;
 
@@ -41,7 +42,7 @@ public class IatevaleAgent {
             final AgentServer agentServer = closeableInjector.getInstance(AgentServer.class);
 
             // El threda principal debe esperar a que se dentenga el Gateway
-            LOGGER.info("El servidor se ha iniciado correctamente y ahora el thread principal entra en espera...");
+            LOGGER.info("El agente se ha iniciado correctamente y ahora el thread principal entra en espera...");
             while (!finishServer) {
                 synchronized (IatevaleAgent.class) {
                     try {
@@ -60,7 +61,7 @@ public class IatevaleAgent {
             System.exit(0);
 
         } catch (Throwable ex) {
-            LOGGER.log(Level.SEVERE, "Se ha producido un error inesperado en el arranque del servidor !!!", ex);
+            LOGGER.log(Level.SEVERE, "Se ha producido un error inesperado en el arranque del agente !!!", ex);
             System.exit(1);
         }
 
