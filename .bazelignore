@@ -1,5 +1,4 @@
 deploy
 java/example
 java/platform/server
-java/platform/util/closeable
 java/product
