@@ -12,19 +12,7 @@ El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el
 
 ## La web mas importante
 
-(https://ai.google.dev)
-
-## Estructura del repositorio
-
-| Directorio     | Contenido                 |
-|----------------|---------------------------|
-| /bazel         | Scripts bazel en Starlark |
-| /deploy | Scripts de despliega de algunos productos en GCloud |
-| /java          | Codigo java               |
-| /java/platform | Componentes que se pueden cablear con los productos mediante inyeccion |
-| /java/products | Productos generados |
-| /java/examples | Ejemplos de usos de las tecnologias |
-| /proto         | Ficheros Protobuf |
+[Pagina oficial](https://ai.google.dev)
 
 ## Librerias
 
@@ -37,6 +25,19 @@ Este nivel requiere generar el codigo del lenguaje correspondiente mediante Baze
 ### Documentacion de entrada
 
 La pagina principal es [esta](https://cloud.google.com/apis)
+
+Documetacion de APIs especifica para IA:
+
+* [API para IA](https://ai.google.dev/api)
+
+* [API para Gemini](https://ai.google.dev/gemini-api)
+
+Aunque tambien sugieren que para utilizar nuestros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
+```
+Own your AI with Gemma open models
+Build custom AI solutions and retain complete control. 
+Tailor Gemma models, built from the same research and technology as Gemini, with your own data.
+```
 
 ### Especificamente para java
 
@@ -51,20 +52,23 @@ Algunas librerias interesantes para las pruebas:
 | https://github.com/googleapis/java-storage-nio | Google NIO Filesystem Provider for Google Cloud Storage Client for Java                                             |
 | https://github.com/googleapis/java-storage     |Google Cloud Storage Client for Java                    |
 
-Documetacion de APIs especifica para IA
+Documentacion de ejemplos -> https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 
-[API para IA](https://ai.google.dev/api)
+Repositorio de ejemplos para java/Android -> https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 
-[API para Gemini](https://ai.google.dev/gemini-api)
+Cookbook -> https://github.com/google-gemini/cookbook
 
-Aunque tambien sugieren que para utilizar nuestros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
-```
-Own your AI with Gemma open models
-Build custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gemini, with your own data.
-En cada uno de lso repositorios hay documentacion y ejemplos.
-```
+## Estructura del repositorio
 
-**En fin, aqui empieza el lio de verdad...**
+| Directorio     | Contenido                 |
+|----------------|---------------------------|
+| /bazel         | Scripts bazel en Starlark |
+| /deploy | Scripts de despliega de algunos productos en GCloud |
+| /java          | Codigo java               |
+| /java/platform | Componentes que se pueden cablear con los productos mediante inyeccion |
+| /java/products | Productos generados |
+| /java/examples | Ejemplos de usos de las tecnologias |
+| /proto         | Ficheros Protobuf |
 
 ## Agente **iatevale-agent**
 
