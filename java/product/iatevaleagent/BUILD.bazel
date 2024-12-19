@@ -3,7 +3,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 java_binary(
     name = "iatevaleagent",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "iateagent",
+    main_class = "org.iatevale.app.iatevaleagent.IAtevaleAgent",
     visibility = ["//visibility:public"],
     deps = [
         "//java/platform/server/agent",

@@ -10,11 +10,11 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class IatevaleAgent {
+public class IAtevaleAgent {
 
     final static private String APP_NAME = "IAtevale Agent";
 
-    static final public java.util.logging.Logger LOGGER = Logger.getLogger(IatevaleAgent.class.getName().replace("org.iatevale.", ""));
+    static final public java.util.logging.Logger LOGGER = Logger.getLogger(IAtevaleAgent.class.getName().replace("org.iatevale.", ""));
 
     static volatile private boolean finishServer = false;
 
@@ -30,7 +30,7 @@ public class IatevaleAgent {
             CloseableInjector closeableInjector = Guice.createInjector(
                     Stage.PRODUCTION,
                     new CloseableModule(),
-                    new IatevaleAgentModule()
+                    new IAtevaleAgentModule()
             ).getInstance(CloseableInjector.class);
 
             // Se planifica una tarea para cuando se reciba la senyal de parada
@@ -44,9 +44,9 @@ public class IatevaleAgent {
             // El threda principal debe esperar a que se dentenga el Gateway
             LOGGER.info("El agente se ha iniciado correctamente y ahora el thread principal entra en espera...");
             while (!finishServer) {
-                synchronized (IatevaleAgent.class) {
+                synchronized (IAtevaleAgent.class) {
                     try {
-                        IatevaleAgent.class.wait(2000);
+                        IAtevaleAgent.class.wait(2000);
                     } catch (InterruptedException e) {
                     }
                 }
@@ -72,12 +72,12 @@ public class IatevaleAgent {
         @Override
         public void run() {
 
-            IatevaleAgent.LOGGER.info("Se ha solicitado la parada ...");
+            IAtevaleAgent.LOGGER.info("Se ha solicitado la parada ...");
 
             // Se despierta el thread principal para que evalue si tiene que parar
-            synchronized (IatevaleAgent.class) {
-                IatevaleAgent.finishServer = true;
-                IatevaleAgent.class.notifyAll();
+            synchronized (IAtevaleAgent.class) {
+                IAtevaleAgent.finishServer = true;
+                IAtevaleAgent.class.notifyAll();
             }
 
         }

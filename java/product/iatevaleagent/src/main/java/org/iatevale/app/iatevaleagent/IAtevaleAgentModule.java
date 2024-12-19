@@ -2,9 +2,9 @@ package org.iatevale.app.iatevaleagent;
 
 import com.google.inject.AbstractModule;
 
-public class IatevaleAgentModule extends AbstractModule {
+public class IAtevaleAgentModule extends AbstractModule {
 
-    public IatevaleAgentModule() {
+    public IAtevaleAgentModule() {
     }
 
     @Override
