@@ -10,7 +10,7 @@
 #load("@rules_oci//oci:repositories.bzl", "oci_register_toolchains")
 #
 #oci_register_toolchains()
-#
-#load("//bazel:iatevale_agent_deps.bzl", "iatevale_agent_deps")
-#
-#iatevale_agent_deps()
+
+load("//bazel:iatevale_agent_deps.bzl", "iatevale_agent_deps")
+
+iatevale_agent_deps()
