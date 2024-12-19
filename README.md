@@ -10,6 +10,10 @@ tambien seran parte del proceso de aprendizaje.
 
 El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el sistema nativo de los productos de Google.
 
+## La web mas importante
+
+(https://ai.google.dev)
+
 ## Estructura del repositorio
 
 | Directorio     | Contenido                 |
@@ -47,11 +51,13 @@ Algunas librerias interesantes para las pruebas:
 | https://github.com/googleapis/java-storage-nio | Google NIO Filesystem Provider for Google Cloud Storage Client for Java                                             |
 | https://github.com/googleapis/java-storage     |Google Cloud Storage Client for Java                    |
 
-Para AI Generativa tienen tu propia portal -> [aqui](https://ai.google.dev/)
+Documetacion de APIs especifica para IA
 
-Aqui encontramos la [API para Gemini](https://ai.google.dev/gemini-api)
+[API para IA](https://ai.google.dev/api)
 
-Aunque tambien sugieren que para utilizar nustros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
+[API para Gemini](https://ai.google.dev/gemini-api)
+
+Aunque tambien sugieren que para utilizar nuestros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
 ```
 Own your AI with Gemma open models
 Build custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gemini, with your own data.
