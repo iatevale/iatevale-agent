@@ -1,8 +1,5 @@
 package org.iatevale.example.aiplatform;
 
-import com.google.cloud.aiplatform.util.ValueConverter;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
 import org.json.JSONObject;
 
 import java.io.IOException;
