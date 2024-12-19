@@ -15,6 +15,7 @@ El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el
 | Directorio     | Contenido                 |
 |----------------|---------------------------|
 | /bazel         | Scripts bazel en Starlark |
+| /deploy | Scripts de despliega de algunos productos en GCloud |
 | /java          | Codigo java               |
 | /java/platform | Componentes que se pueden cablear con los productos mediante inyeccion |
 | /java/products | Productos generados |
