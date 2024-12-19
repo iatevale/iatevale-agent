@@ -1,10 +1,10 @@
-package org.iatevale.app.helloworld;
+package org.iatevale.app.iatevaleagent;
 
 import com.google.inject.AbstractModule;
 
-public class HelloWorldModule extends AbstractModule {
+public class IatevaleAgentModule extends AbstractModule {
 
-    public HelloWorldModule() {
+    public IatevaleAgentModule() {
     }
 
     @Override

@@ -1,12 +1,12 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "helloworld",
+    name = "iatevaleagent",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "org.iatevale.app.helloworld.HelloWorld",
+    main_class = "iateagent",
     visibility = ["//visibility:public"],
     deps = [
-        "//java/platform/server/helloword:helloworld",
+        "//java/platform/server/agent",
         "//java/platform/util/closeable",
         "@maven//:com_google_inject_guice",
     ],

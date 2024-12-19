@@ -1,4 +1,4 @@
-package org.iatevale.app.helloworld;
+package org.iatevale.app.iatevaleagent;
 
 import com.google.inject.Guice;
 import com.google.inject.Stage;
@@ -9,11 +9,11 @@ import org.iatevale.server.agentserver.AgentServer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 
-public class HelloWorld {
+public class IatevaleAgent {
 
     final static private String APP_NAME = "IAtevale Agent";
 
-    static final public java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(HelloWorld.class.getName().replace("org.iatevale.", ""));
+    static final public java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(IatevaleAgent.class.getName().replace("org.iatevale.", ""));
 
     static volatile private boolean finishServer = false;
 
@@ -29,7 +29,7 @@ public class HelloWorld {
             CloseableInjector closeableInjector = Guice.createInjector(
                     Stage.PRODUCTION,
                     new CloseableModule(),
-                    new HelloWorldModule()
+                    new IatevaleAgentModule()
             ).getInstance(CloseableInjector.class);
 
             // Se planifica una tarea para cuando se reciba la senyal de parada
@@ -43,9 +43,9 @@ public class HelloWorld {
             // El threda principal debe esperar a que se dentenga el Gateway
             LOGGER.info("El servidor se ha iniciado correctamente y ahora el thread principal entra en espera...");
             while (!finishServer) {
-                synchronized (HelloWorld.class) {
+                synchronized (IatevaleAgent.class) {
                     try {
-                        HelloWorld.class.wait(2000);
+                        IatevaleAgent.class.wait(2000);
                     } catch (InterruptedException e) {
                     }
                 }
@@ -71,12 +71,12 @@ public class HelloWorld {
         @Override
         public void run() {
 
-            HelloWorld.LOGGER.info("Se ha solicitado la parada ...");
+            IatevaleAgent.LOGGER.info("Se ha solicitado la parada ...");
 
             // Se despierta el thread principal para que evalue si tiene que parar
-            synchronized (HelloWorld.class) {
-                HelloWorld.finishServer = true;
-                HelloWorld.class.notifyAll();
+            synchronized (IatevaleAgent.class) {
+                IatevaleAgent.finishServer = true;
+                IatevaleAgent.class.notifyAll();
             }
 
         }
