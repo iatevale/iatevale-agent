@@ -1,0 +1,13 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_binary(
+    name = "prediccion-tiempo-morella",
+    srcs = glob(["src/main/java/**/*.java"]),
+    main_class = "org.iatevale.example.aiplatform.PrediccionTiempoMorella",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_protobuf//:protobuf_java",
+        "@maven//:com_google_cloud_google_cloud_aiplatform",
+        "@maven//:org_json_json",
+    ],
+)

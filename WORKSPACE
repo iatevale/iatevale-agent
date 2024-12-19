@@ -1,8 +1,10 @@
+workspace(name = "iatevale")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-RULES_JVM_EXTERNAL_TAG = "4.5"
+RULES_JVM_EXTERNAL_TAG = "5.3"
 
-RULES_JVM_EXTERNAL_SHA = "b17d7388feb9bfa7f2fa09031b32707df529f26c91ab9e5d909eb1676badd9a6"
+RULES_JVM_EXTERNAL_SHA = "d31e369b854322ca5098ea12c69d7175ded971435e55c18dd9dd5f29cc5249ac"
 
 http_archive(
     name = "rules_jvm_external",
@@ -19,11 +21,29 @@ load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
 
 rules_jvm_external_setup()
 
-load("//bazel:iatevale-agent.bzl", "iatevale_agent_java_deps")
+load("//bazel:iatevale-agent.bzl", "iatevale_agent_git_repo", "iatevale_agent_java_deps")
 
 iatevale_agent_java_deps()
 
-### Dependencias para el despliegue ###
+load("@io_grpc_grpc_java//:repositories.bzl", "IO_GRPC_GRPC_JAVA_ARTIFACTS", "IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS", "grpc_java_repositories")
+
+speedycontrol_common_deps(IO_GRPC_GRPC_JAVA_ARTIFACTS, IO_GRPC_GRPC_JAVA_OVERRIDE_TARGETS)
+
+load("@maven//:compat.bzl", "compat_repositories")
+
+compat_repositories()
+
+grpc_java_repositories()
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+load("@googleapis//:repository_rules.bzl", "switched_rules_by_language")
+
+###############################################
+### Dependencias para el despliegue
+###############################################
 
 http_archive(
     name = "rules_oci",
@@ -48,18 +68,20 @@ load("@rules_oci//oci:pull.bzl", "oci_pull")
 oci_pull(
     name = "java_21_base",
     image = "index.docker.io/library/eclipse-temurin",
-    tag = "21-jdk",
     platforms = [
         "linux/amd64",
     ],
+    tag = "21-jdk",
 )
 
 http_archive(
     name = "rules_pkg",
+    sha256 = "d250924a2ecc5176808fc4c25d5cf5e9e79e6346d79d5ab1c493e289e722d1d0",
     urls = [
         "https://github.com/bazelbuild/rules_pkg/releases/download/0.10.1/rules_pkg-0.10.1.tar.gz",
     ],
-    sha256 = "d250924a2ecc5176808fc4c25d5cf5e9e79e6346d79d5ab1c493e289e722d1d0",
 )
+
 load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
+
 rules_pkg_dependencies()
