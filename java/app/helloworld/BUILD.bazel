@@ -1,11 +1,10 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "datastore-example",
+    name = "helloworld",
     srcs = glob(["src/main/java/**/*.java"]),
+    main_class = "org.iatevale.app.helloworld.HelloWorld",
     visibility = ["//visibility:public"],
-    main_class = "DatastoreExample",
     deps = [
-        "@maven//:com_google_cloud_google_cloud_datastore",
     ],
 )
