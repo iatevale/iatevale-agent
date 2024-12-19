@@ -8,6 +8,7 @@ java_binary(
     deps = [
         "//java/platform/server/agent",
         "//java/platform/util/closeable",
+        "@maven//:com_google_guava_guava",
         "@maven//:com_google_inject_guice",
     ],
 )
