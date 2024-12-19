@@ -22,6 +22,44 @@ El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el
 | /java/examples | Ejemplos de usos de las tecnologias |
 | /proto         | Ficheros Protobuf |
 
+## Librerias
+
+### La esencia
+El nivel mas bajo de acceso a los productos GCloud es mediante tecnologia protobus/grpc
+y estan todas las definiciones [en este repositorio](https://github.com/googleapis/googleapis).
+
+Este nivel requiere generar el codigo del lenguaje correspondiente mediante Bazel.
+
+### Documentacion de entrada
+
+La pagina principal es [esta](https://cloud.google.com/apis)
+
+### Especificamente para java
+
+La documentacion del reposotio https://github.com/googleapis/google-cloud-java contiene
+una tabla que nos permite acceder a cada libreria en concreto.
+
+Algunas librerias interesantes para las pruebas:
+
+| Reositorio                                     | Descripcion                                                            |
+|------------------------------------------------|------------------------------------------------------------------------|
+| https://github.com/googleapis/java-datastore | Google Cloud Datastore Client for Java |
+| https://github.com/googleapis/java-storage-nio | Google NIO Filesystem Provider for Google Cloud Storage Client for Java                                             |
+| https://github.com/googleapis/java-storage     |Google Cloud Storage Client for Java                    |
+
+Para AI Generativa tienen tu propia portal -> [aqui](https://ai.google.dev/)
+
+Aqui encontramos la [API para Gemini](https://ai.google.dev/gemini-api)
+
+Aunque tambien sugieren que para utilizar nustros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
+```
+Own your AI with Gemma open models
+Build custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gemini, with your own data.
+En cada uno de lso repositorios hay documentacion y ejemplos.
+```
+
+**En fin, aqui empieza el lio de verdad...**
+
 ## Agente **iatevale-agent**
 
 ### Funcionalidades
@@ -35,7 +73,6 @@ de aplicaciones en gcloud cloud run
 En el directorio deploy existe dos ficheros encargados para la construcción y despliegue de aplicaciones.
 
 El fichero BUILD.bazel Incluye las reglas necesarias para construir una imagen dockerizada y subirla al repositorio de artefactos del proyecto gcloud.
-
 
 BUILD.bazel:
 ```load("@rules_oci//oci:defs.bzl", "oci_image")
