@@ -1,4 +1,4 @@
-package org.iatevale.server.helloworldserver;
+package org.iatevale.server.agentserver;
 
 import com.google.inject.Inject;
 import com.mycila.guice.ext.closeable.InjectorCloseListener;
@@ -7,12 +7,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class HelloWorldServer implements InjectorCloseListener {
+public class AgentServer implements InjectorCloseListener {
 
     private final ScheduledExecutorService executorService;
 
     @Inject
-    public HelloWorldServer() {
+    public AgentServer() {
 
         // Crea un ScheduledExecutorService con un único hilo
         this.executorService = Executors.newSingleThreadScheduledExecutor();

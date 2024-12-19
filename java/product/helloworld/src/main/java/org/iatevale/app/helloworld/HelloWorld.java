@@ -4,7 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Stage;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.CloseableModule;
-import org.iatevale.server.helloworldserver.HelloWorldServer;
+import org.iatevale.server.agentserver.AgentServer;
 
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -38,7 +38,7 @@ public class HelloWorld {
             // Hay que arrancar el servidor
             // Al instalar el servidor se le inyectan todos los servicios que componen el entramado:
             //   * ..
-            final HelloWorldServer helloWorldServer = closeableInjector.getInstance(HelloWorldServer.class);
+            final AgentServer agentServer = closeableInjector.getInstance(AgentServer.class);
 
             // El threda principal debe esperar a que se dentenga el Gateway
             LOGGER.info("El servidor se ha iniciado correctamente y ahora el thread principal entra en espera...");
