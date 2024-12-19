@@ -1,23 +1,9 @@
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 
-def iatevale_agent_git_repo():
-    git_repository(
-        name = "googleapis",
-        commit = GOOGLE_APIS_COMMIT,
-        remote = "https://github.com/googleapis/googleapis.git",
-        verbose = False,
-    )
-
-    git_repository(
-        name = "io_grpc_grpc_java",
-        remote = "https://github.com/grpc/grpc-java.git",
-        tag = "v1.60.0",
-        verbose = False,
-    )
-
-def iatevale_agent_java_deps():
+def iatevale_agent_deps():
     maven_install(
         artifacts = [
+            "io.grpc:grpc-netty-shaded:1.69.0",
             "com.google.guava:guava:33.0.0-jre",
             "org.json:json:20210307",
             "org.assertj:assertj-core:3.4.1",
@@ -30,7 +16,9 @@ def iatevale_agent_java_deps():
             "org.slf4j:slf4j-api:2.0.7",
             "org.slf4j:slf4j-jdk14:2.0.7",
         ],
+        generate_compat_repositories = True,
         repositories = [
-            "https://repo1.maven.org/maven2",
+            "https://repo.maven.apache.org/maven2/",
+            "https://mvnrepository.com/",
         ],
     )
