@@ -8,7 +8,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class PrediccionTiempoMorella {
+public class AiplaformExample {
 
     // Reemplaza con tu clave de API de Vertex AI
     private static final String API_KEY = "TU_API_KEY";

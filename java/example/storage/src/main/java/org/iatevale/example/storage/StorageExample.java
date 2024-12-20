@@ -1,4 +1,4 @@
-package org.iatevale.example.datastore;
+package org.iatevale.example.storage;
 
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
