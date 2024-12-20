@@ -10,9 +10,9 @@ import java.util.Properties;
 
 public class GCloudAuthFactory {
 
-    static public GCloudAuthData getCredentials() throws IOException {
+    static public GCloudAuthParameters getCredentials() throws IOException {
         final Properties properties = getProperties();
-        return new GCloudAuthData(getProjectId(properties), getCredentials(properties));
+        return new GCloudAuthParameters(getProjectId(properties), getCredentials(properties));
     }
 
     static private String getProjectId(Properties properties) {
