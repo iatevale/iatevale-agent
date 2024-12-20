@@ -41,6 +41,10 @@ Tailor Gemma models, built from the same research and technology as Gemini, with
 
 ### Especificamente para java
 
+https://cloud.google.com/java/docs/reference
+https://cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/overview
+https://github.com/googleapis/google-cloud-java/tree/main/java-aiplatform/samples/snippets/generated/com/google/cloud/aiplatform/v1
+
 La documentacion del reposotio https://github.com/googleapis/google-cloud-java contiene
 una tabla que nos permite acceder a cada libreria en concreto.
 

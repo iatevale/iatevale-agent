@@ -40,6 +40,7 @@ maven.install(artifacts = [
             "com.google.cloud:google-cloud-datastore:2.14.1",
             "com.google.cloud:google-cloud-storage:2.46.0",
             "com.google.cloud:google-cloud-aiplatform:3.56.0",
+            "org.reactivestreams:reactive-streams:1.0.4",
             "com.google.inject:guice:6.0.0",
             "com.moandjiezana.toml:toml4j:0.7.2",
             "com.google.code.gson:gson:2.10.1",
