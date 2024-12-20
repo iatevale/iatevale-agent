@@ -6,6 +6,7 @@ java_binary(
     main_class = "org.iatevale.example.storage.StorageExample",
     visibility = ["//visibility:public"],
     deps = [
+        "//java/platform/util/auth",
         "@maven//:com_google_cloud_google_cloud_storage",
     ],
 )
