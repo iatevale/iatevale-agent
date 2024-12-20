@@ -4,7 +4,7 @@ import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
-public class Main {
+public class StorageExample {
 
     public static void main(String[] args) {
         // Instantiates a client
