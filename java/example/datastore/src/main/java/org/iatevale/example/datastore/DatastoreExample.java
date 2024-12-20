@@ -2,13 +2,20 @@ package org.iatevale.example.datastore;
 
 import com.google.cloud.datastore.*;
 import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
+import org.iatevale.util.auth.GCloudAuthFactory;
+import org.iatevale.util.auth.GCloudAuthParameters;
 
 public class DatastoreExample {
 
     public static void main(String... args) throws Exception {
 
-        // Instancia el cliente de Datastore
-        Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
+
+        final Datastore datastore = DatastoreOptions.newBuilder()
+                .setProjectId(parameters.projectId())
+                .setCredentials(parameters.credentials())
+                .build()
+                .getService();
 
         // El tipo de entidad "Tarea"
         KeyFactory keyFactory = datastore.newKeyFactory().setKind("Tarea");
