@@ -6,7 +6,7 @@ java_binary(
     main_class = "org.iatevale.example.aiplatform.PrediccionTiempoMorella",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_google_protobuf//:protobuf_java",
+        #        "@com_google_protobuf//:protobuf_java",
         "@maven//:com_google_cloud_google_cloud_aiplatform",
         "@maven//:org_json_json",
     ],

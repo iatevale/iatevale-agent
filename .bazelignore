@@ -1,4 +1,5 @@
 deploy
-java/example
-java/platform/server
+java/example/aiplatform
+java/example/datastore
+java/example/storage
 java/product
