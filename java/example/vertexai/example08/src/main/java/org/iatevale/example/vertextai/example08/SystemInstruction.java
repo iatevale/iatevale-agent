@@ -1,9 +1,10 @@
 package org.iatevale.example.vertextai.example08;
 
 import com.google.cloud.vertexai.VertexAI;
+import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.ContentMaker;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
-import com.google.cloud.vertexai.api.GenerateContentResponse;
+
 import java.io.IOException;
 
 public class SystemInstruction {

@@ -1,12 +1,11 @@
 package org.iatevale.example.vertextai.example09;
 
 import com.google.cloud.vertexai.VertexAI;
-import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.api.HarmCategory;
 import com.google.cloud.vertexai.api.SafetySetting;
 import com.google.cloud.vertexai.api.SafetySetting.HarmBlockThreshold;
+
 import java.io.IOException;
-import java.util.Arrays;
 
 public class RequestLevelConfigurations {
 

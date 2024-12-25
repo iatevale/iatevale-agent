@@ -1,10 +1,11 @@
 package org.iatevale.example.vertextai.example11;
 
 import com.google.cloud.vertexai.VertexAI;
-import com.google.cloud.vertexai.api.Tool;
-import com.google.cloud.vertexai.generativeai.*;
 import com.google.cloud.vertexai.api.Content;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
+import com.google.cloud.vertexai.api.Tool;
+import com.google.cloud.vertexai.generativeai.*;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;

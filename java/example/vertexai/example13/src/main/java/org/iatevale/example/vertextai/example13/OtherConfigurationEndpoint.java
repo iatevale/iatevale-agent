@@ -1,8 +1,9 @@
 package org.iatevale.example.vertextai.example13;
 
 import com.google.cloud.vertexai.VertexAI;
-import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
+import com.google.cloud.vertexai.generativeai.GenerativeModel;
+
 import java.io.IOException;
 
 public class OtherConfigurationEndpoint {

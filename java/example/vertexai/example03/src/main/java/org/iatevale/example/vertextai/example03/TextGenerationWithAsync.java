@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 

@@ -1,9 +1,5 @@
 package org.iatevale.example.vertextai.example12;
 
-import com.google.cloud.vertexai.VertexAI;
-import com.google.cloud.vertexai.generativeai.GenerativeModel;
-//import com.google.cloud.vertexai.generativeai.Transport;
-import com.google.cloud.vertexai.api.GenerateContentResponse;
 import java.io.IOException;
 
 public class OtherConfigurationTransport {
