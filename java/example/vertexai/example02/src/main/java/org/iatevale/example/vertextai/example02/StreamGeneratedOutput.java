@@ -13,6 +13,7 @@ public class StreamGeneratedOutput {
     private static final String LOCATION = "<location>";
 
     public static void main(String[] args) throws IOException {
+
         try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION);) {
 
             GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);

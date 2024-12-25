@@ -4,7 +4,7 @@ import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.Candidate;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
-import org.iatevale.util.auth.GCloudAuthFactory;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,7 @@ public class BasedTextGeneration {
 
     public static void main(String[] args) throws IOException {
 
-        try (VertexAI vertexAi = GCloudAuthFactory.vertexBuilder().build()) {
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
             GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
 
