@@ -1,7 +1,7 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "text-generation-with-async",
+    name = "example01",
     srcs = glob(["src/main/java/**/*.java"]),
     main_class = "vertextai",
     visibility = ["//visibility:public"],
