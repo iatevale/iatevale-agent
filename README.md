@@ -41,16 +41,22 @@ Build custom AI solutions and retain complete control.
 Tailor Gemma models, built from the same research and technology as Gemini, with your own data.
 ```
 
-### Especificamente para java
+### Librerias para java
+
+Hay bastante lio con las librerias para java asi que simplemente se lista una lista de las direcciones que resultan de interes.
 
 https://cloud.google.com/java/docs
+
 https://cloud.google.com/java/docs/reference
 
 https://github.com/googleapis/sdk-platform-java
+
 https://github.com/googleapis/google-cloud-java
+
 https://github.com/googleapis/google-cloud-java/tree/main/java-vertexai
 
 https://cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/overview
+
 https://github.com/googleapis/google-cloud-java/tree/main/java-aiplatform/samples/snippets/generated/com/google/cloud/aiplatform/v1
 
 https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
@@ -75,8 +81,6 @@ https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 La idea es que nos permita realizar experimentos de interaccion con Gemini 
 
 ### Despliegue en en gcloud cloud run 
-
-de aplicaciones en gcloud cloud run
 
 En el directorio deploy existe dos ficheros encargados para la construcción y despliegue de aplicaciones.
 
