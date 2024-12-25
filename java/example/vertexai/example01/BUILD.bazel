@@ -1,13 +1,14 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "prediccion-tiempo-morella",
+    name = "base-text-generation",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "org.iatevale.example.aiplatform.AiplaformExample",
+    main_class = "vertextai",
     visibility = ["//visibility:public"],
     deps = [
         "//java/platform/util/auth",
-        "@maven//:com_google_cloud_google_cloud_aiplatform",
+        "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
+        "@maven//:com_google_cloud_google_cloud_vertexai",
         "@maven//:org_json_json",
     ],
 )
