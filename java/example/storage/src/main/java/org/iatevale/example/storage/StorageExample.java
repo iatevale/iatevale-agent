@@ -24,7 +24,6 @@ public class StorageExample {
         for (Bucket bucket : storage.list().iterateAll()) {
             System.out.println(bucket.getName());
         }
-        System.out.println("Application Name: " + System.getProperty("application.name"));
     }
 
 }

@@ -20,18 +20,18 @@ public class GCloudAuthFactory {
     }
 
     static private Credentials getParameters(Properties properties) throws IOException {
-        final String credentialsPath = properties.getProperty("service-account-key");
+        final String credentialsPath = properties.getProperty("credentials");
         return GoogleCredentials.fromStream(new FileInputStream(credentialsPath));
     }
 
     static private Properties getProperties() throws IOException {
 
         // Ruta al directorio de configuración en el home del usuario
-        final String configDir = System.getProperty("user.home") + "/.iatevale/";
+        final String configDir = System.getProperty("user.home") + "/.iatevale/config.properties";
 
         // Cargar propiedades desde config.properties
         final Properties configProps = new Properties();
-        try (FileInputStream propsFile = new FileInputStream(configDir + "config.properties")) {
+        try (FileInputStream propsFile = new FileInputStream(configDir)) {
             configProps.load(propsFile);
             return configProps;
         }

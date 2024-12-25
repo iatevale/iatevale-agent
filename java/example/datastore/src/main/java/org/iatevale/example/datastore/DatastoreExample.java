@@ -69,7 +69,7 @@ public class DatastoreExample {
         }
 
         // Elimina la tarea
-        datastore.delete(task.getKey());
+//        datastore.delete(task.getKey());
     }
 
 }
