@@ -12,7 +12,7 @@ public class StorageExample {
 
     public static void main(String[] args) throws IOException {
 
-        final GCloudAuthParameters parameters = GCloudAuthFactory.getCredentials();
+        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
 
         final Storage storage = StorageOptions.newBuilder()
                 .setProjectId(parameters.projectId())

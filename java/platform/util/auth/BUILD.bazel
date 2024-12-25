@@ -6,5 +6,6 @@ java_library(
     deps = [
         "@maven//:com_google_auth_google_auth_library_credentials",
         "@maven//:com_google_auth_google_auth_library_oauth2_http",
+        "@maven//:com_google_cloud_google_cloud_vertexai",
     ],
 )

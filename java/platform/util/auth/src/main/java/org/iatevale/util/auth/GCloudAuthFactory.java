@@ -2,6 +2,7 @@ package org.iatevale.util.auth;
 
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.vertexai.VertexAI;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,7 +11,14 @@ import java.util.Properties;
 
 public class GCloudAuthFactory {
 
-    static public GCloudAuthParameters getCredentials() throws IOException {
+    static public VertexAI.Builder vertexBuilder() throws IOException {
+        final GCloudAuthParameters parameters = getParameters();
+        return new VertexAI.Builder()
+                .setProjectId(parameters.projectId())
+                .setCredentials(parameters.credentials());
+    }
+
+    static public GCloudAuthParameters getParameters() throws IOException {
         final Properties properties = getProperties();
         return new GCloudAuthParameters(
                 getProjectId(properties),
@@ -24,7 +32,8 @@ public class GCloudAuthFactory {
 
     static private Credentials getCredentials(Properties properties) throws IOException {
         final String credentialsPath = properties.getProperty("credentials");
-        return GoogleCredentials.fromStream(new FileInputStream(credentialsPath));
+        return GoogleCredentials.fromStream(new FileInputStream(credentialsPath))
+                .createScoped("https://www.googleapis.com/auth/cloud-platform");
     }
 
     static private Properties getProperties() throws IOException {
