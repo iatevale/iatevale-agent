@@ -8,7 +8,7 @@ Por tanto es puramente especulativo y puede sufrir refactorizaciones drasticas.
 Para ser productivos se utilizaran los productos de gcloud y por tanto estos productos
 tambien seran parte del proceso de aprendizaje.
 
-El sistema de build utilizado es [BAZEL](https://bazel.build/) ya que este es el sistema nativo de los productos de Google.
+El sistema de build utilizado es [BAZEL](https://bazel.build/) (con el nuevo sistema de dependencias por modulos) ya que este es el sistema nativo de los productos de Google.
 
 ## La web mas importante
 
@@ -32,6 +32,8 @@ Documetacion de APIs especifica para IA:
 
 * [API para Gemini](https://ai.google.dev/gemini-api)
 
+* [Cookbook](https://github.com/google-gemini/cookbook)
+
 Aunque tambien sugieren que para utilizar nuestros propios datos utilizemoe [Gemmma](https://ai.google.dev/gemma)
 ```
 Own your AI with Gemma open models
@@ -41,26 +43,18 @@ Tailor Gemma models, built from the same research and technology as Gemini, with
 
 ### Especificamente para java
 
+https://cloud.google.com/java/docs
 https://cloud.google.com/java/docs/reference
+
+https://github.com/googleapis/sdk-platform-java
+https://github.com/googleapis/google-cloud-java
+https://github.com/googleapis/google-cloud-java/tree/main/java-vertexai
+
 https://cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/overview
 https://github.com/googleapis/google-cloud-java/tree/main/java-aiplatform/samples/snippets/generated/com/google/cloud/aiplatform/v1
 
-La documentacion del reposotio https://github.com/googleapis/google-cloud-java contiene
-una tabla que nos permite acceder a cada libreria en concreto.
+https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 
-Algunas librerias interesantes para las pruebas:
-
-| Reositorio                                     | Descripcion                                                            |
-|------------------------------------------------|------------------------------------------------------------------------|
-| https://github.com/googleapis/java-datastore | Google Cloud Datastore Client for Java |
-| https://github.com/googleapis/java-storage-nio | Google NIO Filesystem Provider for Google Cloud Storage Client for Java                                             |
-| https://github.com/googleapis/java-storage     |Google Cloud Storage Client for Java                    |
-
-Documentacion de ejemplos -> https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
-
-Repositorio de ejemplos para java/Android -> https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
-
-Cookbook -> https://github.com/google-gemini/cookbook
 
 ## Estructura del repositorio
 
