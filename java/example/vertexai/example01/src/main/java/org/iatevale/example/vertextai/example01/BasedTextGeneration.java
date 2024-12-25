@@ -3,19 +3,22 @@ package org.iatevale.example.vertextai.example01;
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
+import org.iatevale.util.auth.GCloudAuthFactory;
+import org.iatevale.util.auth.GCloudAuthParameters;
 
 import java.io.IOException;
 
 public class BasedTextGeneration {
 
-    // Reemplaza con tu clave de API de Vertex AI
-    private static final String API_KEY = "TU_API_KEY";
-
-    private static final String PROJECT_ID = "<your project id>";
-    private static final String LOCATION = "<location>";
-
     public static void main(String[] args) throws IOException {
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION);) {
+
+        final GCloudAuthParameters parameters = GCloudAuthFactory.getCredentials();
+
+        final VertexAI.Builder vertextAIBuilder = new VertexAI.Builder()
+                .setProjectId(parameters.projectId())
+                .setCredentials(parameters.credentials());
+
+        try (VertexAI vertexAi = vertextAIBuilder.build()) {
 
             GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
 

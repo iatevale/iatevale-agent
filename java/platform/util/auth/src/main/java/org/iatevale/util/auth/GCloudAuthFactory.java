@@ -10,16 +10,19 @@ import java.util.Properties;
 
 public class GCloudAuthFactory {
 
-    static public GCloudAuthParameters getParameters() throws IOException {
+    static public GCloudAuthParameters getCredentials() throws IOException {
         final Properties properties = getProperties();
-        return new GCloudAuthParameters(getProjectId(properties), getParameters(properties));
+        return new GCloudAuthParameters(
+                getProjectId(properties),
+                getCredentials(properties)
+        );
     }
 
     static private String getProjectId(Properties properties) {
         return properties.getProperty("project.id");
     }
 
-    static private Credentials getParameters(Properties properties) throws IOException {
+    static private Credentials getCredentials(Properties properties) throws IOException {
         final String credentialsPath = properties.getProperty("credentials");
         return GoogleCredentials.fromStream(new FileInputStream(credentialsPath));
     }

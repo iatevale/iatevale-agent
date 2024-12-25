@@ -9,7 +9,7 @@ public class DatastoreExample {
 
     public static void main(String... args) throws Exception {
 
-        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
+        final GCloudAuthParameters parameters = GCloudAuthFactory.getCredentials();
 
         final Datastore datastore = DatastoreOptions.newBuilder()
                 .setProjectId(parameters.projectId())
