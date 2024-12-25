@@ -9,6 +9,5 @@ java_binary(
         "//java/example/vertexai/common",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
-        "@maven//:org_json_json",
     ],
 )

@@ -6,9 +6,8 @@ java_binary(
     main_class = "org.iatevale.example.vertextai.example02.StreamGeneratedOutput",
     visibility = ["//visibility:public"],
     deps = [
-        "//java/platform/util/auth",
+        "//java/example/vertexai/common",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
-        "@maven//:org_json_json",
     ],
 )
