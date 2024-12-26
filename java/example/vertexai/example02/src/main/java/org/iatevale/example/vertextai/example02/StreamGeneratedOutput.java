@@ -20,6 +20,7 @@ public class StreamGeneratedOutput {
 
             ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream("How are you?");
             // Do something with the ResponseStream, which is an iterable.
+
         }
     }
 
