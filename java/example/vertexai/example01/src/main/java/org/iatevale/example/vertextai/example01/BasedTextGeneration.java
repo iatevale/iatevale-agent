@@ -10,10 +10,11 @@ import java.io.IOException;
 
 // Primer analisis..
 //
-// Conclusion, es una llamada a service GenerativeService {
-//  rpc GenerateContent(GenerateContentRequest) returns (GenerateContentResponse)
-//  ..
-//  }
+// Conclusion, es una llamada a service GRPC GenerativeService
+// service GenerativeService {
+//   rpc GenerateContent(GenerateContentRequest) returns (GenerateContentResponse)
+//   ..
+// }
 public class BasedTextGeneration {
 
     public static void main(String[] args) throws IOException {
