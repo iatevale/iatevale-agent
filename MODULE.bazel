@@ -37,3 +37,12 @@ maven.install(artifacts = [
 )
 use_repo(maven, "maven")
 
+# Carga de la imagen con Java 21
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "java_21_base",
+    image = "index.docker.io/library/eclipse-temurin",
+    tag = "21-jdk",
+    platforms = ["linux/amd64"],
+)
+use_repo(oci, "java_21_base")
