@@ -7,10 +7,9 @@ java_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/vertexai/common",
-        "//java/platform/util/auth",
+        "//java/platform/util/conversion",
         "@maven//:com_google_api_api_common",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
-        "@maven//:org_json_json",
     ],
 )

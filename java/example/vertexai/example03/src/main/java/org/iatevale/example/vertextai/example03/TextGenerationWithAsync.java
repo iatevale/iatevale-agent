@@ -5,9 +5,14 @@ import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import org.iatevale.example.vertextai.common.VertextaiUtil;
+import org.iatevale.util.conversion.ProtoUtils;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+
+// Este ejemplo a diferencia de los anteriores utiliza los STUB asincronos java que genera el GRPC para
+// poder consumir el resultado de forma asincrona.
 
 public class TextGenerationWithAsync {
 
@@ -19,13 +24,16 @@ public class TextGenerationWithAsync {
 
             final ApiFuture<GenerateContentResponse> future = model.generateContentAsync("How are you?");
 
-            // Do something else.
+            // Hacemos algo que resulte bloqueante...
+            TimeUnit.SECONDS.sleep(4);
 
             // Get the response from Future
-            GenerateContentResponse response = future.get();
+            final GenerateContentResponse response = future.get();
 
-            // Do something with the response.
+            // Seguro que tenemos el resultado ya preparado y si no espermos..
+            System.out.println(ProtoUtils.messageToJson(response));
         }
+
     }
 
 }
