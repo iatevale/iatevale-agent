@@ -1,15 +1,19 @@
 package org.iatevale.example.vertextai.example01;
 
 import com.google.cloud.vertexai.VertexAI;
-import com.google.cloud.vertexai.api.Candidate;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import org.iatevale.example.vertextai.common.VertextaiUtil;
 import org.iatevale.util.conversion.ProtoUtils;
 
 import java.io.IOException;
-import java.util.List;
 
+// Primer analisis..
+//
+// Conclusion, es una llamada a service GenerativeService {
+//  rpc GenerateContent(GenerateContentRequest) returns (GenerateContentResponse)
+//  ..
+//  }
 public class BasedTextGeneration {
 
     public static void main(String[] args) throws IOException {
