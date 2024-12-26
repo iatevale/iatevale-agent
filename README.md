@@ -45,6 +45,8 @@ Tailor Gemma models, built from the same research and technology as Gemini, with
 
 Hay bastante lio con las librerias para java asi que simplemente se lista una lista de las direcciones que resultan de interes.
 
+https://cloud.google.com/vertex-ai/generative-ai
+
 https://cloud.google.com/java/docs
 
 https://cloud.google.com/java/docs/reference
@@ -60,6 +62,7 @@ https://cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/over
 https://github.com/googleapis/google-cloud-java/tree/main/java-aiplatform/samples/snippets/generated/com/google/cloud/aiplatform/v1
 
 https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
+
 
 
 ## Estructura del repositorio
