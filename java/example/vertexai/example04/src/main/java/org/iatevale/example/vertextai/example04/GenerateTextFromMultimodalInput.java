@@ -1,29 +1,50 @@
 package org.iatevale.example.vertextai.example04;
 
 import com.google.cloud.vertexai.VertexAI;
+import com.google.cloud.vertexai.api.Content;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.ContentMaker;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.PartMaker;
 import com.google.cloud.vertexai.generativeai.ResponseStream;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
+import org.iatevale.util.conversion.ProtoUtils;
+
+import java.io.InputStream;
 
 public class GenerateTextFromMultimodalInput {
 
-    private static final String PROJECT_ID = "<your project id>";
-    private static final String LOCATION = "<location>";
-    private static final String IMAGE_URI = "<gcs uri to your image>";
+    private static final String IMAGE_RESOURCE = "/que_sera.jpg";
 
     public static void main(String[] args) throws Exception {
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION); ) {
-            // Vision model must be used for multi-modal input
-            GenerativeModel model = new GenerativeModel("gemini-pro-vision", vertexAi);
 
-            ResponseStream<GenerateContentResponse> stream =
-                    model.generateContentStream(ContentMaker.fromMultiModalData(
-                            "Please describe this image",
-                            PartMaker.fromMimeTypeAndData("image/jpeg", IMAGE_URI)
-                    ));
-            // Do something with the ResponseStream, which is an iterable.
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
+
+            // Vision model must be used for multi-modal input
+            final GenerativeModel model = new GenerativeModel("gemini-pro-vision", vertexAi);
+
+            final Content content = ContentMaker.fromMultiModalData(
+                    "Please describe this image",
+                    PartMaker.fromMimeTypeAndData("image/jpeg", readImageBytes())
+            );
+
+            final ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream(content);
+
+            for (GenerateContentResponse response : responseStream) {
+                System.out.println("-------------------------------------");
+                System.out.println(ProtoUtils.messageToJson(response));
+            }
+
+        }
+
+    }
+
+    static byte[] readImageBytes() throws Exception {
+        try (InputStream inputStream = GenerateTextFromMultimodalInput.class.getResourceAsStream(IMAGE_RESOURCE)) {
+            if (inputStream == null) {
+                throw new Exception("El recurso no pudo ser encontrado.");
+            }
+            return inputStream.readAllBytes();
         }
     }
 
