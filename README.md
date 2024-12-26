@@ -74,13 +74,58 @@ https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 | /java/examples | Ejemplos de usos de las tecnologias |
 | /proto         | Ficheros Protobuf |
 
-## Agente **iatevale-agent**
+## Ejemplos
 
-### Funcionalidades
+Estos ejemplos estan pensados para ejecutarse sobre infraestructura GCloud por lo que 
+hay que tener acceso a un projecto GCloud.
 
-La idea es que nos permita realizar experimentos de interaccion con Gemini 
+En principio estos ejemplos no tienen que generar costo o sera insignificante.
 
-### Despliegue en en gcloud cloud run 
+Los ejemplos de verificacion de funcionamiento de Datastore y Storage funcionan.
+
+Los ejemplos de vertexai etan dejados caer y solo he ajustado el codigo de 01 para que funcione.
+
+La idea es ir ajustando los ejemplos poco a poco ya que cada uno aporta un poquito mas respecto al siguiente
+en lo referente al uso de la API.
+
+Supongo que despues se pueden ir generando mas ejemplos para ir verificando nuevas funcionalidades...
+
+Finalmente llegado el momento tal vez construir algun tipo de agente que se comunique 
+con nosotros a traves de la implementacion de un bot telegram...
+
+La cuestion es disponer de una ARENA donde ir haciendo pruebas....
+
+De momento lo que es el agente que se puede cargar en un Cloud run es un simple printf cada ciertos segundos...
+
+### Configuracion para GCloud
+
+Se necesitan los siguientes datos:
+
+* Una cuenta de servicio
+* Una credencial de tipo JSON
+
+Hay que crear un fichero ".iatevale/config.propertie" dentro del home del usuario linux.
+
+La credencial JSON tambien se puede dejay en el directorio ".iatevale".
+
+Ejemplo de fichero $HOME/.iatevale/config.properties
+```
+project.id=project-name
+credentials=/home/{username}/.iatevale/lacredencial.json
+```
+
+La lista de Roles que tiene que tener asignado la cuenta de servicio:
+* Administrador de almacenamiento
+* Usuario de Cloud Datastore
+* Usuario de Vertex AI
+
+### Despliegue de un agente gcloud cloud run [TODO]
+
+Tal vez los comentarios de estos scripts no tengan que estar en este documento y simplemente en los propios scripts...
+
+Documenar simplemente aqui como ejecutar la carga del agente..
+
+Supongo que al final habra que lanzar la carga mediante la utilidad gcloud ya que no habra forma de utilizar las credenciales que hay en $HOME/.iatevale/config.properties 
 
 En el directorio deploy existe dos ficheros encargados para la construcción y despliegue de aplicaciones.
 
