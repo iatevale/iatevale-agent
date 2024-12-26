@@ -83,7 +83,7 @@ En principio estos ejemplos no tienen que generar costo o sera insignificante.
 
 Los ejemplos de verificacion de funcionamiento de Datastore y Storage funcionan.
 
-Los ejemplos de vertexai etan dejados caer y solo he ajustado el codigo de 01 para que funcione.
+Los ejemplos de vertexai estan dejados caer y solo he ajustado el codigo de 01 para que funcione.
 
 La idea es ir ajustando los ejemplos poco a poco ya que cada uno aporta un poquito mas respecto al siguiente
 en lo referente al uso de la API.
@@ -91,11 +91,11 @@ en lo referente al uso de la API.
 Supongo que despues se pueden ir generando mas ejemplos para ir verificando nuevas funcionalidades...
 
 Finalmente llegado el momento tal vez construir algun tipo de agente que se comunique 
-con nosotros a traves de la implementacion de un bot telegram...
-
-La cuestion es disponer de una ARENA donde ir haciendo pruebas....
+con nosotros a traves de la implementacion de un [bot telegram...](https://monsterdeveloper.gitbook.io/java-telegram-bot-tutorial)
 
 De momento lo que es el agente que se puede cargar en un Cloud run es un simple printf cada ciertos segundos...
+
+La cuestion es disponer de una ARENA donde ir haciendo pruebas....
 
 ### Configuracion para GCloud
 
