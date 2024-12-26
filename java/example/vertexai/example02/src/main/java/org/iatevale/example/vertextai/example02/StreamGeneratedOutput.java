@@ -4,6 +4,7 @@ import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseStream;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 import org.iatevale.util.conversion.ProtoUtils;
 
 import java.io.IOException;
@@ -18,12 +19,9 @@ import java.io.IOException;
 // }
 public class StreamGeneratedOutput {
 
-    private static final String PROJECT_ID = "<your project id>";
-    private static final String LOCATION = "<location>";
-
     public static void main(String[] args) throws IOException {
 
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION)) {
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
             final GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
 
