@@ -6,6 +6,7 @@ java_binary(
     main_class = "org.iatevale.example.vertextai.example03.TextGenerationWithAsync",
     visibility = ["//visibility:public"],
     deps = [
+        "//java/example/vertexai/common",
         "//java/platform/util/auth",
         "@maven//:com_google_api_api_common",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
