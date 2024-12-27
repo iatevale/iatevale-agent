@@ -18,15 +18,15 @@ public class SystemInstruction {
 
         try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
-            final Content systemInstuction = ContentMaker.fromString(
+            final Content systemInstruction = ContentMaker.fromString(
                     "You're a helpful assistant that starts all its answers with: \"COOL\""
             );
 
             final GenerativeModel model = new GenerativeModel.Builder()
-                            .setModelName(MODEL_NAME)
-                            .setVertexAi(vertexAi)
-                            .setSystemInstruction(systemInstuction)
-                            .build();
+                    .setModelName(MODEL_NAME)
+                    .setVertexAi(vertexAi)
+                    .setSystemInstruction(systemInstruction)
+                    .build();
 
             final GenerateContentResponse response = model.generateContent("How are you?");
             System.out.println(ResponseHandler.getText(response));
