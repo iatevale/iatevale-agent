@@ -10,6 +10,12 @@ import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 
+// Construye la instancia de GenerativeModel mediante un builder el cual
+// permite proporcionarle la configuracion al modelo.
+//
+// Despues aprovecha el interface fluido del CharSession para actualizar
+// sobre la marcha la configuracion del modelo con el que esta trabajando
+// el chat.
 public class ConfigurationsForChatSession {
 
     static final private String MODEL_NAME = "gemini-pro";
@@ -36,12 +42,14 @@ public class ConfigurationsForChatSession {
             // Send a message. The model level GenerationConfig will be applied here
             final GenerateContentResponse firstResponse = chatSession
                     .sendMessage("Please explain LLM?");
+            System.out.println("=======================================================================================");
             System.out.println(ResponseHandler.getText(firstResponse));
 
             // Send another message, using Fluent API to update the GenerationConfig
             final GenerateContentResponse secondResponse = chatSession
                     .withGenerationConfig(GenerationConfig.getDefaultInstance())
                     .sendMessage("Tell me more about what you can do.");
+            System.out.println("=======================================================================================");
             System.out.println(ResponseHandler.getText(secondResponse));
 
         }
