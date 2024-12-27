@@ -6,19 +6,22 @@ import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.ChatSession;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseStream;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 import java.util.List;
 
 public class UseChatSessionForMultiturnChat {
 
-    private static final String PROJECT_ID = "<your project id>";
-    private static final String LOCATION = "<location>";
+    static final private String MODEL_NAME = "gemini-pro";
 
     public static void main(String[] args) throws IOException {
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION); ) {
-            GenerativeModel model =
-                    new GenerativeModel("gemini-pro", vertexAi);
+
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
+
+            GenerativeModel model =new GenerativeModel(MODEL_NAME, vertexAi);
+
+
             ChatSession chat = model.startChat();
 
             // Send the first message.

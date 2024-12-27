@@ -12,6 +12,7 @@ import org.iatevale.util.conversion.ProtoUtils;
 
 import java.io.InputStream;
 
+// Este ejemplo muestra como adjuntar una imagen en el promopt
 public class GenerateTextFromMultimodalInput {
 
     static final private String MODEL_NAME = "gemini-pro-vision";
