@@ -9,6 +9,9 @@ import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 
+// Construye la instancia de GenerativeModel mediante un builder el cual
+// permite proporcioarle la configuracion que previamente ha estipulado
+// la maxima salida en 50 tokens.
 public class ModelLevelConfigurations {
 
     static final private String MODEL_NAME = "gemini-pro";
