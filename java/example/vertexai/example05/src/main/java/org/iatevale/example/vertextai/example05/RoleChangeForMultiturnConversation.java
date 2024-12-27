@@ -15,6 +15,7 @@ import java.util.List;
 // Genera mediante la utilidad ContentMaker distintas instsnacias de
 // del mensaje proto Content -> https://github.com/googleapis/googleapis/blob/master/google/ai/generativelanguage/v1/content.proto
 // para envialos en el request del servicio GenerativeService -> https://github.com/googleapis/googleapis/blob/master/google/ai/generativelanguage/v1/generative_service.proto
+// Simula manualmente que se ha tenido una conversacion previa como si de un chat se tratara..
 public class RoleChangeForMultiturnConversation {
 
     static final private String MODEL_NAME = "gemini-pro";
