@@ -5,40 +5,45 @@ import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.api.GenerationConfig;
 import com.google.cloud.vertexai.generativeai.ChatSession;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
+import com.google.cloud.vertexai.generativeai.ResponseHandler;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 
 public class ConfigurationsForChatSession {
 
-    private static final String PROJECT_ID = "<PROJECT_ID>";
-    private static final String LOCATION = "<LOCATION>";
+    static final private String MODEL_NAME = "gemini-pro";
 
     public static void main(String[] args) throws IOException {
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION);) {
+
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
+
             // Instantiate a model with GenerationConfig
-            GenerationConfig generationConfig =
-                    GenerationConfig.newBuilder().setMaxOutputTokens(50).build();
-            GenerativeModel model =
-                    new GenerativeModel.Builder()
-                            .setModelName("gemino-pro")
-                            .setVertexAi(vertexAi)
-                            .setGenerationConfig(generationConfig)
-                            .build();
+            final GenerationConfig generationConfig = GenerationConfig.newBuilder()
+                .setMaxOutputTokens(50)
+                .build();
+
+            // Se instania el modelo
+            final GenerativeModel model = new GenerativeModel.Builder()
+                .setModelName(MODEL_NAME)
+                .setVertexAi(vertexAi)
+                .setGenerationConfig(generationConfig)
+                .build();
 
             // Start a chat session
-            ChatSession chat = model.startChat();
+            final ChatSession chatSession = model.startChat();
 
             // Send a message. The model level GenerationConfig will be applied here
-            GenerateContentResponse response = chat.sendMessage("Please explain LLM?");
-
-            // Do something with the response
+            final GenerateContentResponse firstResponse = chatSession
+                    .sendMessage("Please explain LLM?");
+            System.out.println(ResponseHandler.getText(firstResponse));
 
             // Send another message, using Fluent API to update the GenerationConfig
-            response =
-                    chat.withGenerationConfig(GenerationConfig.getDefaultInstance())
-                            .sendMessage("Tell me more about what you can do.");
+            final GenerateContentResponse secondResponse = chatSession
+                    .withGenerationConfig(GenerationConfig.getDefaultInstance())
+                    .sendMessage("Tell me more about what you can do.");
+            System.out.println(ResponseHandler.getText(secondResponse));
 
-            // Do something with the response
         }
     }
 
