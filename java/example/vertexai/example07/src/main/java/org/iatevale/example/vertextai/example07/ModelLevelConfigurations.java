@@ -4,32 +4,35 @@ import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.api.GenerationConfig;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
+import com.google.cloud.vertexai.generativeai.ResponseHandler;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 
 public class ModelLevelConfigurations {
 
-    private static final String PROJECT_ID = "<PROJECT_ID>";
-    private static final String LOCATION = "<LOCATION>";
+    static final private String MODEL_NAME = "gemini-pro";
 
     public static void main(String[] args) throws IOException {
-        try (VertexAI vertexAi = new VertexAI(PROJECT_ID, LOCATION);) {
+
+        try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
+
             // Build a GenerationConfig instance.
-            GenerationConfig generationConfig =
-                    GenerationConfig.newBuilder().setMaxOutputTokens(50).build();
+            final GenerationConfig generationConfig = GenerationConfig.newBuilder()
+                .setMaxOutputTokens(50)
+                .build();
 
             // Use the builder to instantialize the model with the configuration.
-            GenerativeModel model =
-                    new GenerativeModel.Builder()
-                            .setModelName("gemino-pro")
-                            .setVertexAi(vertexAi)
-                            .setGenerationConfig(generationConfig)
-                            .build();
+            final GenerativeModel model = new GenerativeModel.Builder()
+                .setModelName(MODEL_NAME)
+                .setVertexAi(vertexAi)
+                .setGenerationConfig(generationConfig)
+                .build();
 
             // Generate the response.
-            GenerateContentResponse response = model.generateContent("Please explain LLM?");
+            final GenerateContentResponse response = model.generateContent("Please explain LLM?");
+            System.out.println(ResponseHandler.getText(response));
 
-            // Do something with the response.
         }
     }
 
