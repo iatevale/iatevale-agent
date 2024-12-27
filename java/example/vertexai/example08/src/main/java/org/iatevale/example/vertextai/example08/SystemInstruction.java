@@ -10,6 +10,8 @@ import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 
+// Construye la instancia de GenerativeModel mediante un builder el cual
+// permite proporcioarle instrucciones de sistema.
 public class SystemInstruction {
 
     static final private String MODEL_NAME = "gemini-pro";
