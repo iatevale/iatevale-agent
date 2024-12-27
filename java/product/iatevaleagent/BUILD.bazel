@@ -12,3 +12,30 @@ java_binary(
         "@maven//:com_google_inject_guice",
     ],
 )
+
+# Empaqueta la construcción del jar de la aplicación
+pkg_tar(
+    name = "deploy_tar",
+    srcs = ["//java/product/iatevaleagent:iatevaleagent_deploy.jar"],
+)
+
+# Construye el container docker incluyendo el jar de la imagen anterior
+oci_image(
+    name = "iatevaleagent_gcloud_image",
+    base = "@java_21_base",
+    entrypoint = [
+        "java",
+        "-jar",
+        "iatevaleagent_deploy.jar",
+    ],
+    tars = [":deploy_tar"],
+    visibility = ["//visibility:public"],
+)
+
+#### IMPORTANTE: en el atributo repository cambiar project-id y repo-name por las variables que proceda.
+# Sube al repositorio de artefactos del proyecto gcloud indicado la imagen generada
+oci_push(
+    name = "iatevaleagent_gcloud_push",
+    image = ":iatevaleagent_gcloud_image",
+    repository = "europe-west3-docker.pkg.dev/project-id/repo-name/iatevaleagent",
+)

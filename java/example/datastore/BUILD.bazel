@@ -13,30 +13,3 @@ java_binary(
         "@maven//:com_google_cloud_google_cloud_datastore",
     ],
 )
-
-# Empaqueta la construcción del jar de la aplicación
-pkg_tar(
-    name = "deploy_tar",
-    srcs = ["//java/example/datastore:datastore-example_deploy.jar"],
-)
-
-# Construye el container docker incluyendo el jar de la imagen anterior
-oci_image(
-    name = "datastore_example_gcloud_image",
-    base = "@java_21_base",
-    entrypoint = [
-        "java",
-        "-jar",
-        "datastore-example_deploy.jar",
-    ],
-    tars = [":deploy_tar"],
-    visibility = ["//visibility:public"],
-)
-
-#### IMPORTANTE: en el atributo repository cambiar project-id y repo-name por las variables que proceda.
-# Sube al repositorio de artefactos del proyecto gcloud indicado la imagen generada
-oci_push(
-    name = "datastore_example_gcloud_push",
-    image = ":datastore_example_gcloud_image",
-    repository = "europe-west3-docker.pkg.dev/project-id/repo-name/datastore-example",
-)
