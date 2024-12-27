@@ -17,6 +17,8 @@ import java.io.IOException;
 // }
 public class BasedTextGeneration {
 
+    static final private String MODEL_NAME = "gemini-pro";
+
     public static void main(String[] args) throws IOException {
 
         // Con el VertexAI.Builder generamos una instancia de VertexAI
@@ -30,7 +32,7 @@ public class BasedTextGeneration {
             //
             // Por lo que se ve GenerativeModel es un envoltorio para invocar a GenerativeService del proto https://github.com/googleapis/googleapis/blob/master/google/ai/generativelanguage/v1/generative_service.proto
 
-            final GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
+            final GenerativeModel model = new GenerativeModel(MODEL_NAME, vertexAi);
 
             // Este metodo genera una respuesta basandose en el cotenido que le proporcionamos
             // GenerativeModel tiene los metodos:

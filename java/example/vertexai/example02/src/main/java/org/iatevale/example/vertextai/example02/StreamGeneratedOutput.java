@@ -19,11 +19,13 @@ import java.io.IOException;
 // }
 public class StreamGeneratedOutput {
 
+    static final private String MODEL_NAME = "gemini-pro";
+
     public static void main(String[] args) throws IOException {
 
         try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
-            final GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
+            final GenerativeModel model = new GenerativeModel(MODEL_NAME, vertexAi);
 
             final ResponseStream<GenerateContentResponse> responseStream = model.generateContentStream("How are you?");
 

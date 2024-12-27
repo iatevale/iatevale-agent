@@ -16,11 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TextGenerationWithAsync {
 
+    static final private String MODEL_NAME = "gemini-pro";
+
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
 
         try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
-            final GenerativeModel model = new GenerativeModel("gemini-pro", vertexAi);
+            final GenerativeModel model = new GenerativeModel(MODEL_NAME, vertexAi);
 
             final ApiFuture<GenerateContentResponse> future = model.generateContentAsync("How are you?");
 

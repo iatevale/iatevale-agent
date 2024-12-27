@@ -14,6 +14,8 @@ import java.io.InputStream;
 
 public class GenerateTextFromMultimodalInput {
 
+    static final private String MODEL_NAME = "gemini-pro-vision";
+
     private static final String IMAGE_RESOURCE = "/que_sera.jpg";
 
     public static void main(String[] args) throws Exception {
@@ -21,7 +23,7 @@ public class GenerateTextFromMultimodalInput {
         try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
             // Vision model must be used for multi-modal input
-            final GenerativeModel model = new GenerativeModel("gemini-pro-vision", vertexAi);
+            final GenerativeModel model = new GenerativeModel(MODEL_NAME, vertexAi);
 
             final Content content = ContentMaker.fromMultiModalData(
                     "Please describe this image",
