@@ -7,6 +7,8 @@ import com.google.cloud.vertexai.api.SafetySetting.HarmBlockThreshold;
 
 import java.io.IOException;
 
+// Construye la instancia de GenerativeModel mediante un builder el cual
+// permite proporcioarle instrucciones de sistema.
 public class RequestLevelConfigurations {
 
     private static final String PROJECT_ID = "<PROJECT_ID>";
