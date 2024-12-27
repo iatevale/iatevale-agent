@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
+// Muestra como se implementa una llamada a funcion desde el modelo
 public class ChatSessionForFunctionCalling {
 
     private static final String MODEL_NAME = "gemini-pro";
@@ -75,7 +76,7 @@ public class ChatSessionForFunctionCalling {
             System.out.println("\nDe nuevo respuesta del modelo:: ");
             System.out.println(ResponseHandler.getText(response));
             System.out.println("\n");
-            
+
         }
     }
 
