@@ -11,6 +11,9 @@ import org.iatevale.example.vertextai.common.VertextaiUtil;
 import java.io.IOException;
 import java.util.List;
 
+// La clase de utilidad GenerativeModel ahora instancia un ChatSession el cual se encarga
+// de mantener elhistorial de las invocaciones al LLM para que este arrastre todo el
+// contexto de la conversacion.
 public class UseChatSessionForMultiturnChat {
 
     static final private String MODEL_NAME = "gemini-pro";
@@ -19,7 +22,7 @@ public class UseChatSessionForMultiturnChat {
 
         try (VertexAI vertexAi = VertextaiUtil.vertexBuilder().build()) {
 
-            GenerativeModel model =new GenerativeModel(MODEL_NAME, vertexAi);
+            GenerativeModel model = new GenerativeModel(MODEL_NAME, vertexAi);
 
 
             ChatSession chat = model.startChat();
