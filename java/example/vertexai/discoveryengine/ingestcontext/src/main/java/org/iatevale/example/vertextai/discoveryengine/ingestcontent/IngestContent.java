@@ -2,6 +2,7 @@ package org.iatevale.example.vertextai.discoveryengine.ingestcontent;
 
 import com.google.cloud.discoveryengine.v1.*;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
 import com.google.protobuf.Struct;
 import com.google.protobuf.util.JsonFormat;
 import org.iatevale.example.vertextai.discoveryengine.domain.MyProto;
@@ -38,28 +39,40 @@ public class IngestContent {
                     dataStoreId
             );
 
-            // Convierte el mensaje Protobuf a un objeto JSON (String)
-            String jsonString = JsonFormat.printer().print(myProto);
+            // Convierte el mensaje Protobuf a un mensaje de tipo struct (protobuf->json->struct)
+            final Struct struct = messageToStruct(myProto);
 
             // Crea el documento para Vertex AI Search
-            Document document = Document.newBuilder()
-                    .setStructuredData(Struct.newBuilder().mergeFromJson(jsonString)) // Usa mergeFromJson para parsear el String JSON
+            final Document document = Document.newBuilder()
+                    .setDerivedStructData(struct) // Usa mergeFromJson para parsear el String JSON
                     .build();
 
             // Crea la solicitud para la API
-            CreateDocumentRequest request = CreateDocumentRequest.newBuilder()
+            final CreateDocumentRequest request = CreateDocumentRequest.newBuilder()
                     .setParent(parent)
                     .setDocument(document)
                     .setDocumentId("unique_id_" + myProto.getId()) // Genera un ID único para el documento
                     .build();
 
             // Envía la solicitud para crear el documento
-            Document response = documentServiceClient.createDocument(request);
+            final Document response = documentServiceClient.createDocument(request);
             System.out.println("Documento creado: " + response.getName());
 
         } catch (InvalidProtocolBufferException e) {
             System.err.println("Error al convertir el mensaje Protobuf a JSON: " + e);
         }
+    }
+
+    public static Struct messageToStruct(Message message) throws InvalidProtocolBufferException {
+
+        // Usa JsonFormat para convertir el mensaje a una representación JSON
+        final String jsonString = JsonFormat.printer().print(message);
+
+        // Usa JsonFormat para convertir la cadena JSON de nuevo a un Struct
+        final Struct.Builder structBuilder = Struct.newBuilder();
+        JsonFormat.parser().merge(jsonString, structBuilder);
+        return structBuilder.build();
+
     }
 
 }
