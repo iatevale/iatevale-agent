@@ -17,18 +17,3 @@ java_binary(
     ],
 )
 
-java_binary(
-    name = "createsatastore2",
-    srcs = glob(["src/main/java/org/iatevale/example/vertextai/discoveryengine/createdatastore/CreateDataStoreExample.java"]),
-    main_class = "org.iatevale.example.vertextai.discoveryengine.createdatastore.CreateDataStoreExample",
-    visibility = ["//visibility:public"],
-    deps = [
-        "//java/example/vertexai/discoveryengine/common",
-        "//proto/example/vertexai/discoveryengine:domain_java_proto",
-        "@maven//:com_google_api_gax",
-        "@maven//:com_google_api_grpc_proto_google_cloud_discoveryengine_v1",
-        "@maven//:com_google_cloud_google_cloud_discoveryengine",
-        "@maven//:com_google_protobuf_protobuf_java_util",
-        "@protobuf//java/core",
-    ],
-)
