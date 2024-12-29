@@ -2,7 +2,10 @@ package org.iatevale.example.vertextai.discoveryengine.ingestcontent;
 
 import com.google.cloud.discoveryengine.v1.*;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Struct;
 import com.google.protobuf.util.JsonFormat;
+import org.iatevale.example.vertextai.discoveryengine.domain.MyProto;
+
 import java.io.IOException;
 
 public class IngestContent {
@@ -14,42 +17,41 @@ public class IngestContent {
         String dataStoreId = "tu-data-store-id";
 
         // Crea una instancia de tu mensaje Protobuf (asegúrate de haber generado las clases desde tu .proto)
-        MyProto.MiMensaje miMensajeProtobuf = MyProto.MiMensaje.newBuilder()
+        MyProto myProto = MyProto.newBuilder()
                 .setId(1)
-                .setNombre("Ejemplo de Nombre")
-                .setDescripcion("Una descripción detallada del mensaje.")
-                .setValorNumerico(123.45)
+                .setName("Ejemplo de Nombre")
+                .setDescription("Una descripción detallada del mensaje.")
+                .setValue(123.45f)
                 .build();
 
-        ingestProtobufData(projectId, location, dataStoreId, miMensajeProtobuf);
+        ingestProtobufData(projectId, location, dataStoreId, myProto);
     }
 
-    public static void ingestProtobufData(
-            String projectId, String location, String dataStoreId, MyProto.MiMensaje protobufMessage)
-            throws IOException {
+    public static void ingestProtobufData(String projectId, String location, String dataStoreId, MyProto myProto) throws IOException {
+
         try (DocumentServiceClient documentServiceClient = DocumentServiceClient.create()) {
-            String parent =
-                    String.format(
-                            "projects/%s/locations/%s/dataStores/%s/branches/default_branch",
-                            projectId, location, dataStoreId);
+
+            final String parent = String.format(
+                    "projects/%s/locations/%s/dataStores/%s/branches/default_branch",
+                    projectId,
+                    location,
+                    dataStoreId
+            );
 
             // Convierte el mensaje Protobuf a un objeto JSON (String)
-            String jsonString = JsonFormat.printer().print(protobufMessage);
+            String jsonString = JsonFormat.printer().print(myProto);
 
             // Crea el documento para Vertex AI Search
-            Document document =
-                    Document.newBuilder()
-                            .setStructuredData(com.google.protobuf.Struct.newBuilder()
-                                    .mergeFromJson(jsonString)) // Usa mergeFromJson para parsear el String JSON
-                            .build();
+            Document document = Document.newBuilder()
+                    .setStructuredData(Struct.newBuilder().mergeFromJson(jsonString)) // Usa mergeFromJson para parsear el String JSON
+                    .build();
 
             // Crea la solicitud para la API
-            CreateDocumentRequest request =
-                    CreateDocumentRequest.newBuilder()
-                            .setParent(parent)
-                            .setDocument(document)
-                            .setDocumentId("unique_id_" + protobufMessage.getId()) // Genera un ID único para el documento
-                            .build();
+            CreateDocumentRequest request = CreateDocumentRequest.newBuilder()
+                    .setParent(parent)
+                    .setDocument(document)
+                    .setDocumentId("unique_id_" + myProto.getId()) // Genera un ID único para el documento
+                    .build();
 
             // Envía la solicitud para crear el documento
             Document response = documentServiceClient.createDocument(request);
@@ -59,4 +61,5 @@ public class IngestContent {
             System.err.println("Error al convertir el mensaje Protobuf a JSON: " + e);
         }
     }
+
 }
