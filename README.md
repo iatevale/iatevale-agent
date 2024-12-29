@@ -73,6 +73,8 @@ https://cloud.google.com/generative-ai-app-builder/docs/introduction
 
 https://github.com/googleapis/google-cloud-java/tree/main/java-discoveryengine
 
+https://github.com/googleapis/googleapis/tree/master/google/cloud/discoveryengine/v1
+
 ## Estructura del repositorio
 
 | Directorio     | Contenido                 |
