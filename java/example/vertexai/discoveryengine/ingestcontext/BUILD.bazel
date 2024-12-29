@@ -8,6 +8,7 @@ java_binary(
     deps = [
         "//java/example/vertexai/generativeai/common",
         "//java/platform/util/conversion",
+        "//proto/example/vertexai/discoveryengine",
         "@maven//:com_google_cloud_google_cloud_discoveryengine",
     ],
 )
