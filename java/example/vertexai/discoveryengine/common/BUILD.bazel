@@ -1,12 +1,13 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
-java_binary(
-    name = "createsatastore",
+java_library(
+    name = "common",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "org.iatevale.example.vertextai.discoveryengine.createdatastore.CreateDatastore",
     visibility = ["//visibility:public"],
     deps = [
-        "//java/example/vertexai/discoveryengine/common",
+        "//java/example/vertexai/generativeai/common",
+        "//java/platform/util/auth",
+        "//java/platform/util/conversion",
         "//proto/example/vertexai/discoveryengine:domain_java_proto",
         "@maven//:com_google_api_gax",
         "@maven//:com_google_api_grpc_proto_google_cloud_discoveryengine_v1",

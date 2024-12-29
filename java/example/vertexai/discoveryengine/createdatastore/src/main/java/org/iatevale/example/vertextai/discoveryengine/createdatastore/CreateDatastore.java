@@ -2,34 +2,28 @@ package org.iatevale.example.vertextai.discoveryengine.createdatastore;
 
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.cloud.discoveryengine.v1.*;
+import org.iatevale.example.vertextai.discoveryengine.createdatastore.common.DataStoreServiceClientFactory;
+
 import java.io.IOException;
 
 public class CreateDatastore {
 
     public static void main(String[] args) throws IOException {
-
-        // Reemplaza con tu ID de proyecto y ubicación
-        String projectId = "tu-proyecto-id";
-        String location = "tu-ubicacion"; // Por ejemplo, "us-central1"
-
-        createDataStore(projectId, location);
+        createDataStore();
     }
 
-    public static void createDataStore(String projectId, String location) throws IOException {
-        try (DataStoreServiceClient dataStoreServiceClient = DataStoreServiceClient.create()) {
-            String parent = String.format("projects/%s/locations/%s", projectId, location);
+    public static void createDataStore() throws IOException {
+
+        try (DataStoreServiceClient dataStoreServiceClient = DataStoreServiceClientFactory.create()) {
 
             // Define el Data Store que quieres crear
             DataStore dataStore = DataStore.newBuilder()
                     .setDisplayName("Mi Nuevo Data Store IoT") // Nombre para mostrar en la consola
                     .addSolutionTypes(SolutionType.SOLUTION_TYPE_CHAT)
                     .addSolutionTypes(SolutionType.SOLUTION_TYPE_GENERATIVE_CHAT)
-//                    .setDefaultSolutionType(SolutionType.SEARCH) // Tipo de solución: SEARCH, RECOMMENDATION, o CHAT
-                    // Puedes configurar otros parámetros aquí, como industry_vertical
                     .build();
 
             CreateDataStoreRequest request = CreateDataStoreRequest.newBuilder()
-                    .setParent(parent)
                     .setDataStore(dataStore)
                     .build();
 
