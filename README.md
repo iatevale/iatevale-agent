@@ -63,7 +63,12 @@ https://github.com/googleapis/google-cloud-java/tree/main/java-aiplatform/sample
 
 https://github.com/google-gemini/generative-ai-android?tab=readme-ov-file
 
+### Vertex AI Search (antes Discovery Engine) y que forma parte de Vertex AI Agent Builder
 
+https://cloud.google.com/java/docs/reference/google-cloud-discoveryengine/latest/overview
+https://console.cloud.google.com/gen-app-builder
+https://cloud.google.com/generative-ai-app-builder/docs/introduction
+https://github.com/googleapis/google-cloud-java/tree/main/java-discoveryengine
 
 ## Estructura del repositorio
 
