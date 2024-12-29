@@ -16,4 +16,3 @@ java_binary(
         "@protobuf//java/core",
     ],
 )
-
