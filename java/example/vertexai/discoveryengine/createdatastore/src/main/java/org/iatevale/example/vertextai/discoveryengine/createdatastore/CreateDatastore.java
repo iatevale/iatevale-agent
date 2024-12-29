@@ -4,7 +4,7 @@ import com.google.api.gax.longrunning.OperationFuture;
 import com.google.cloud.discoveryengine.v1.*;
 import java.io.IOException;
 
-public class CreateDataStore {
+public class CreateDatastore {
 
     public static void main(String[] args) throws IOException {
 
@@ -22,7 +22,9 @@ public class CreateDataStore {
             // Define el Data Store que quieres crear
             DataStore dataStore = DataStore.newBuilder()
                     .setDisplayName("Mi Nuevo Data Store IoT") // Nombre para mostrar en la consola
-                    .setDefaultSolutionType(SolutionType.SEARCH) // Tipo de solución: SEARCH, RECOMMENDATION, o CHAT
+                    .addSolutionTypes(SolutionType.SOLUTION_TYPE_CHAT)
+                    .addSolutionTypes(SolutionType.SOLUTION_TYPE_GENERATIVE_CHAT)
+//                    .setDefaultSolutionType(SolutionType.SEARCH) // Tipo de solución: SEARCH, RECOMMENDATION, o CHAT
                     // Puedes configurar otros parámetros aquí, como industry_vertical
                     .build();
 
@@ -43,11 +45,11 @@ public class CreateDataStore {
             System.out.println("Data Store creado exitosamente:");
             System.out.println("Nombre: " + response.getName());
             System.out.println("Nombre para mostrar: " + response.getDisplayName());
-            System.out.println("Tipo de solución por defecto: " + response.getDefaultSolutionType());
+            System.out.println("Tipo de solución por defecto: " + response.getSolutionTypesList().toString());
 
         } catch (Exception e) {
             System.err.println("Error al crear el Data Store: " + e);
         }
-        
+
     }
 }
