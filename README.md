@@ -122,60 +122,38 @@ La lista de Roles que tiene que tener asignado la cuenta de servicio:
 * Usuario de Cloud Datastore
 * Usuario de Vertex AI
 
-### Despliegue de un agente gcloud cloud run [TODO]
+### Despliegue de un agente gcloud cloud run 
 
-Tal vez los comentarios de estos scripts no tengan que estar en este documento y simplemente en los propios scripts...
+En este despliegue se supone que ya se ha creado un proyecto gcloud.
 
-Documenar simplemente aqui como ejecutar la carga del agente..
+El primer paso es tener [instaladas](https://cloud.google.com/sdk/docs/install-sdk?hl=es-419) las utilidades cliente de gcloud, una vez instaladas lanzamos el comando **gcloud init** para especificar el entorno de trabajo.
 
-Supongo que al final habra que lanzar la carga mediante la utilidad gcloud ya que no habra forma de utilizar las credenciales que hay en $HOME/.iatevale/config.properties 
+En el proyecto gcloud hemos de crear un repositorio de Artifact Registry donde se subirá la imagen dockerizada que queremos desplegar. Entre las opciones de creación elegiremos formato docker y modo estándar.
 
-En el directorio deploy existe dos ficheros encargados para la construcción y despliegue de aplicaciones.
-
-El fichero BUILD.bazel Incluye las reglas necesarias para construir una imagen dockerizada y subirla al repositorio de artefactos del proyecto gcloud.
+Una vez creado el repositorio hemos de ajustar la regla bazel que encontraremos en el fichero BUILD.bazel del producto que vayamos a desplegar. En la línea repository de la regla que adjunto a continuación hay que substituir project-id y repo-name por el id de proyecto gcloud y el nombre del repositorio de artifacts que hemos creado en el proyecto
 
 BUILD.bazel:
-```load("@rules_oci//oci:defs.bzl", "oci_image")
-load("@rules_oci//oci:defs.bzl", "oci_push")
-load("@rules_pkg//pkg:tar.bzl", "pkg_tar")
-
-
-# Empaqueta la construcción del jar de la aplicación
-pkg_tar(
-    name = "deploy_tar",
-    srcs = ["//java:datastore-example_deploy.jar"],
-)
-
-# Construye el container docker incluyendo el jar de la imagen anterior
-oci_image(
-    name = "datastore_example_gcloud_image",
-    base = "@java_21_base",
-    entrypoint = [
-        "java",
-        "-jar",
-        "datastore-example_deploy.jar",
-    ],
-    tars = [":deploy_tar"],
-    visibility = ["//visibility:public"],
-)
-
-#### IMPORTANTE: en el atributo repository cambiar project-id y repo-name por las variables que proceda.
-# Sube al repositorio de artefactos del proyecto gcloud indicado la imagen generada
+```
 oci_push(
-    name = "datastore_example_gcloud_push",
-    image = ":datastore_example_gcloud_image",
-    repository = "europe-west3-docker.pkg.dev/project-id/repo-name/datastore-example",
+    name = "iatevaleagent_gcloud_push",
+    image = ":iatevaleagent_gcloud_image",
+    repository = "europe-west4-docker.pkg.dev/project-id/repo-name/iatevaleagent",
 )
 ```
 
-El fichero deploy.sh es un script que se encarga de llamar a la regla bazel anterior que subira la imagen a un repositorio de artefactos y la dejara disponible para que se pueda desplegar en un servicio de gcloud cloud run.
+El fichero deploy.sh es un script que se encarga de llamar a la regla bazel anterior que subirá la imagen a un repositorio de artefactos y la dejará disponible para que se pueda desplegar en un servicio de gcloud cloud run. 
+Antes de ejecutarlo se deben de cambiar las mismas variables que en el caso anterior y se debe de incluir el hash de la imagen subida en el repositorio.
+
+También dse debera de ejecutar **gcloud auth configure-docker europe-west4-docker.pkg.dev**
 
 deploy.sh:
 ```
 #! /bin/bash
-bazel run //deploy:datastore_example_gcloud_push
-gcloud run deploy datastore-example-service \
-    --image=gcr.io/<TU_PROYECTO_ID>/datastore-example-image \
-    --platform=managed \
-    --allow-unauthenticat
+bazel run //java/product/iatevaleagent:iatevaleagent_gcloud_push
+gcloud run jobs create iatevaleagent-job \
+    --image=europe-west4-docker.pkg.dev/project-id/repo-name/iatevaleagent@sha256:80b076009f51a2c192ed89376958ff693ed018e6d69456da1b0e373bba49db23 \
+    --project=project-id
+gcloud run jobs execute iatevaleagent-job
 ```
+
+Si funciona correctamente en nuestro proyecto gcloud en cloud run en la pestaña jobs estará ejecutándose nuestro trabajo y en registros podremos ver el log.
