@@ -25,7 +25,7 @@ public class FunctionDefinitions {
         // Lista de métodos que se expondrán como funciones
         Method[] methods = new Method[]{
                 getClass().getDeclaredMethod("getCustomer", int.class),
-                getClass().getDeclaredMethod("createCustomer", String.class, String.class, String.class, String.class, String.class, String.class),
+                getClass().getDeclaredMethod("createCustomer", String.class, String.class, String.class, String.class, String.class, String.class, String.class),
                 getClass().getDeclaredMethod("createOrder", int.class, String[].class, double.class)
         };
 
