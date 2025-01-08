@@ -53,11 +53,10 @@ public class FunctionDefinitions {
     }
 
     // Simula una base de datos en memoria para el ejemplo
-    private final Map<Integer, Customer> customerDatabase = new HashMap<>() {{
-        put(123, new Customer("Alice Smith", 123, new ContactInfo("alice@example.com", "555-1234", new Address("123 Main St", "Anytown", "CA", "12345"))));
-        put(456, new Customer("Bob Johnson", 456, new ContactInfo("bob@example.com", "555-5678", new Address("456 Oak Ave", "Springfield", "IL", "67890"))));
-    }};
-
+    private final Map<Integer, Customer> customerDatabase = Map.of(
+            123, new Customer("Alice Smith", 123, new ContactInfo("alice@example.com", "555-1234", new Address("123 Main St", "Anytown", "CA", "12345"))),
+            456, new Customer("Bob Johnson", 456, new ContactInfo("bob@example.com", "555-5678", new Address("456 Oak Ave", "Springfield", "IL", "67890")))
+    );
     private final Map<Integer, Order> orderDatabase = new HashMap<>();
 
     // Funciones a ser expuestas a Vertex AI (sin la anotación @Function)

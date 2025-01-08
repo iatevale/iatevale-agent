@@ -6,6 +6,7 @@ import com.google.cloud.vertexai.generativeai.ChatSession;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
 import com.google.protobuf.Value;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,20 +15,23 @@ import java.util.Map;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
-        String projectId = "your-gcp-project-id"; // Reemplazar por tu project ID
-        String location = "us-central1"; // Reemplazar por la localizacion deseada
-        String modelName = "gemini-1.0-pro"; // Reemplazar por el modelo deseado
+    private static final String MODEL_NAME = "gemini-pro";
 
-        try (VertexAI vertexAI = new VertexAI(projectId, location)) {
+    public static void main(String[] args) throws Exception {
+
+        try (VertexAI vertexAI = VertextaiUtil.vertexBuilder().build()) {
 
             // Obtener la instancia de FunctionDefinitions y la herramienta
             FunctionDefinitions functionDefinitions = FunctionDefinitions.getInstance();
             Tool tool = functionDefinitions.getTool();
 
             // Crear el modelo generativo con la herramienta
-            GenerativeModel model = new GenerativeModel(modelName, vertexAI);
-            model = model.toBuilder().setToolsList(Arrays.asList(tool)).build();
+            // Se cre el modelo con la funcion configurada
+            final GenerativeModel model = new GenerativeModel.Builder()
+                    .setModelName(MODEL_NAME)
+                    .setVertexAi(vertexAI)
+                    .setTools(Arrays.asList(tool))
+                    .build();
 
             // Ejemplo de conversación con el modelo
             ChatSession chat = model.startChat();
@@ -66,8 +70,6 @@ public class Main {
      */
     private static GenerateContentResponse handleFunctionCall(FunctionDefinitions functionDefinitions, ChatSession chat, GenerateContentResponse response) throws Exception {
         if (ResponseHandler.getFunctionCalls(response).size() > 0) {
-            List<Content> contents = new ArrayList<>();
-
             // Iterar sobre las llamadas a funciones
             for (FunctionCall functionCall : ResponseHandler.getFunctionCalls(response)) {
 
@@ -78,7 +80,7 @@ public class Main {
                 // Invocar la función y obtener la respuesta
                 String functionResponse = functionDefinitions.invokeFunction(functionName, args);
 
-                // Crear la respuesta de la función y añadirla a la lista de contenidos
+                // Crear la respuesta de la función
                 Content content = Content.newBuilder()
                         .addParts(Part.newBuilder()
                                 .setFunctionResponse(FunctionResponse.newBuilder()
@@ -89,21 +91,19 @@ public class Main {
                                         .build())
                                 .build())
                         .build();
-                contents.add(content);
 
                 System.out.println("\nFunction Response:\n" + functionResponse);
-            }
 
-            // Enviar la respuesta de la función al modelo
-            response = chat.sendMessage(contents);
-            printResponse(response);
+                // Enviar la respuesta de la función al modelo
+                response = chat.sendMessage(content);
+                printResponse(response);
+            }
             return response;
 
         } else {
             return response;
         }
     }
-
     /**
      * Imprime la respuesta del modelo.
      * @param response Respuesta del modelo.

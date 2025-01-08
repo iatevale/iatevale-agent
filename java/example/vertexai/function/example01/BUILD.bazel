@@ -11,5 +11,7 @@ java_binary(
         "@maven//:com_fasterxml_jackson_core_jackson_databind",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
+        "@maven//:com_google_protobuf_protobuf_java",
+        "@protobuf//java/core",
     ],
 )
