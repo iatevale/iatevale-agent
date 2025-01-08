@@ -6,7 +6,7 @@ import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.ContentMaker;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
 import com.google.cloud.vertexai.generativeai.ResponseHandler;
-import org.iatevale.example.vertextai.generativeai.common.VertextaiUtil;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 

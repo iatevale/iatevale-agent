@@ -3,7 +3,7 @@ package org.iatevale.example.vertextai.generativeai.example01;
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.generativeai.GenerativeModel;
-import org.iatevale.example.vertextai.generativeai.common.VertextaiUtil;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 import org.iatevale.util.conversion.ProtoUtils;
 
 import java.io.IOException;

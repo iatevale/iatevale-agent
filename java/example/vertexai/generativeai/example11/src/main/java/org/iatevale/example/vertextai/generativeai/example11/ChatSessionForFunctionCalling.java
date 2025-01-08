@@ -5,7 +5,7 @@ import com.google.cloud.vertexai.api.Content;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
 import com.google.cloud.vertexai.api.Tool;
 import com.google.cloud.vertexai.generativeai.*;
-import org.iatevale.example.vertextai.generativeai.common.VertextaiUtil;
+import org.iatevale.example.vertextai.common.VertextaiUtil;
 
 import java.io.IOException;
 import java.util.Arrays;

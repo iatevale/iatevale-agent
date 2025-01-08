@@ -1,4 +1,4 @@
-package org.iatevale.example.vertextai.generativeai.common;
+package org.iatevale.example.vertextai.common;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.Candidate;

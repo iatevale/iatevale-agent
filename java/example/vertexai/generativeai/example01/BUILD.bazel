@@ -6,7 +6,7 @@ java_binary(
     main_class = "org.iatevale.example.vertextai.generativeai.example01.BasedTextGeneration",
     visibility = ["//visibility:public"],
     deps = [
-        "//java/example/vertexai/generativeai/common",
+        "//java/example/vertexai/common",
         "//java/platform/util/conversion",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
