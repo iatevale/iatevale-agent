@@ -8,6 +8,7 @@ java_binary(
     deps = [
         "//java/example/vertexai/common",
         "//java/platform/util/conversion",
+        "@maven//:com_fasterxml_jackson_core_jackson_databind",
         "@maven//:com_google_api_grpc_proto_google_cloud_vertexai_v1",
         "@maven//:com_google_cloud_google_cloud_vertexai",
     ],

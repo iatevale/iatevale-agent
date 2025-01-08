@@ -36,6 +36,7 @@ maven.install(artifacts = [
             "org.hamcrest:hamcrest:2.2",
             "org.slf4j:slf4j-api:2.0.7",
             "org.slf4j:slf4j-jdk14:2.0.7",
+            "com.fasterxml.jackson.core:jackson-databind:2.16.0",
     ]
 )
 use_repo(maven, "maven")
