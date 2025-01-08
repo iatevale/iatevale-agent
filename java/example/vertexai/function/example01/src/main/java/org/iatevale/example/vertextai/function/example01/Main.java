@@ -1,4 +1,4 @@
-package com.example;
+package org.iatevale.example.vertextai.function.example01;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.*;
@@ -8,9 +8,7 @@ import com.google.cloud.vertexai.generativeai.ResponseHandler;
 import com.google.protobuf.Value;
 import org.iatevale.example.vertextai.common.VertextaiUtil;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Main {

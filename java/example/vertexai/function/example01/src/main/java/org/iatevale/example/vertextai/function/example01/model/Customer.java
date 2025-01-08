@@ -1,4 +1,4 @@
-package com.example.model;
+package org.iatevale.example.vertextai.function.example01.model;
 
 public class Customer {
     public String name;

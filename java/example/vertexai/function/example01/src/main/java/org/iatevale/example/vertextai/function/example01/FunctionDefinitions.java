@@ -1,9 +1,9 @@
-package com.example;
+package org.iatevale.example.vertextai.function.example01;
 
-import com.example.model.Address;
-import com.example.model.ContactInfo;
-import com.example.model.Customer;
-import com.example.model.Order;
+import org.iatevale.example.vertextai.function.example01.model.Address;
+import org.iatevale.example.vertextai.function.example01.model.ContactInfo;
+import org.iatevale.example.vertextai.function.example01.model.Customer;
+import org.iatevale.example.vertextai.function.example01.model.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.cloud.vertexai.api.*;
