@@ -1,104 +1,35 @@
 package com.google.adk.samples.agents.timeseriesforecasting;
 
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.adk.agents.BaseAgent;
-import com.google.adk.events.Event;
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.RunConfig;
+import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
+import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentLogger;
+import com.google.adk.samples.agents.timeseriesforecasting.impl.Tools;
 import com.google.adk.sessions.Session;
-import com.google.adk.tools.BaseTool;
-import com.google.adk.tools.mcp.McpToolset;
-import com.google.adk.tools.mcp.SseServerParameters;
-import com.google.common.collect.ImmutableList;
 import com.google.genai.types.Content;
 import com.google.genai.types.FunctionResponse;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+
 /**
  * The main application class for the time series forecasting agent.
  */
 public class ForecastingAgent {
-    private static final Logger ADK_LOGGER = Logger.getLogger(ForecastingAgent.class.getName());
+
 
     private static final String AGENT_NAME = "time-series-forecasting";
     private static final String MODEL_NAME = "gemini-2.0-flash";
-    private static final String MCP_TOOLBOX_SERVER_URL_ENV_VAR = "MCP_TOOLBOX_SERVER_URL";
 
     public static BaseAgent ROOT_AGENT = initAgent();
 
-    /**
-     * Loads tools from the MCP server.
-     *
-     * @return The list of tools.
-     */
-    private static List<BaseTool> getTools() {
-        List<BaseTool> tools = ImmutableList.of();
-
-        String mcpServerUrl = System.getenv(MCP_TOOLBOX_SERVER_URL_ENV_VAR);
-        ADK_LOGGER.info("MCP Server URL from env: " + mcpServerUrl);
-
-        if (mcpServerUrl == null || mcpServerUrl.trim().isEmpty()) {
-            ADK_LOGGER.info(MCP_TOOLBOX_SERVER_URL_ENV_VAR
-                    + " environment variable not set. No remote tools will be loaded.");
-        } else {
-            ADK_LOGGER.info("Attempting to load tools from MCP server: " + mcpServerUrl);
-
-            try {
-                SseServerParameters params =
-                        SseServerParameters.builder().url(mcpServerUrl).build();
-                ADK_LOGGER.fine("URL in SseServerParameters object: " + params.url());
-
-                McpToolset.McpToolsAndToolsetResult toolsAndToolsetResult =
-                        McpToolset.fromServer(params, new ObjectMapper()).get();
-
-                if (toolsAndToolsetResult == null) {
-                    ADK_LOGGER.warning("Failed to load tools from MCP server at " + mcpServerUrl
-                            + ". Load method returned null.");
-                } else {
-                    McpToolset toolset =
-                            (toolsAndToolsetResult != null) ? toolsAndToolsetResult.getToolset()
-                                    : null;
-                    try (McpToolset managedToolset = toolset) {
-                        if (toolsAndToolsetResult != null
-                                && toolsAndToolsetResult.getTools() != null) {
-                            tools = toolsAndToolsetResult.getTools().stream()
-                                    .collect(Collectors.toList());
-                            ADK_LOGGER.info("Loaded " + tools.size() + " tools.");
-                        } else {
-                            tools = ImmutableList.of();
-                            ADK_LOGGER.warning(
-                                    "Proceeding with an empty tool list due to previous errors or no tools loaded.");
-                        }
-
-                        if (tools.isEmpty()
-                                && System.getenv(MCP_TOOLBOX_SERVER_URL_ENV_VAR) != null) {
-                            ADK_LOGGER.warning(MCP_TOOLBOX_SERVER_URL_ENV_VAR
-                                    + " was set, but no tools were loaded. Agent will function without these tools.");
-                        } else if (tools.isEmpty()) {
-                            ADK_LOGGER.warning("No tools are configured for the agent.");
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                ADK_LOGGER.log(Level.WARNING, "Failed to load tools from MCP server at "
-                                + mcpServerUrl
-                                + ". Ensure the server is running and accessible, and the URL is correct.",
-                        e);
-            }
-        }
-
-        return tools;
-    }
 
     /**
      * Creates a time series forecasting agent.
@@ -106,7 +37,6 @@ public class ForecastingAgent {
      * @return The created LLM agent.
      */
     private static BaseAgent initAgent() {
-        List<BaseTool> tools = getTools();
         return LlmAgent.builder().name(AGENT_NAME).description(
                         "A general-purpose agent that performs time series forecasting using provided tools.")
                 .model(MODEL_NAME)
@@ -135,11 +65,12 @@ public class ForecastingAgent {
 
                                 Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
                                 """)
-                .tools(tools).build();
+                .tools(Tools.getTools())
+                .build();
     }
 
     public static void main(String[] args) {
-        ADK_LOGGER.setLevel(Level.WARNING);
+        AgentLogger.setLevel(Level.WARNING);
 
         InMemoryRunner runner = new InMemoryRunner(ROOT_AGENT);
         Session session = runner.sessionService().createSession(ROOT_AGENT.name(), "tmp-user",
@@ -186,9 +117,9 @@ public class ForecastingAgent {
 
                 if (toolCalledInTurn.get() && !toolErroredInTurn.get()
                         && agentResponseBuilder.length() == 0) {
-                    ADK_LOGGER.warning("Agent used a tool but provided no text response.");
+                    AgentLogger.warning("Agent used a tool but provided no text response.");
                 } else if (toolErroredInTurn.get()) {
-                    ADK_LOGGER.warning(
+                    AgentLogger.warning(
                             "An error occurred during tool execution or in the agent's response processing.");
                 }
             }
