@@ -37,6 +37,8 @@ maven.install(artifacts = [
             "org.slf4j:slf4j-api:2.0.7",
             "org.slf4j:slf4j-jdk14:2.0.7",
             "com.fasterxml.jackson.core:jackson-databind:2.16.0",
+            "com.google.adk:google-adk:0.1.0",
+            "com.google.adk:google-adk-dev:0.1.0"
     ]
 )
 use_repo(maven, "maven")
