@@ -7,6 +7,8 @@ import com.google.adk.tools.mcp.SseServerParameters;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 public class Tools {
@@ -41,6 +43,7 @@ public class Tools {
                     AgentLogger.warning("Failed to load tools from MCP server at " + mcpServerUrl + ". Load method returned null.");
 
                 } else {
+                    
                     McpToolset toolset = (toolsAndToolsetResult != null) ? toolsAndToolsetResult.getToolset() : null;
                     try (McpToolset managedToolset = toolset) {
                         if (toolsAndToolsetResult != null && toolsAndToolsetResult.getTools() != null) {
@@ -69,4 +72,29 @@ public class Tools {
 
         return tools;
     }
+
+    static SseServerParameters getServerParameters() throws AgentConfigException {
+
+        final String mcpServerUrl = System.getenv(MCP_TOOLBOX_SERVER_URL_ENV_VAR);
+
+        if (mcpServerUrl == null || mcpServerUrl.trim().isEmpty()) {
+            throw new AgentConfigException(MCP_TOOLBOX_SERVER_URL_ENV_VAR + " environment variable not set. No remote tools will be loaded.");
+        }
+
+        return SseServerParameters.builder().url(mcpServerUrl).build();
+
+    }
+
+    static Optional<McpToolset.McpToolsAndToolsetResult> getToolsFromServer(SseServerParameters parameters) throws AgentConfigException {
+        try {
+            return Optional.ofNullable(
+                    McpToolset.fromServer(parameters, new ObjectMapper()).get()
+            );
+        } catch (InterruptedException e) {
+            throw new AgentConfigException("Se ha producido una interrupcion del thread al cargar la Tool remota", e);
+        } catch (ExecutionException e) {
+            throw new AgentConfigException("Se ha producido una error de ejecucion al cargar la Tool remota", e);
+        }
+    }
+
 }
