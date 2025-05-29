@@ -9,9 +9,8 @@ import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class HelloWeatherAgent {
 
@@ -27,12 +26,12 @@ public class HelloWeatherAgent {
     }
 
     static private Scanner parseScanner() {
-        return new Scanner(System.in, UTF_8);
+        return new Scanner(System.in, StandardCharsets.UTF_8);
     }
 
-    final RunConfig runConfig;
-    final InMemoryRunner runner;
-    final Session session;
+    final private RunConfig runConfig;
+    final private InMemoryRunner runner;
+    final private Session session;
 
     private HelloWeatherAgent() {
         runConfig = RunConfig.builder().build();

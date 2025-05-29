@@ -13,34 +13,50 @@ import java.util.Scanner;
 
 public class MultiToolAgent {
 
-    private static String USER_ID = "student";
-    private static String NAME = "multi_tool_agent";
+    final private static String USER_ID = "student";
+    final private static String NAME = "multi_tool_agent";
 
-    public static void main(String[] args) throws Exception {
-
-        InMemoryRunner runner = new InMemoryRunner(AgentBuilder.getAgent(NAME));
-
-        Session session =
-                runner
-                        .sessionService()
-                        .createSession(NAME, USER_ID)
-                        .blockingGet();
-
-        try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
+    public static void main(String[] args) {
+        final MultiToolAgent multiToolAgent = new MultiToolAgent();
+        try (Scanner scanner = parseScanner()) {
             while (true) {
-                System.out.print("\nYou > ");
-                String userInput = scanner.nextLine();
-
-                if ("quit".equalsIgnoreCase(userInput)) {
+                if (!multiToolAgent.execute(scanner)) {
                     break;
                 }
-
-                Content userMsg = Content.fromParts(Part.fromText(userInput));
-                Flowable<Event> events = runner.runAsync(USER_ID, session.id(), userMsg);
-
-                System.out.print("\nAgent > ");
-                events.blockingForEach(event -> System.out.println(event.stringifyContent()));
             }
         }
+    }
+
+    static private Scanner parseScanner() {
+        return new Scanner(System.in, StandardCharsets.UTF_8);
+    }
+
+    final private InMemoryRunner runner;
+    final private Session session;
+
+    public MultiToolAgent() {
+        runner = new InMemoryRunner(AgentBuilder.getAgent(NAME));
+        session = runner
+                .sessionService()
+                .createSession(NAME, USER_ID)
+                .blockingGet();
+    }
+
+    private boolean execute(Scanner scanner) {
+
+        System.out.print("\nYou > ");
+        String userInput = scanner.nextLine();
+        if ("quit".equalsIgnoreCase(userInput)) {
+            return false;
+        }
+
+        Content userMsg = Content.fromParts(Part.fromText(userInput));
+        Flowable<Event> events = runner.runAsync(session.userId(), session.id(), userMsg);
+
+        System.out.print("\nAgent > ");
+        events.blockingForEach(event -> System.out.println(event.stringifyContent()));
+
+        return true;
+
     }
 }
