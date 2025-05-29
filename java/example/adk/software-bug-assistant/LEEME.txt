@@ -1,0 +1,2 @@
+El resto de piezas para hacer funcionar este software se encuentran en
+    https://github.com/google/adk-samples/tree/main/java/agents/software-bug-assistant
