@@ -9,3 +9,4 @@ docs/guia/target
 /test/lorawan/ttn/downtest/src/resources/esp-idf/.vscode/
 /test/lorawan/ttn/downtest/src/resources/esp-idf/build/
 
+/MODULE.bazel.lock
