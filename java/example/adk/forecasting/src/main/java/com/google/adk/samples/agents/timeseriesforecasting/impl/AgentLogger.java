@@ -3,10 +3,11 @@ package com.google.adk.samples.agents.timeseriesforecasting.impl;
 import com.google.adk.samples.agents.timeseriesforecasting.ForecastingAgent;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AgentLogger {
 
-    static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(ForecastingAgent.class.getName());
+    static final java.util.logging.Logger LOGGER = Logger.getLogger(ForecastingAgent.class.getName());
 
     static public void setLevel(Level level) {
         LOGGER.setLevel(level);
