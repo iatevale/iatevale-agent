@@ -5,6 +5,7 @@ import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
+import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteConfig;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentException;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
@@ -37,11 +38,11 @@ public class ForecastingAgent {
      * @return The created LLM agent.
      */
     private static BaseAgent initAgent() throws AgentException {
-        return LlmAgent.builder().name(AGENT_NAME).description(
-                        "A general-purpose agent that performs time series forecasting using provided tools.")
+        return LlmAgent.builder()
+                .name(AGENT_NAME)
+                .description("A general-purpose agent that performs time series forecasting using provided tools.")
                 .model(MODEL_NAME)
-                .instruction(
-                        """
+                .instruction("""
                                 You are a highly skilled expert at time-series forecasting, possessing strong data science skills. You will be provided with tools to solve specific time series problems.
 
                                 Your general process is as follows:
@@ -65,16 +66,21 @@ public class ForecastingAgent {
 
                                 Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
                                 """)
-                .tools(RemoteTools.getTools())
+                .tools(RemoteTools.instantiate(RemoteConfig.instantiate()).getTools())
                 .build();
     }
 
     public static void main(String[] args) {
+
         AgentLogger.setLevel(Level.WARNING);
 
-        InMemoryRunner runner = new InMemoryRunner(ROOT_AGENT);
-        Session session = runner.sessionService().createSession(ROOT_AGENT.name(), "tmp-user",
-                (ConcurrentMap<String, Object>) null, (String) null).blockingGet();
+        final InMemoryRunner runner = new InMemoryRunner(ROOT_AGENT);
+        final Session session = runner.sessionService().createSession(
+                ROOT_AGENT.name(),
+                "tmp-user",
+                (ConcurrentMap<String, Object>) null,
+                (String) null
+        ).blockingGet();
 
         runInteractiveSession(runner, session, ROOT_AGENT);
 
