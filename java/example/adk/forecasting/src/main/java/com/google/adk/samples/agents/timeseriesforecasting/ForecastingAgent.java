@@ -5,9 +5,8 @@ import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentInitException;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentLogger;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.Tools;
+import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
+import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
 import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.FunctionResponse;
@@ -24,7 +23,6 @@ import java.util.logging.Level;
  * The main application class for the time series forecasting agent.
  */
 public class ForecastingAgent {
-
 
     private static final String AGENT_NAME = "time-series-forecasting";
     private static final String MODEL_NAME = "gemini-2.0-flash";
@@ -66,7 +64,7 @@ public class ForecastingAgent {
 
                                 Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
                                 """)
-                .tools(Tools.getTools())
+                .tools(RemoteTools.getTools())
                 .build();
     }
 
