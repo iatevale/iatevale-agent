@@ -5,6 +5,7 @@ import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
+import com.google.adk.samples.agents.timeseriesforecasting.util.AgentException;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
 import com.google.adk.sessions.Session;
@@ -35,7 +36,7 @@ public class ForecastingAgent {
      *
      * @return The created LLM agent.
      */
-    private static BaseAgent initAgent() throws AgentInitException {
+    private static BaseAgent initAgent() throws AgentException {
         return LlmAgent.builder().name(AGENT_NAME).description(
                         "A general-purpose agent that performs time series forecasting using provided tools.")
                 .model(MODEL_NAME)
