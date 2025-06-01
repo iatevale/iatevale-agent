@@ -8,7 +8,11 @@ Por tanto es puramente especulativo y puede sufrir refactorizaciones drasticas.
 Para ser productivos se utilizaran los productos de gcloud y por tanto estos productos
 tambien seran parte del proceso de aprendizaje.
 
-El sistema de build utilizado es [BAZEL](https://bazel.build/) (con el nuevo sistema de dependencias por modulos) ya que este es el sistema nativo de los productos de Google.
+## Tecnologías Utilizadas
+
+- **Java**: Es el lenguaje de programación principal utilizado para el desarrollo de los componentes y ejemplos en este repositorio.
+- **Bazel**: Se utiliza como el sistema de compilación. Bazel es el sistema de construcción preferido para proyectos que se integran estrechamente con el ecosistema de Google Cloud, ofreciendo compilaciones rápidas y reproducibles, y una gestión de dependencias eficiente. La configuración actual utiliza el sistema de módulos de Bazel.
+- **Protocol Buffers (Protobuf)**: Se emplean para la definición de estructuras de datos y la serialización eficiente, facilitando la comunicación entre servicios y el almacenamiento de datos estructurados.
 
 ## La web mas importante
 
