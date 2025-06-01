@@ -1,13 +1,11 @@
 package com.google.adk.samples.agents.timeseriesforecasting;
 
 import com.google.adk.agents.BaseAgent;
-import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.Agent;
+import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentBuilder;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteConfig;
-import com.google.adk.samples.agents.timeseriesforecasting.util.AgentConfigException;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentException;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
@@ -32,11 +30,12 @@ public class ForecastingAgent {
 
         AgentLogger.setLevel(Level.WARNING);
 
-        // Se preparan todos los recursos necesarios
+        // Se construye el agente
         final RemoteConfig remoteConfig = RemoteConfig.instantiate();
         final RemoteTools remoteTools = RemoteTools.instantiate(remoteConfig);
-        final Agent agent = Agent.instantiate(remoteTools);
-        final BaseAgent baseAgent = agent.getAgent();
+        final AgentBuilder agentBuilder = AgentBuilder.instantiate(remoteTools);
+
+        final BaseAgent baseAgent = agentBuilder.getAgent();
         final InMemoryRunner runner = new InMemoryRunner(baseAgent);
         final Session session = runner.sessionService().createSession(
                 baseAgent.name(),
@@ -45,7 +44,7 @@ public class ForecastingAgent {
                 (String) null
         ).blockingGet();
 
-        // Se crea el egente
+        // Se crea el agente
         ForecastingAgent forecastingAgent = new ForecastingAgent(runner, session);
 
         // Saludo inicial
