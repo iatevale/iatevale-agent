@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.timeseriesforecasting.console;
+package org.iatevale.adk.common.console;
 
 public sealed interface InputType {
     record Prompt(String text) implements InputType {}

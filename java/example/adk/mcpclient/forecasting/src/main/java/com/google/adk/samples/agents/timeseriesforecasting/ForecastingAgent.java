@@ -1,9 +1,8 @@
 package com.google.adk.samples.agents.timeseriesforecasting;
 
-import com.google.adk.agents.BaseAgent;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.timeseriesforecasting.console.Console;
-import com.google.adk.samples.agents.timeseriesforecasting.console.InputType;
+import org.iatevale.adk.common.console.Console;
+import org.iatevale.adk.common.console.InputType;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentBuilder;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteConfig;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
@@ -21,15 +20,17 @@ public class ForecastingAgent {
 
         AgentLogger.setLevel(Level.WARNING);
 
-        // Se construye el agente
+        // Se ensambla el agente
         final RemoteConfig remoteConfig = RemoteConfig.instantiate();
         final RemoteTools remoteTools = RemoteTools.instantiate(remoteConfig);
         final AgentBuilder agentBuilder = AgentBuilder.instantiate(remoteTools);
 
-        final BaseAgent baseAgent = agentBuilder.getAgent();
-        final InMemoryRunner runner = new InMemoryRunner(baseAgent);
+        // Se crea en runner el agente, con las herramientas cargadas
+        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
+
+        // Se crea una sesión temporal para el agente, con los datos de usuario nulos
         final Session session = runner.sessionService().createSession(
-                baseAgent.name(),
+                agentBuilder.getAgent().name(),
                 "tmp-user",
                 (ConcurrentMap<String, Object>) null,
                 (String) null

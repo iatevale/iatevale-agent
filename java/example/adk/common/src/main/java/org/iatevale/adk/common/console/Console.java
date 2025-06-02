@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.timeseriesforecasting.console;
+package org.iatevale.adk.common.console;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;

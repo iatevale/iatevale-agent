@@ -1,0 +1,10 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+java_library(
+    name = "common",
+    srcs = glob(["src/main/java/**/*.java"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@maven//:com_google_adk_google_adk",
+    ],
+)
