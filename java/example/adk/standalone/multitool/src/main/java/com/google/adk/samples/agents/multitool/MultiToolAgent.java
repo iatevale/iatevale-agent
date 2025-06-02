@@ -1,62 +1,53 @@
 package com.google.adk.samples.agents.multitool;
 
-import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.samples.agents.multitool.agentbuilder.AgentBuilder;
+import com.google.adk.samples.agents.multitool.agentrunner.MultiToolRunner;
+import com.google.adk.samples.agents.multitool.tool.CurrentTimeTool;
+import com.google.adk.samples.agents.multitool.tool.WeatherTool;
 import com.google.adk.sessions.Session;
-import com.google.genai.types.Content;
-import com.google.genai.types.Part;
-import io.reactivex.rxjava3.core.Flowable;
+import org.iatevale.adk.common.console.Console;
+import org.iatevale.adk.common.console.InputType;
+import org.iatevale.adk.common.logger.AgentLogger;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.logging.Level;
 
 public class MultiToolAgent {
 
     final private static String USER_ID = "student";
-    final private static String NAME = "multi_tool_agent";
 
     public static void main(String[] args) {
-        final MultiToolAgent multiToolAgent = new MultiToolAgent();
-        try (Scanner scanner = parseScanner()) {
-            while (true) {
-                if (!multiToolAgent.execute(scanner)) {
-                    break;
-                }
-            }
-        }
-    }
 
-    static private Scanner parseScanner() {
-        return new Scanner(System.in, StandardCharsets.UTF_8);
-    }
+        AgentLogger.setLevel(Level.WARNING);
 
-    final private InMemoryRunner runner;
-    final private Session session;
+        // Se ensambla el agente
+        final CurrentTimeTool currentTimeTool = CurrentTimeTool.instantiate();
+        final WeatherTool weatherTool = WeatherTool.instantiate();
+        final AgentBuilder agentBuilder = AgentBuilder.instantiate(currentTimeTool, weatherTool);
 
-    public MultiToolAgent() {
-        runner = new InMemoryRunner(AgentBuilder.getAgent(NAME));
-        session = runner
-                .sessionService()
-                .createSession(NAME, USER_ID)
+        // Se crea en runner el agente, con las herramientas cargadas
+        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
+
+        // Se crea una sesión temporal para el agente
+        final Session session = runner.sessionService()
+                .createSession(runner.appName(), USER_ID)
                 .blockingGet();
-    }
 
-    private boolean execute(Scanner scanner) {
+        // Se crea el agente
+        final MultiToolRunner multiToolRunner = new MultiToolRunner(runner, session);
 
-        System.out.print("\nYou > ");
-        String userInput = scanner.nextLine();
-        if ("quit".equalsIgnoreCase(userInput)) {
-            return false;
+        // Consola para interaccion con el usuario
+        try (Console console = new Console(Constants.HELLO, Constants.PROMPT)) {
+            while (switch (console.Input()) {
+                case InputType.Quit quit -> false;
+                case InputType.Empty empty -> true;
+                case InputType.Prompt prompt -> multiToolRunner.execute(prompt.text(), console::output);
+            }
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        Content userMsg = Content.fromParts(Part.fromText(userInput));
-        Flowable<Event> events = runner.runAsync(session.userId(), session.id(), userMsg);
-
-        System.out.print("\nAgent > ");
-        events.blockingForEach(event -> System.out.println(event.stringifyContent()));
-
-        return true;
-
     }
+
 }

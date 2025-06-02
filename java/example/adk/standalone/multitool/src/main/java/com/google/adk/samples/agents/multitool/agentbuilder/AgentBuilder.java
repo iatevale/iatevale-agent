@@ -2,35 +2,51 @@ package com.google.adk.samples.agents.multitool.agentbuilder;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
-import com.google.adk.samples.agents.multitool.tool.CurrentTimeTool;
-import com.google.adk.samples.agents.multitool.tool.WeatherTool;
-import com.google.adk.tools.FunctionTool;
+import com.google.adk.tools.BaseTool;
+import org.iatevale.adk.common.tool.AbstractToolBuilder;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class AgentBuilder {
 
-    private static BaseAgent ROOT_AGENT;
+    private static final String AGENT_NAME = "multi_tool_agent";
+    private static final String MODEL_NAME = "gemini-2.0-flash";
+    private static final String DESCRIPTION = "Agent to answer questions about the time and weather in a city.";
+    private static final String INSTRUCTION = """
+You are a helpful agent who can answer user questions about the time and weather in a city.
+""";
 
-    // The run your agent with Dev UI, the ROOT_AGENT should be a global public static variable.
-    public static BaseAgent getAgent(String name    ) {
-        synchronized (AgentBuilder.class) {
-            if (ROOT_AGENT == null) {
-                ROOT_AGENT = initAgent(name);
-            }
-        }
-        return ROOT_AGENT;
+    static public AgentBuilder instantiate(AbstractToolBuilder...builders) {
+
+        final List<BaseTool> tools = Arrays.stream(builders)
+                .toList()
+                .stream()
+                .map(AbstractToolBuilder::getTool)
+                .toList();
+
+        final BaseAgent agent = LlmAgent.builder()
+                .name(AGENT_NAME)
+                .description(DESCRIPTION)
+                .model(MODEL_NAME)
+                .instruction(INSTRUCTION)
+                .tools(tools)
+                .build();
+
+        return new AgentBuilder(agent);
+
     }
 
-    public static BaseAgent initAgent(String name) {
-        return LlmAgent.builder()
-                .name(name)
-                .model("gemini-2.0-flash")
-                .description("Agent to answer questions about the time and weather in a city.")
-                .instruction("You are a helpful agent who can answer user questions about the time and weather in a city.")
-                .tools(
-                        FunctionTool.create(CurrentTimeTool.class, "getCurrentTime"),
-                        FunctionTool.create(WeatherTool.class, "getWeather")
-                )
-                .build();
+    // Instancia
+
+    final private BaseAgent agent;
+
+    public AgentBuilder(BaseAgent agent) {
+        this.agent = agent;
+    }
+
+    public BaseAgent getAgent() {
+        return agent;
     }
 
 }
