@@ -4,6 +4,8 @@ import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
+import com.google.adk.samples.agents.timeseriesforecasting.console.Console;
+import com.google.adk.samples.agents.timeseriesforecasting.console.InputType;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentBuilder;
 import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteConfig;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentException;
@@ -19,12 +21,24 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 
 /**
  * The main application class for the time series forecasting agent.
  */
 public class ForecastingAgent {
+
+    final static private String HELLO = """
+\\nTime Series Forecasting Agent
+-----------------------------
+Examples:
+predict next week's liquor sales in iowa
+how many SF bike trips are expected tomorrow
+forecast seattle air quality for the next 10 days
+""";
+
+    final static private String PROMPT = "";
 
     public static void main(String[] args) throws AgentException {
 
@@ -47,29 +61,18 @@ public class ForecastingAgent {
         // Se crea el agente
         ForecastingAgent forecastingAgent = new ForecastingAgent(runner, session);
 
-        // Saludo inicial
-        System.out.println("\\nTime Series Forecasting Agent");
-        System.out.println("-----------------------------");
-        System.out.println("Examples:");
-        System.out.println("predict next week's liquor sales in iowa");
-        System.out.println("how many SF bike trips are expected tomorrow");
-        System.out.println("forecast seattle air quality for the next 10 days");
-
-        // Bucle con el usuario
-        try (Scanner scanner = parseScanner()) {
-            while (true) {
-                if (!forecastingAgent.execute(scanner)) {
-                    break;
+        // Consola para interaccion con el usuario
+        try (Console console = new Console(HELLO, PROMPT)) {
+            while (switch (console.Input()) {
+                    case InputType.Quit quit -> false;
+                    case InputType.Empty qmpty -> true;
+                    case InputType.Prompt prompt -> forecastingAgent.execute(prompt.text(), console::output);
                 }
-            }
-            // Saludo de despedida
-            System.out.println("Exiting agent.");
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    }
-
-    static private Scanner parseScanner() {
-        return new Scanner(System.in, StandardCharsets.UTF_8);
     }
 
     final InMemoryRunner runner;
@@ -80,37 +83,31 @@ public class ForecastingAgent {
         this.session = session;
     }
 
-    private boolean execute(Scanner scanner) {
+    private boolean execute(String prompt, Consumer<String> consoleOutput) {
 
         System.out.print("\\nYou > ");
-        String userInput = scanner.nextLine();
+        final Content userMsgForHistory = Content.fromParts(Part.fromText(prompt));
+        final Flowable<Event> events = runner.runWithSessionId(
+                session.id(),
+                userMsgForHistory,
+                RunConfig.builder().build()
+        );
 
-        if (!userInput.trim().isEmpty()) {
+        consoleOutput.accept("\\nAgent > ");
+        final StringBuilder agentResponseBuilder = new StringBuilder();
+        final AtomicBoolean toolCalledInTurn = new AtomicBoolean(false);
+        final AtomicBoolean toolErroredInTurn = new AtomicBoolean(false);
 
-            if ("quit".equalsIgnoreCase(userInput.trim())) {
-                return false;
-            }
-
-            Content userMsgForHistory = Content.fromParts(Part.fromText(userInput));
-            Flowable<Event> events = runner.runWithSessionId(session.id(), userMsgForHistory,
-                    RunConfig.builder().build());
-
-            System.out.print("\\nAgent > ");
-            final StringBuilder agentResponseBuilder = new StringBuilder();
-            final AtomicBoolean toolCalledInTurn = new AtomicBoolean(false);
-            final AtomicBoolean toolErroredInTurn = new AtomicBoolean(false);
-
-            events.blockingForEach(
+        events.blockingForEach(
                 event -> processAgentEvent(event, agentResponseBuilder, toolCalledInTurn, toolErroredInTurn)
-            );
+        );
 
-            System.out.println();
+        consoleOutput.accept("\\n");
 
-            if (toolCalledInTurn.get() && !toolErroredInTurn.get() && agentResponseBuilder.isEmpty()) {
-                AgentLogger.warning("Agent used a tool but provided no text response.");
-            } else if (toolErroredInTurn.get()) {
-                AgentLogger.warning("An error occurred during tool execution or in the agent's response processing.");
-            }
+        if (toolCalledInTurn.get() && !toolErroredInTurn.get() && agentResponseBuilder.isEmpty()) {
+            AgentLogger.warning("Agent used a tool but provided no text response.");
+        } else if (toolErroredInTurn.get()) {
+            AgentLogger.warning("An error occurred during tool execution or in the agent's response processing.");
         }
         return true;
     }
