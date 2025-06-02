@@ -1,7 +1,9 @@
-package com.google.adk.samples.agents.multitool.impl;
+package com.google.adk.samples.agents.multitool.agentbuilder;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
+import com.google.adk.samples.agents.multitool.tool.CurrentTimeTool;
+import com.google.adk.samples.agents.multitool.tool.WeatherTool;
 import com.google.adk.tools.FunctionTool;
 
 public class AgentBuilder {

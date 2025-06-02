@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.multitool;
 
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.multitool.impl.AgentBuilder;
+import com.google.adk.samples.agents.multitool.agentbuilder.AgentBuilder;
 import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;

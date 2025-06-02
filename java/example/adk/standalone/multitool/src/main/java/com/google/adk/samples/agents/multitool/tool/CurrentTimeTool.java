@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.multitool.impl;
+package com.google.adk.samples.agents.multitool.tool;
 
 import com.google.adk.tools.Annotations;
 
