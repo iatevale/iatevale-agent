@@ -16,6 +16,8 @@ import java.util.logging.Level;
 
 public class ForecastingAgent {
 
+    final private static String USER_ID = "tmp-user";
+
     public static void main(String[] args) throws AgentException {
 
         AgentLogger.setLevel(Level.WARNING);
@@ -32,7 +34,7 @@ public class ForecastingAgent {
         final Session session = runner.sessionService()
                 .createSession(
                     agentBuilder.getAgent().name(),
-                    "tmp-user",
+                    USER_ID,
                     (ConcurrentMap<String, Object>) null,
                     (String) null)
                 .blockingGet();

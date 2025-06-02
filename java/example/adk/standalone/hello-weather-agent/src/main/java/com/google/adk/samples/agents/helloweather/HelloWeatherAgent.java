@@ -13,6 +13,8 @@ import java.util.logging.Level;
 
 public class HelloWeatherAgent {
 
+    final private static String USER_ID = "user1234";
+
     public static void main(String[] args) {
 
         AgentLogger.setLevel(Level.WARNING);
@@ -26,7 +28,7 @@ public class HelloWeatherAgent {
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()
-                .createSession(runner.appName(), "user1234")
+                .createSession(runner.appName(), USER_ID)
                 .blockingGet();
 
         // Se crea el agente
