@@ -11,6 +11,6 @@ how many SF bike trips are expected tomorrow
 forecast seattle air quality for the next 10 days
 """;
 
-    final static public String PROMPT = "";
+    final static public String PROMPT = "\\You > ";
 
 }
