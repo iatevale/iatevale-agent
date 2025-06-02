@@ -32,10 +32,10 @@ public class HelloWeatherRunner {
                 runConfig
         );
 
-        System.out.print("\nAgent > ");
+        consoleOutput.accept("\nAgent > ");
         events.blockingForEach(event -> {
             if (event.finalResponse()) {
-                System.out.println(event.stringifyContent());
+                consoleOutput.accept(event.stringifyContent());
             }
         });
 

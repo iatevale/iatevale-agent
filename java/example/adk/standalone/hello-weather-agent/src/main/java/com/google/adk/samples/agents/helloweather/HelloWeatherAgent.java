@@ -3,6 +3,7 @@ package com.google.adk.samples.agents.helloweather;
 import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.samples.agents.helloweather.agentbuilder.AgentBuilder;
 import com.google.adk.samples.agents.helloweather.agentrunner.HelloWeatherRunner;
+import com.google.adk.samples.agents.helloweather.tool.HelloWeatherTool;
 import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.Console;
@@ -17,7 +18,11 @@ public class HelloWeatherAgent {
         AgentLogger.setLevel(Level.WARNING);
 
         // Se ensambla el agente
-        final InMemoryRunner runner = new InMemoryRunner(AgentBuilder.ROOT_AGENT);
+        final HelloWeatherTool helloWeatherTool = HelloWeatherTool.instantiate();
+        final AgentBuilder agentBuilder = AgentBuilder.instantiate(helloWeatherTool);
+
+        // Se crea en runner el agente, con las herramientas cargadas
+        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()
