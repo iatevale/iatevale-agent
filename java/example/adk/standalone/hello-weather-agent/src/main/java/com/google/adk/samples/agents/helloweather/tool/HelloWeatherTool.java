@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.helloweather.impl;
+package com.google.adk.samples.agents.helloweather.tool;
 
 import com.google.adk.tools.Annotations;
 

@@ -1,7 +1,8 @@
-package com.google.adk.samples.agents.timeseriesforecasting.impl;
+package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
+import com.google.adk.samples.agents.timeseriesforecasting.tool.RemoteTools;
 
 public class AgentBuilder {
 

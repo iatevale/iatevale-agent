@@ -3,12 +3,12 @@ package com.google.adk.samples.agents.timeseriesforecasting;
 import com.google.adk.runner.InMemoryRunner;
 import org.iatevale.adk.common.console.Console;
 import org.iatevale.adk.common.console.InputType;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.AgentBuilder;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteConfig;
-import com.google.adk.samples.agents.timeseriesforecasting.impl.RemoteTools;
+import com.google.adk.samples.agents.timeseriesforecasting.agent.AgentBuilder;
+import com.google.adk.samples.agents.timeseriesforecasting.tool.RemoteConfig;
+import com.google.adk.samples.agents.timeseriesforecasting.tool.RemoteTools;
 import com.google.adk.samples.agents.timeseriesforecasting.runner.ForecastingRunner;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentException;
-import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
+import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.sessions.Session;
 
 import java.util.concurrent.ConcurrentMap;
@@ -28,13 +28,14 @@ public class ForecastingAgent {
         // Se crea en runner el agente, con las herramientas cargadas
         final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
 
-        // Se crea una sesión temporal para el agente, con los datos de usuario nulos
-        final Session session = runner.sessionService().createSession(
-                agentBuilder.getAgent().name(),
-                "tmp-user",
-                (ConcurrentMap<String, Object>) null,
-                (String) null
-        ).blockingGet();
+        // Se crea una sesión temporal para el agente
+        final Session session = runner.sessionService()
+                .createSession(
+                    agentBuilder.getAgent().name(),
+                    "tmp-user",
+                    (ConcurrentMap<String, Object>) null,
+                    (String) null)
+                .blockingGet();
 
         // Se crea el agente
         ForecastingRunner forecastingAgent = new ForecastingRunner(runner, session);

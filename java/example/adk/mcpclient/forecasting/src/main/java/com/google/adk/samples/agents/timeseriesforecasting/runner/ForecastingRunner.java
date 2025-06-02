@@ -3,7 +3,7 @@ package com.google.adk.samples.agents.timeseriesforecasting.runner;
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
+import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.FunctionResponse;
@@ -15,12 +15,14 @@ import java.util.function.Consumer;
 
 public class ForecastingRunner {
 
-    final InMemoryRunner runner;
-    final Session session;
+    final private InMemoryRunner runner;
+    final private Session session;
+    final private RunConfig runConfig;
 
     public ForecastingRunner(InMemoryRunner runner, Session session) {
         this.runner = runner;
         this.session = session;
+        this.runConfig = RunConfig.builder().build();
     }
 
     public boolean execute(String prompt, Consumer<String> consoleOutput) {
@@ -30,7 +32,7 @@ public class ForecastingRunner {
         final Flowable<Event> events = runner.runWithSessionId(
                 session.id(),
                 userMsgForHistory,
-                RunConfig.builder().build()
+                runConfig
         );
 
         consoleOutput.accept("\\nAgent > ");

@@ -1,7 +1,7 @@
-package com.google.adk.samples.agents.timeseriesforecasting.impl;
+package com.google.adk.samples.agents.timeseriesforecasting.tool;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.adk.samples.agents.timeseriesforecasting.util.AgentLogger;
+import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.samples.agents.timeseriesforecasting.util.AgentServerException;
 import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.mcp.McpToolset;

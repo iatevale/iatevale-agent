@@ -1,13 +1,11 @@
-package com.google.adk.samples.agents.timeseriesforecasting.util;
-
-import com.google.adk.samples.agents.timeseriesforecasting.ForecastingAgent;
+package org.iatevale.adk.common.logger;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AgentLogger {
 
-    static final java.util.logging.Logger LOGGER = Logger.getLogger(ForecastingAgent.class.getName());
+    static final java.util.logging.Logger LOGGER = Logger.getLogger("agent");
 
     static public void setLevel(Level level) {
         LOGGER.setLevel(level);
