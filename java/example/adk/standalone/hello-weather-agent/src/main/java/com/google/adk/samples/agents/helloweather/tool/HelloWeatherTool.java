@@ -3,10 +3,11 @@ package com.google.adk.samples.agents.helloweather.tool;
 import com.google.adk.tools.Annotations;
 import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.FunctionTool;
+import org.iatevale.adk.common.tool.AbstractToolBuilder;
 
 import java.util.Map;
 
-public class HelloWeatherTool {
+public class HelloWeatherTool extends AbstractToolBuilder {
 
     static public HelloWeatherTool instantiate() {
         FunctionTool functionTool = FunctionTool.create(HelloWeatherToolImpl.class, "getWeather");
@@ -26,16 +27,8 @@ public class HelloWeatherTool {
 
     }
 
-    // Instancia
-
-    final private BaseTool tool;
-
     public HelloWeatherTool(BaseTool tool) {
-        this.tool = tool;
-    }
-
-    public BaseTool getTool() {
-        return tool;
+        super(tool);
     }
 
 }
