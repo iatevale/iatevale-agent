@@ -15,40 +15,14 @@ import java.util.concurrent.ExecutionException;
 public class RemoteTools {
 
     static public RemoteTools instantiate(RemoteConfig remoteConfig) throws AgentServerException {
-
-        // Se carga la lista de herramientas desde el servidor MCP
-        final Optional<McpToolset.McpToolsAndToolsetResult> loaded = load(remoteConfig.getParameters());
-        if (loaded.isEmpty()) {
-            AgentLogger.warning("No se han podido cargar las tools desde el servidor  " + remoteConfig.getParameters().url() + " (load method returned null)");
-            return new RemoteTools(Collections.emptyList());
-        }
-
-        // Se extraen las tools de la lista cargada previamente (y se adaptan a la interfaz BaseTool que es la universal)
-        try (McpToolset toolset = loaded.get().getToolset()) {
-
-            // Se extraen y adapta
-            final List<BaseTool> list = toolset.loadTools()
-                    .get()
-                    .stream()
-                    .map(mcpTool -> (BaseTool) mcpTool)
-                    .toList();
-
-            // Entregamos el resultado
-            return new RemoteTools(list);
-
-        } catch (InterruptedException e) {
-            throw new AgentServerException("Se ha producido una interrupcion del thread al extraer las Tools cargadas previamente", e);
-        } catch (ExecutionException e) {
-            throw new AgentServerException("Se ha producido una error al extraer las Tools cargadas previamente", e);
-        }
-
+        return new RemoteTools(extract(remoteConfig.getParameters()));
     }
 
     static public List<BaseTool> extract(SseServerParameters sseServerParameters) throws AgentServerException {
 
         try {
 
-            Optional<McpToolset.McpToolsAndToolsetResult> toolsFromServer = load(sseServerParameters);
+            final Optional<McpToolset.McpToolsAndToolsetResult> toolsFromServer = load(sseServerParameters);
 
             if (toolsFromServer.isEmpty()) {
                 AgentLogger.warning("Failed to load tools from MCP server at " + sseServerParameters.url() + " (load method returned null)");
