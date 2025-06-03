@@ -6,10 +6,10 @@ import com.google.adk.samples.agents.multitool.agentrunner.MultiToolRunner;
 import com.google.adk.samples.agents.multitool.tool.CurrentTimeTool;
 import com.google.adk.samples.agents.multitool.tool.WeatherTool;
 import com.google.adk.sessions.Session;
-import org.iatevale.adk.common.console.Console;
-import org.iatevale.adk.common.console.InputType;
+import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
 
+import java.util.function.Consumer;
 import java.util.logging.Level;
 
 public class MultiToolAgent {
@@ -35,19 +35,25 @@ public class MultiToolAgent {
 
         // Se crea el agente
         final MultiToolRunner multiToolRunner = new MultiToolRunner(runner, session);
+        final MultiToolAgent multiToolAgent = new MultiToolAgent(multiToolRunner);
 
         // Consola para interaccion con el usuario
-        try (Console console = new Console(Constants.HELLO, Constants.PROMPT)) {
-            while (switch (console.Input()) {
-                case InputType.Quit quit -> false;
-                case InputType.Empty empty -> true;
-                case InputType.Prompt prompt -> multiToolRunner.execute(prompt.text(), console::output);
-            }
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ConsoleLoop.run(
+                Constants.HELLO,
+                Constants.PROMPT,
+                multiToolAgent::onInput
+        );
 
+    }
+
+    final MultiToolRunner multiToolRunner;
+
+    public MultiToolAgent(MultiToolRunner multiToolRunner) {
+        this.multiToolRunner = multiToolRunner;
+    }
+
+    void onInput(String prompt, Consumer<String> consoleOutput) {
+        multiToolRunner.execute(prompt, consoleOutput);
     }
 
 }
