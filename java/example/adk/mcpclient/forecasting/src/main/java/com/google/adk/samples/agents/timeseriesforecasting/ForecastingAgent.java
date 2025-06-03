@@ -60,7 +60,7 @@ public class ForecastingAgent {
     }
 
     void onInput(String prompt, Consumer<String> consoleOutput) {
-        forecastingRunner.execute(prompt, consoleOutput)    ;
+        forecastingRunner.execute(prompt, consoleOutput);
     }
 
 }
