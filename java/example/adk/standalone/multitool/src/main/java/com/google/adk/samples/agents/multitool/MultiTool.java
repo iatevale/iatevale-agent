@@ -1,10 +1,10 @@
 package com.google.adk.samples.agents.multitool;
 
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.multitool.agentbuilder.AgentFactory;
-import com.google.adk.samples.agents.multitool.agentrunner.MultiToolRunner;
-import com.google.adk.samples.agents.multitool.tool.CurrentTimeFactory;
-import com.google.adk.samples.agents.multitool.tool.WeatherFactory;
+import com.google.adk.samples.agents.multitool.agent.AgentFactory;
+import com.google.adk.samples.agents.multitool.runner.MultiToolRunner;
+import com.google.adk.samples.agents.multitool.tool.CurrentTimeToolFactory;
+import com.google.adk.samples.agents.multitool.tool.WeatherToolFactory;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
@@ -12,7 +12,7 @@ import org.iatevale.adk.common.logger.AgentLogger;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
-public class MultiToolAgent {
+public class MultiTool {
 
     final private static String USER_ID = "student";
 
@@ -21,9 +21,9 @@ public class MultiToolAgent {
         AgentLogger.setLevel(Level.WARNING);
 
         // Se ensambla el agente
-        final CurrentTimeFactory currentTimeFactory = CurrentTimeFactory.instantiate();
-        final WeatherFactory weatherFactory = WeatherFactory.instantiate();
-        final AgentFactory agentFactory = AgentFactory.instantiate(currentTimeFactory.functionTool(), weatherFactory.functionTool());
+        final CurrentTimeToolFactory currentTimeToolFactory = CurrentTimeToolFactory.instantiate();
+        final WeatherToolFactory weatherToolFactory = WeatherToolFactory.instantiate();
+        final AgentFactory agentFactory = AgentFactory.instantiate(currentTimeToolFactory.functionTool(), weatherToolFactory.functionTool());
 
         // Se crea en runner el agente, con las herramientas cargadas
         final InMemoryRunner runner = new InMemoryRunner(agentFactory.agent());
@@ -35,16 +35,16 @@ public class MultiToolAgent {
 
         // Se crea el agente
         final MultiToolRunner multiToolRunner = new MultiToolRunner(runner, session);
-        final MultiToolAgent multiToolAgent = new MultiToolAgent(multiToolRunner);
+        final MultiTool multiTool = new MultiTool(multiToolRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, multiToolAgent::onInput);
+        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, multiTool::onInput);
 
     }
 
     final MultiToolRunner multiToolRunner;
 
-    public MultiToolAgent(MultiToolRunner multiToolRunner) {
+    public MultiTool(MultiToolRunner multiToolRunner) {
         this.multiToolRunner = multiToolRunner;
     }
 

@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.multitool.agentrunner;
+package com.google.adk.samples.agents.multitool.runner;
 
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;

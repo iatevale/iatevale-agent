@@ -5,11 +5,11 @@ import com.google.adk.tools.FunctionTool;
 
 import java.util.Map;
 
-public record WeatherFactory(FunctionTool functionTool) {
+public record WeatherToolFactory(FunctionTool functionTool) {
 
-    static public WeatherFactory instantiate() {
+    static public WeatherToolFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(WeatherToolImpl.class, "getWeather");
-        return new WeatherFactory(functionTool);
+        return new WeatherToolFactory(functionTool);
     }
 
     static private class WeatherToolImpl {

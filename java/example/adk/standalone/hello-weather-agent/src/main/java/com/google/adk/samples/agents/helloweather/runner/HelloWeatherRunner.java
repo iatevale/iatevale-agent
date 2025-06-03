@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.helloweather.agentrunner;
+package com.google.adk.samples.agents.helloweather.runner;
 
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;

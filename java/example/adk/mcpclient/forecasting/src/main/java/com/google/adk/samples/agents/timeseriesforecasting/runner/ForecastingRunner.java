@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.timeseriesforecasting.agentrunner;
+package com.google.adk.samples.agents.timeseriesforecasting.runner;
 
 import com.google.adk.agents.RunConfig;
 import com.google.adk.events.Event;

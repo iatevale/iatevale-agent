@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.multitool.agentbuilder;
+package com.google.adk.samples.agents.multitool.agent;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;

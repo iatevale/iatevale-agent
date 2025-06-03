@@ -1,8 +1,8 @@
 package com.google.adk.samples.agents.helloweather;
 
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.helloweather.agentbuilder.AgentBuilderFactory;
-import com.google.adk.samples.agents.helloweather.agentrunner.HelloWeatherRunner;
+import com.google.adk.samples.agents.helloweather.agent.AgentFactory;
+import com.google.adk.samples.agents.helloweather.runner.HelloWeatherRunner;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
@@ -11,7 +11,7 @@ import org.iatevale.adk.common.logger.AgentLogger;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
-public class HelloWeatherAgent {
+public class HelloWeather {
 
     final private static String USER_ID = "user1234";
 
@@ -21,10 +21,10 @@ public class HelloWeatherAgent {
 
         // Se ensambla el agente
         final HelloWeatherToolFactory helloWeatherTool = HelloWeatherToolFactory.instantiate();
-        final AgentBuilderFactory agentBuilderFactory = AgentBuilderFactory.instantiate(helloWeatherTool);
+        final AgentFactory agentFactory = AgentFactory.instantiate(helloWeatherTool);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentBuilderFactory.agent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory.agent());
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()
@@ -33,16 +33,16 @@ public class HelloWeatherAgent {
 
         // Se crea el agente
         final HelloWeatherRunner helloWeatherRunner = new HelloWeatherRunner(runner, session);
-        final HelloWeatherAgent helloWeatherAgent = new HelloWeatherAgent(helloWeatherRunner);
+        final HelloWeather helloWeather = new HelloWeather(helloWeatherRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, helloWeatherAgent::onInput);
+        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, helloWeather::onInput);
 
     }
 
     final HelloWeatherRunner helloWeatherRunner;
 
-    public HelloWeatherAgent(HelloWeatherRunner helloWeatherRunner) {
+    public HelloWeather(HelloWeatherRunner helloWeatherRunner) {
         this.helloWeatherRunner = helloWeatherRunner;
     }
 

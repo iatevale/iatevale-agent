@@ -9,11 +9,11 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public record CurrentTimeFactory(FunctionTool functionTool) {
+public record CurrentTimeToolFactory(FunctionTool functionTool) {
 
-    static public CurrentTimeFactory instantiate() {
+    static public CurrentTimeToolFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(CurrentTimeToolImpl.class, "getCurrentTime");
-        return new CurrentTimeFactory(functionTool);
+        return new CurrentTimeToolFactory(functionTool);
     }
 
     static private class CurrentTimeToolImpl {

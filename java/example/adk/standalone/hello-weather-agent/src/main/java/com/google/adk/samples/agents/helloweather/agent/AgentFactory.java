@@ -1,10 +1,10 @@
-package com.google.adk.samples.agents.helloweather.agentbuilder;
+package com.google.adk.samples.agents.helloweather.agent;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 
-public record AgentBuilderFactory(BaseAgent agent) {
+public record AgentFactory(BaseAgent agent) {
 
     private static final String AGENT_NAME = "hello-weather-agent";
     private static final String MODEL_NAME = "gemini-2.0-flash";
@@ -15,7 +15,7 @@ public record AgentBuilderFactory(BaseAgent agent) {
                             When asked about weather information, you MUST use the `getWeather` function.
             """;
 
-    public static AgentBuilderFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
+    public static AgentFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
@@ -23,7 +23,7 @@ public record AgentBuilderFactory(BaseAgent agent) {
                 .instruction(INSTRUCTION)
                 .tools(helloWeatherTool.functionTool())
                 .build();
-        return new AgentBuilderFactory(agent);
+        return new AgentFactory(agent);
     }
 
 }

@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
-public record MscpClientToolsFactory(List<BaseTool> tools) {
+public record McpClientToolsFactory(List<BaseTool> tools) {
 
-    static public MscpClientToolsFactory instantiate(McpClientConfig mcpClientConfig) throws McpClientInstanceException {
-        return new MscpClientToolsFactory(extract(mcpClientConfig.parameters()));
+    static public McpClientToolsFactory instantiate(McpClientConfig mcpClientConfig) throws McpClientInstanceException {
+        return new McpClientToolsFactory(extract(mcpClientConfig.parameters()));
     }
 
     static public List<BaseTool> extract(SseServerParameters sseServerParameters) throws McpClientInstanceException {

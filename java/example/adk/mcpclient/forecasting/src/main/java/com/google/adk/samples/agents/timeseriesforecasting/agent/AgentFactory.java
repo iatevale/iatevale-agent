@@ -1,8 +1,8 @@
-package com.google.adk.samples.agents.timeseriesforecasting.agentbuilder;
+package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.adk.common.mcpclient.MscpClientToolsFactory;
+import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
 
 public record AgentFactory(BaseAgent agent) {
 
@@ -34,13 +34,13 @@ public record AgentFactory(BaseAgent agent) {
             Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
             """;
 
-    static public AgentFactory instantiate(MscpClientToolsFactory mscpClientToolsFactory) {
+    static public AgentFactory instantiate(McpClientToolsFactory mcpClientToolsFactory) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
-                .tools(mscpClientToolsFactory.tools())
+                .tools(mcpClientToolsFactory.tools())
                 .build();
         return new AgentFactory(agent);
     }

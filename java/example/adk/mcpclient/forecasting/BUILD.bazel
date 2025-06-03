@@ -3,7 +3,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 java_binary(
     name = "forecasting",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "com.google.adk.samples.agents.timeseriesforecasting.ForecastingAgent",
+    main_class = "com.google.adk.samples.agents.timeseriesforecasting.Forecasting",
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/adk/common",
