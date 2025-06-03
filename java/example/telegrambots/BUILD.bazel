@@ -8,5 +8,6 @@ java_binary(
     deps = [
         "@maven//:org_telegram_telegrambots_client",
         "@maven//:org_telegram_telegrambots_longpolling",
+        "@maven//:org_telegram_telegrambots_meta",
     ],
 )
