@@ -28,12 +28,12 @@ public class ForecastingAgent {
         final AgentFactory agentFactory = AgentFactory.instantiate(mscpClientToolsFactory);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentFactory.getAgent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory.agent());
 
         // Se crea una sesión temporal para el agente
         final Session session = runner.sessionService()
                 .createSession(
-                    agentFactory.getAgent().name(),
+                    agentFactory.agent().name(),
                     USER_ID,
                     (ConcurrentMap<String, Object>) null,
                     (String) null)

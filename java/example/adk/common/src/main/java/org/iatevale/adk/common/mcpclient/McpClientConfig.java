@@ -2,7 +2,7 @@ package org.iatevale.adk.common.mcpclient;
 
 import com.google.adk.tools.mcp.SseServerParameters;
 
-public class McpClientConfig {
+public record McpClientConfig(SseServerParameters parameters) {
 
     static public final String TOOLS_SERVER_URL = "http://localhost:8080";
 
@@ -23,18 +23,6 @@ public class McpClientConfig {
             throw new McpClientConfigException("Tools server URL cannot be null or empty");
         }
         return url;
-    }
-
-    // Instancia
-
-    final private SseServerParameters parameters;
-
-    public McpClientConfig(SseServerParameters parameters) {
-        this.parameters = parameters;
-    }
-
-    public SseServerParameters getParameters() {
-        return parameters;
     }
 
 }

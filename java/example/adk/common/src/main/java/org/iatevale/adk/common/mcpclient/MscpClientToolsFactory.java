@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
-public class MscpClientToolsFactory {
+public record MscpClientToolsFactory(List<BaseTool> tools) {
 
     static public MscpClientToolsFactory instantiate(McpClientConfig mcpClientConfig) throws McpClientInstanceException {
-        return new MscpClientToolsFactory(extract(mcpClientConfig.getParameters()));
+        return new MscpClientToolsFactory(extract(mcpClientConfig.parameters()));
     }
 
     static public List<BaseTool> extract(SseServerParameters sseServerParameters) throws McpClientInstanceException {
@@ -52,18 +52,6 @@ public class MscpClientToolsFactory {
         } catch (ExecutionException e) {
             throw new McpClientInstanceException("Se ha producido una error de ejecucion al cargar la Tool remota", e);
         }
-    }
-
-    // Instancia
-
-    final private List<BaseTool> tools;
-
-    public MscpClientToolsFactory(List<BaseTool> tools) {
-        this.tools = tools;
-    }
-
-    public List<BaseTool> getTools() {
-        return tools;
     }
 
 }

@@ -4,16 +4,16 @@ import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherTool;
 
-public class AgentBuilderFactory {
+public record AgentBuilderFactory(BaseAgent agent) {
 
     private static final String AGENT_NAME = "hello-weather-agent";
     private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "Hello World";
     private static final String INSTRUCTION = """
-                You are a friendly assistant, answering questions in a concise manner.
-                
-                When asked about weather information, you MUST use the `getWeather` function.
-""";
+                            You are a friendly assistant, answering questions in a concise manner.
+            
+                            When asked about weather information, you MUST use the `getWeather` function.
+            """;
 
     public static AgentBuilderFactory instantiate(HelloWeatherTool helloWeatherTool) {
         final BaseAgent agent = LlmAgent.builder()
@@ -24,18 +24,6 @@ public class AgentBuilderFactory {
                 .tools(helloWeatherTool.getTool())
                 .build();
         return new AgentBuilderFactory(agent);
-    }
-
-    // Instancia
-
-    final private BaseAgent agent;
-
-    public AgentBuilderFactory(BaseAgent agent) {
-        this.agent = agent;
-    }
-
-    public BaseAgent getAgent() {
-        return agent;
     }
 
 }

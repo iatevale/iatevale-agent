@@ -8,16 +8,16 @@ import org.iatevale.adk.common.tool.AbstractToolBuilder;
 import java.util.Arrays;
 import java.util.List;
 
-public class AgentFactory {
+public record AgentFactory(BaseAgent agent) {
 
     private static final String AGENT_NAME = "multi_tool_agent";
     private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "Agent to answer questions about the time and weather in a city.";
     private static final String INSTRUCTION = """
-You are a helpful agent who can answer user questions about the time and weather in a city.
-""";
+            You are a helpful agent who can answer user questions about the time and weather in a city.
+            """;
 
-    static public AgentFactory instantiate(AbstractToolBuilder...builders) {
+    static public AgentFactory instantiate(AbstractToolBuilder... builders) {
 
         final List<BaseTool> tools = Arrays.stream(builders)
                 .toList()
@@ -35,18 +35,6 @@ You are a helpful agent who can answer user questions about the time and weather
 
         return new AgentFactory(agent);
 
-    }
-
-    // Instancia
-
-    final private BaseAgent agent;
-
-    public AgentFactory(BaseAgent agent) {
-        this.agent = agent;
-    }
-
-    public BaseAgent getAgent() {
-        return agent;
     }
 
 }
