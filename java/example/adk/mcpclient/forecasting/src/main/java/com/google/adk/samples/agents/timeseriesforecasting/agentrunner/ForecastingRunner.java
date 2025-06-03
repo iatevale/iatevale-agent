@@ -25,7 +25,7 @@ public class ForecastingRunner {
         this.runConfig = RunConfig.builder().build();
     }
 
-    public boolean execute(String prompt, Consumer<String> consoleOutput) {
+    public void execute(String prompt, Consumer<String> consoleOutput) {
 
         System.out.print("\\nYou > ");
         final Content userMsgForHistory = Content.fromParts(Part.fromText(prompt));
@@ -51,7 +51,7 @@ public class ForecastingRunner {
         } else if (toolErroredInTurn.get()) {
             AgentLogger.warning("An error occurred during tool execution or in the agent's response processing.");
         }
-        return true;
+
     }
 
     private void processAgentEvent(

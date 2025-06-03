@@ -22,7 +22,7 @@ public class HelloWeatherRunner {
         this.runConfig = RunConfig.builder().build();
     }
 
-    public boolean execute(String prompt, Consumer<String> consoleOutput) {
+    public void execute(String prompt, Consumer<String> consoleOutput) {
 
         final Content userMsg = Content.fromParts(Part.fromText(prompt));
         final Flowable<Event> events = runner.runAsync(
@@ -39,7 +39,6 @@ public class HelloWeatherRunner {
             }
         });
 
-        return true;
     }
 
 }
