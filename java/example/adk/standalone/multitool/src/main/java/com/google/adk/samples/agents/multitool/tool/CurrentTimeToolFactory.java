@@ -16,7 +16,7 @@ public record CurrentTimeToolFactory(FunctionTool functionTool) {
         return new CurrentTimeToolFactory(functionTool);
     }
 
-    static private class CurrentTimeToolImpl {
+    static public class CurrentTimeToolImpl {
 
         public static Map<String, String> getCurrentTime(
                 @Annotations.Schema(description = "The name of the city for which to retrieve the current time")

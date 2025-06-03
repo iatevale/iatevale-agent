@@ -12,7 +12,7 @@ public record WeatherToolFactory(FunctionTool functionTool) {
         return new WeatherToolFactory(functionTool);
     }
 
-    static private class WeatherToolImpl {
+    static public class WeatherToolImpl {
 
         public static Map<String, String> getWeather(
                 @Annotations.Schema(description = "The name of the city for which to retrieve the weather report")
