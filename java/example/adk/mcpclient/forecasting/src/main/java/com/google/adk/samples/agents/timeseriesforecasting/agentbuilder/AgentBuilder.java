@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.timeseriesforecasting.agentbuilder;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
-import com.google.adk.samples.agents.timeseriesforecasting.tool.RemoteTools;
+import org.iatevale.adk.common.mcpclient.MscpClientTools;
 
 public class AgentBuilder {
 
@@ -34,13 +34,13 @@ Your general process is as follows:
 Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
 """;
 
-    static public AgentBuilder instantiate(RemoteTools remoteTools) {
+    static public AgentBuilder instantiate(MscpClientTools mscpClientTools) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
-                .tools(remoteTools.getTools())
+                .tools(mscpClientTools.getTools())
                 .build();
         return new AgentBuilder(agent);
     }
