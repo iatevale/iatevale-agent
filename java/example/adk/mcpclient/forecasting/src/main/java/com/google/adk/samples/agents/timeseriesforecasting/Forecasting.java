@@ -22,7 +22,7 @@ public class Forecasting {
 
         AgentLogger.setLevel(Level.WARNING);
 
-        // Se ensambla el agente
+        // Se cargan las tools remotas (Mcp client)
         final McpClientConfig mcpClientConfig = McpClientConfig.instantiate();
         final McpClientToolsFactory mcpClientToolsFactory = McpClientToolsFactory.instantiate(mcpClientConfig);
         final AgentFactory agentFactory = AgentFactory.instantiate(mcpClientToolsFactory);
