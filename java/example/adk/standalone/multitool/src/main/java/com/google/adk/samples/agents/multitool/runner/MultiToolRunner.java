@@ -32,7 +32,7 @@ public class MultiToolRunner {
                 runConfig
         );
 
-        consoleOutput.accept("\nAgent > ");
+        consoleOutput.accept("\nAgent> ");
         events.blockingForEach(event -> {
             if (event.finalResponse()) {
                 consoleOutput.accept(event.stringifyContent());
