@@ -1,12 +1,11 @@
 package com.google.adk.samples.agents.helloweather.agent;
 
-import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 
-public record AgentFactory(BaseAgent agent) {
+public record AgentFactory(LlmAgent llmAgent) {
 
-    private static final String AGENT_NAME = "hello-weather-agent";
+    private static final String AGENT_NAME = "hello-weather-llmAgent";
     private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "Hello World";
     private static final String INSTRUCTION = """
@@ -16,7 +15,7 @@ public record AgentFactory(BaseAgent agent) {
             """;
 
     public static AgentFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
-        final BaseAgent agent = LlmAgent.builder()
+        final LlmAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .model(MODEL_NAME)

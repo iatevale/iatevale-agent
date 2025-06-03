@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class AgentLogger {
 
-    static final java.util.logging.Logger LOGGER = Logger.getLogger("agent");
+    static final java.util.logging.Logger LOGGER = Logger.getLogger("llmAgent");
 
     static public void setLevel(Level level) {
         LOGGER.setLevel(level);

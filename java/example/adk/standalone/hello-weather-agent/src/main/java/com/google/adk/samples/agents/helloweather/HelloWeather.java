@@ -24,7 +24,7 @@ public class HelloWeather {
         final AgentFactory agentFactory = AgentFactory.instantiate(helloWeatherTool);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentFactory.agent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory.llmAgent());
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()

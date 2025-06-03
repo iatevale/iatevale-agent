@@ -49,7 +49,7 @@ public class ForecastingRunner {
         if (toolCalledInTurn.get() && !toolErroredInTurn.get() && agentResponseBuilder.isEmpty()) {
             AgentLogger.warning("Agent used a tool but provided no text response.");
         } else if (toolErroredInTurn.get()) {
-            AgentLogger.warning("An error occurred during tool execution or in the agent's response processing.");
+            AgentLogger.warning("An error occurred during tool execution or in the llmAgent's response processing.");
         }
 
     }

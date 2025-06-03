@@ -81,7 +81,7 @@ public class SoftwareBugAssistant {
                     .outputKey("bug_assistant_result")
                     .build();
         } catch (Exception e) {
-            logger.info("Error initializing MCP toolset and starting agent " + e.getMessage());
+            logger.info("Error initializing MCP toolset and starting llmAgent " + e.getMessage());
             return null;
         }
     }
