@@ -20,15 +20,15 @@ public class Console implements AutoCloseable {
         scanner.close();
     }
 
-    public InputType Input() {
+    public ConsoleInputType Input() {
         System.out.print(prompt);
         String userInput = scanner.nextLine();
         if ("quit".equalsIgnoreCase(userInput)) {
-            return new InputType.Quit();
+            return new ConsoleInputType.Quit();
         } else if (userInput.trim().isEmpty()) {
-            return new InputType.Empty();
+            return new ConsoleInputType.Empty();
         } else {
-            return new InputType.Prompt(userInput);
+            return new ConsoleInputType.Prompt(userInput);
         }
     }
 
