@@ -23,7 +23,7 @@ public class MultiToolAgent {
         // Se ensambla el agente
         final CurrentTimeFactory currentTimeFactory = CurrentTimeFactory.instantiate();
         final WeatherFactory weatherFactory = WeatherFactory.instantiate();
-        final AgentFactory agentFactory = AgentFactory.instantiate(currentTimeFactory, weatherFactory);
+        final AgentFactory agentFactory = AgentFactory.instantiate(currentTimeFactory.functionTool(), weatherFactory.functionTool());
 
         // Se crea en runner el agente, con las herramientas cargadas
         final InMemoryRunner runner = new InMemoryRunner(agentFactory.agent());

@@ -3,10 +3,6 @@ package com.google.adk.samples.agents.multitool.agentbuilder;
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.adk.common.tool.AbstractToolBuilder;
-
-import java.util.Arrays;
-import java.util.List;
 
 public record AgentFactory(BaseAgent agent) {
 
@@ -17,14 +13,7 @@ public record AgentFactory(BaseAgent agent) {
             You are a helpful agent who can answer user questions about the time and weather in a city.
             """;
 
-    static public AgentFactory instantiate(AbstractToolBuilder... builders) {
-
-        final List<BaseTool> tools = Arrays.stream(builders)
-                .toList()
-                .stream()
-                .map(AbstractToolBuilder::getTool)
-                .toList();
-
+    static public AgentFactory instantiate(BaseTool... tools) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
@@ -34,7 +23,6 @@ public record AgentFactory(BaseAgent agent) {
                 .build();
 
         return new AgentFactory(agent);
-
     }
 
 }

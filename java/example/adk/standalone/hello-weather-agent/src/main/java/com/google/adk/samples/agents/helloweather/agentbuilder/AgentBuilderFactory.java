@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.helloweather.agentbuilder;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
-import com.google.adk.samples.agents.helloweather.tool.HelloWeatherTool;
+import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 
 public record AgentBuilderFactory(BaseAgent agent) {
 
@@ -15,13 +15,13 @@ public record AgentBuilderFactory(BaseAgent agent) {
                             When asked about weather information, you MUST use the `getWeather` function.
             """;
 
-    public static AgentBuilderFactory instantiate(HelloWeatherTool helloWeatherTool) {
+    public static AgentBuilderFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
-                .tools(helloWeatherTool.getTool())
+                .tools(helloWeatherTool.functionTool())
                 .build();
         return new AgentBuilderFactory(agent);
     }

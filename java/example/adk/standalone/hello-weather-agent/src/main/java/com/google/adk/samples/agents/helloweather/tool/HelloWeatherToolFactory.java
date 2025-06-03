@@ -1,17 +1,15 @@
 package com.google.adk.samples.agents.helloweather.tool;
 
 import com.google.adk.tools.Annotations;
-import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.FunctionTool;
-import org.iatevale.adk.common.tool.AbstractToolBuilder;
 
 import java.util.Map;
 
-public class HelloWeatherTool extends AbstractToolBuilder {
+public record HelloWeatherToolFactory(FunctionTool functionTool) {
 
-    static public HelloWeatherTool instantiate() {
+    static public HelloWeatherToolFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(HelloWeatherToolImpl.class, "getWeather");
-        return new HelloWeatherTool(functionTool);
+        return new HelloWeatherToolFactory(functionTool);
     }
 
     static private class HelloWeatherToolImpl {
@@ -25,10 +23,6 @@ public class HelloWeatherTool extends AbstractToolBuilder {
             );
         }
 
-    }
-
-    public HelloWeatherTool(BaseTool tool) {
-        super(tool);
     }
 
 }

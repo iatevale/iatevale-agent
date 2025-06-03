@@ -1,9 +1,7 @@
 package com.google.adk.samples.agents.multitool.tool;
 
 import com.google.adk.tools.Annotations;
-import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.FunctionTool;
-import org.iatevale.adk.common.tool.AbstractToolBuilder;
 
 import java.text.Normalizer;
 import java.time.ZoneId;
@@ -11,7 +9,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class CurrentTimeFactory extends AbstractToolBuilder {
+public record CurrentTimeFactory(FunctionTool functionTool) {
 
     static public CurrentTimeFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(CurrentTimeToolImpl.class, "getCurrentTime");
@@ -53,10 +51,6 @@ public class CurrentTimeFactory extends AbstractToolBuilder {
                                     "Sorry, I don't have timezone information for " + city + "."));
         }
 
-    }
-
-    public CurrentTimeFactory(BaseTool tool) {
-        super(tool);
     }
 
 }

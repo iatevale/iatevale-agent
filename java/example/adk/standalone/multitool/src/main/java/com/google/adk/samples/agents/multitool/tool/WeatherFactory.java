@@ -1,13 +1,11 @@
 package com.google.adk.samples.agents.multitool.tool;
 
 import com.google.adk.tools.Annotations;
-import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.FunctionTool;
-import org.iatevale.adk.common.tool.AbstractToolBuilder;
 
 import java.util.Map;
 
-public class WeatherFactory extends AbstractToolBuilder {
+public record WeatherFactory(FunctionTool functionTool) {
 
     static public WeatherFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(WeatherToolImpl.class, "getWeather");
@@ -32,10 +30,6 @@ public class WeatherFactory extends AbstractToolBuilder {
             }
         }
 
-    }
-
-    public WeatherFactory(BaseTool tool) {
-        super(tool);
     }
 
 }
