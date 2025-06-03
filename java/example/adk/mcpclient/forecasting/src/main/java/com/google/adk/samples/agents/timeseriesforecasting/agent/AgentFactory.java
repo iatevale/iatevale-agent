@@ -1,6 +1,5 @@
 package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
-import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
 
