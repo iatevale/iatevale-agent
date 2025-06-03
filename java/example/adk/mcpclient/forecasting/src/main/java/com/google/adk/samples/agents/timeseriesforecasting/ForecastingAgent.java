@@ -44,11 +44,7 @@ public class ForecastingAgent {
         final ForecastingAgent forecastingAgent = new ForecastingAgent(forecastingRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(
-                Constants.HELLO,
-                Constants.PROMPT,
-                forecastingAgent::onInput
-        );
+        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, forecastingAgent::onInput);
 
     }
 

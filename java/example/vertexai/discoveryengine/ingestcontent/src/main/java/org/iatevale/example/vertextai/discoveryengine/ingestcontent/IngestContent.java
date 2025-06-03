@@ -1,6 +1,8 @@
 package org.iatevale.example.vertextai.discoveryengine.ingestcontent;
 
-import com.google.cloud.discoveryengine.v1.*;
+import com.google.cloud.discoveryengine.v1.CreateDocumentRequest;
+import com.google.cloud.discoveryengine.v1.Document;
+import com.google.cloud.discoveryengine.v1.DocumentServiceClient;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
 import com.google.protobuf.Struct;

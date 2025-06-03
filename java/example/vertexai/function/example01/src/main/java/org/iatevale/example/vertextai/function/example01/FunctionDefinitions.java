@@ -1,14 +1,17 @@
 package org.iatevale.example.vertextai.function.example01;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.cloud.vertexai.api.FunctionDeclaration;
+import com.google.cloud.vertexai.api.Schema;
+import com.google.cloud.vertexai.api.Tool;
+import com.google.cloud.vertexai.api.Type;
+import com.google.protobuf.ListValue;
+import com.google.protobuf.Value;
 import org.iatevale.example.vertextai.function.example01.model.Address;
 import org.iatevale.example.vertextai.function.example01.model.ContactInfo;
 import org.iatevale.example.vertextai.function.example01.model.Customer;
 import org.iatevale.example.vertextai.function.example01.model.Order;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.cloud.vertexai.api.*;
-import com.google.protobuf.ListValue;
-import com.google.protobuf.Value;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

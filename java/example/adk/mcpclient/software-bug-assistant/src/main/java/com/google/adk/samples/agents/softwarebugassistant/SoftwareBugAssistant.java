@@ -1,9 +1,5 @@
 package com.google.adk.samples.agents.softwarebugassistant;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
@@ -12,6 +8,10 @@ import com.google.adk.tools.BaseTool;
 import com.google.adk.tools.GoogleSearchTool;
 import com.google.adk.tools.mcp.McpToolset;
 import com.google.adk.tools.mcp.SseServerParameters;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class SoftwareBugAssistant {
 

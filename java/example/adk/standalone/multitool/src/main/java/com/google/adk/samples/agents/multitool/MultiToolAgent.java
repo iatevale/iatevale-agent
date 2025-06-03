@@ -38,11 +38,7 @@ public class MultiToolAgent {
         final MultiToolAgent multiToolAgent = new MultiToolAgent(multiToolRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(
-                Constants.HELLO,
-                Constants.PROMPT,
-                multiToolAgent::onInput
-        );
+        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, multiToolAgent::onInput);
 
     }
 

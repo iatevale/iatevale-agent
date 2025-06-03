@@ -36,11 +36,7 @@ public class HelloWeatherAgent {
         final HelloWeatherAgent helloWeatherAgent = new HelloWeatherAgent(helloWeatherRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(
-                Constants.HELLO,
-                Constants.PROMPT,
-                helloWeatherAgent::onInput
-        );
+        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, helloWeatherAgent::onInput);
 
     }
 

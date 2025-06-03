@@ -15,8 +15,8 @@
  */
 package com.mycila.guice.ext.closeable;
 
-import com.google.inject.Module;
 import com.google.inject.*;
+import com.google.inject.Module;
 import com.google.inject.spi.Element;
 import com.google.inject.spi.InjectionPoint;
 import com.google.inject.spi.TypeConverterBinding;
