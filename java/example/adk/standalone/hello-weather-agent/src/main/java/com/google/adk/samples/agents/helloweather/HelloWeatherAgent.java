@@ -1,7 +1,7 @@
 package com.google.adk.samples.agents.helloweather;
 
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.helloweather.agentbuilder.AgentBuilder;
+import com.google.adk.samples.agents.helloweather.agentbuilder.AgentBuilderFactory;
 import com.google.adk.samples.agents.helloweather.agentrunner.HelloWeatherRunner;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherTool;
 import com.google.adk.sessions.Session;
@@ -21,10 +21,10 @@ public class HelloWeatherAgent {
 
         // Se ensambla el agente
         final HelloWeatherTool helloWeatherTool = HelloWeatherTool.instantiate();
-        final AgentBuilder agentBuilder = AgentBuilder.instantiate(helloWeatherTool);
+        final AgentBuilderFactory agentBuilderFactory = AgentBuilderFactory.instantiate(helloWeatherTool);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
+        final InMemoryRunner runner = new InMemoryRunner(agentBuilderFactory.getAgent());
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()

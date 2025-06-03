@@ -1,10 +1,10 @@
 package com.google.adk.samples.agents.multitool;
 
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.multitool.agentbuilder.AgentBuilder;
+import com.google.adk.samples.agents.multitool.agentbuilder.AgentFactory;
 import com.google.adk.samples.agents.multitool.agentrunner.MultiToolRunner;
-import com.google.adk.samples.agents.multitool.tool.CurrentTimeTool;
-import com.google.adk.samples.agents.multitool.tool.WeatherTool;
+import com.google.adk.samples.agents.multitool.tool.CurrentTimeFactory;
+import com.google.adk.samples.agents.multitool.tool.WeatherFactory;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
@@ -21,12 +21,12 @@ public class MultiToolAgent {
         AgentLogger.setLevel(Level.WARNING);
 
         // Se ensambla el agente
-        final CurrentTimeTool currentTimeTool = CurrentTimeTool.instantiate();
-        final WeatherTool weatherTool = WeatherTool.instantiate();
-        final AgentBuilder agentBuilder = AgentBuilder.instantiate(currentTimeTool, weatherTool);
+        final CurrentTimeFactory currentTimeFactory = CurrentTimeFactory.instantiate();
+        final WeatherFactory weatherFactory = WeatherFactory.instantiate();
+        final AgentFactory agentFactory = AgentFactory.instantiate(currentTimeFactory, weatherFactory);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory.getAgent());
 
         // Se crea una sesión temporal para el agente
         final Session session = runner.sessionService()

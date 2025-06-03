@@ -1,14 +1,14 @@
 package com.google.adk.samples.agents.timeseriesforecasting;
 
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.timeseriesforecasting.agentbuilder.AgentBuilder;
+import com.google.adk.samples.agents.timeseriesforecasting.agentbuilder.AgentFactory;
 import com.google.adk.samples.agents.timeseriesforecasting.agentrunner.ForecastingRunner;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
 import org.iatevale.adk.common.mcpclient.McpClientConfig;
 import org.iatevale.adk.common.mcpclient.McpClientException;
-import org.iatevale.adk.common.mcpclient.MscpClientTools;
+import org.iatevale.adk.common.mcpclient.MscpClientToolsFactory;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -24,16 +24,16 @@ public class ForecastingAgent {
 
         // Se ensambla el agente
         final McpClientConfig mcpClientConfig = McpClientConfig.instantiate();
-        final MscpClientTools mscpClientTools = MscpClientTools.instantiate(mcpClientConfig);
-        final AgentBuilder agentBuilder = AgentBuilder.instantiate(mscpClientTools);
+        final MscpClientToolsFactory mscpClientToolsFactory = MscpClientToolsFactory.instantiate(mcpClientConfig);
+        final AgentFactory agentFactory = AgentFactory.instantiate(mscpClientToolsFactory);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentBuilder.getAgent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory.getAgent());
 
         // Se crea una sesión temporal para el agente
         final Session session = runner.sessionService()
                 .createSession(
-                    agentBuilder.getAgent().name(),
+                    agentFactory.getAgent().name(),
                     USER_ID,
                     (ConcurrentMap<String, Object>) null,
                     (String) null)

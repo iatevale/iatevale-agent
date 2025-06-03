@@ -11,11 +11,11 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class CurrentTimeTool extends AbstractToolBuilder {
+public class CurrentTimeFactory extends AbstractToolBuilder {
 
-    static public CurrentTimeTool instantiate() {
+    static public CurrentTimeFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(CurrentTimeToolImpl.class, "getCurrentTime");
-        return new CurrentTimeTool(functionTool);
+        return new CurrentTimeFactory(functionTool);
     }
 
     static private class CurrentTimeToolImpl {
@@ -55,7 +55,7 @@ public class CurrentTimeTool extends AbstractToolBuilder {
 
     }
 
-    public CurrentTimeTool(BaseTool tool) {
+    public CurrentTimeFactory(BaseTool tool) {
         super(tool);
     }
 

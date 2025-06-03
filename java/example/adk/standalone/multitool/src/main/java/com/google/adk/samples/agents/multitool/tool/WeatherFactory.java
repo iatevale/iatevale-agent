@@ -7,11 +7,11 @@ import org.iatevale.adk.common.tool.AbstractToolBuilder;
 
 import java.util.Map;
 
-public class WeatherTool extends AbstractToolBuilder {
+public class WeatherFactory extends AbstractToolBuilder {
 
-    static public WeatherTool instantiate() {
+    static public WeatherFactory instantiate() {
         FunctionTool functionTool = FunctionTool.create(WeatherToolImpl.class, "getWeather");
-        return new WeatherTool(functionTool);
+        return new WeatherFactory(functionTool);
     }
 
     static private class WeatherToolImpl {
@@ -34,7 +34,7 @@ public class WeatherTool extends AbstractToolBuilder {
 
     }
 
-    public WeatherTool(BaseTool tool) {
+    public WeatherFactory(BaseTool tool) {
         super(tool);
     }
 

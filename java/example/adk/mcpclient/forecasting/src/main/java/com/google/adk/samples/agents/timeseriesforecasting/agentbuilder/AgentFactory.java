@@ -2,9 +2,9 @@ package com.google.adk.samples.agents.timeseriesforecasting.agentbuilder;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.adk.common.mcpclient.MscpClientTools;
+import org.iatevale.adk.common.mcpclient.MscpClientToolsFactory;
 
-public class AgentBuilder {
+public class AgentFactory {
 
     private static final String AGENT_NAME = "time-series-forecasting";
     private static final String MODEL_NAME = "gemini-2.0-flash";
@@ -34,22 +34,22 @@ Your general process is as follows:
 Refer to the specific names and descriptions of the tools provided to you to determine their requirements and parameters.
 """;
 
-    static public AgentBuilder instantiate(MscpClientTools mscpClientTools) {
+    static public AgentFactory instantiate(MscpClientToolsFactory mscpClientToolsFactory) {
         final BaseAgent agent = LlmAgent.builder()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
-                .tools(mscpClientTools.getTools())
+                .tools(mscpClientToolsFactory.getTools())
                 .build();
-        return new AgentBuilder(agent);
+        return new AgentFactory(agent);
     }
 
     // Instancia
 
     final private BaseAgent agent;
 
-    public AgentBuilder(BaseAgent agent) {
+    public AgentFactory(BaseAgent agent) {
         this.agent = agent;
     }
 
