@@ -1,17 +1,17 @@
 package com.google.adk.samples.agents.timeseriesforecasting;
 
 import com.google.adk.runner.InMemoryRunner;
-import org.iatevale.adk.common.console.Console;
-import org.iatevale.adk.common.console.InputType;
 import com.google.adk.samples.agents.timeseriesforecasting.agentbuilder.AgentBuilder;
-import org.iatevale.adk.common.mcpclient.McpClientConfig;
-import org.iatevale.adk.common.mcpclient.MscpClientTools;
 import com.google.adk.samples.agents.timeseriesforecasting.agentrunner.ForecastingRunner;
-import org.iatevale.adk.common.mcpclient.McpClientException;
-import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.sessions.Session;
+import org.iatevale.adk.common.console.ConsoleLoop;
+import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.adk.common.mcpclient.McpClientConfig;
+import org.iatevale.adk.common.mcpclient.McpClientException;
+import org.iatevale.adk.common.mcpclient.MscpClientTools;
 
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 
 public class ForecastingAgent {
@@ -40,20 +40,27 @@ public class ForecastingAgent {
                 .blockingGet();
 
         // Se crea el agente
-        final ForecastingRunner forecastingAgent = new ForecastingRunner(runner, session);
+        final ForecastingRunner forecastingRunner = new ForecastingRunner(runner, session);
+
+        final ForecastingAgent forecastingAgent = new ForecastingAgent(forecastingRunner);
 
         // Consola para interaccion con el usuario
-        try (Console console = new Console(Constants.HELLO, Constants.PROMPT)) {
-            while (switch (console.Input()) {
-                    case InputType.Quit quit -> false;
-                    case InputType.Empty empty -> true;
-                    case InputType.Prompt prompt -> forecastingAgent.execute(prompt.text(), console::output);
-                }
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ConsoleLoop.run(
+                Constants.HELLO,
+                Constants.PROMPT,
+                forecastingAgent::onInput
+        );
 
+    }
+
+    final private ForecastingRunner forecastingRunner;
+
+    public ForecastingAgent(ForecastingRunner forecastingRunner) {
+        this.forecastingRunner = forecastingRunner;
+    }
+
+    void onInput(String prompt, Consumer<String> consoleOutput) {
+        forecastingRunner.execute(prompt, consoleOutput)    ;
     }
 
 }
