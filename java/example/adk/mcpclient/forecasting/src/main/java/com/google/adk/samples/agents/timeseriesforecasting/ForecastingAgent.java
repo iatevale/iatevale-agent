@@ -40,7 +40,7 @@ public class ForecastingAgent {
                 .blockingGet();
 
         // Se crea el agente
-        ForecastingRunner forecastingAgent = new ForecastingRunner(runner, session);
+        final ForecastingRunner forecastingAgent = new ForecastingRunner(runner, session);
 
         // Consola para interaccion con el usuario
         try (Console console = new Console(Constants.HELLO, Constants.PROMPT)) {
