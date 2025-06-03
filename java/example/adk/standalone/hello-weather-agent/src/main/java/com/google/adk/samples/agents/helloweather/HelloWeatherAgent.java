@@ -4,11 +4,11 @@ import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.samples.agents.helloweather.agentbuilder.AgentBuilder;
 import com.google.adk.samples.agents.helloweather.agentrunner.HelloWeatherRunner;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherTool;
-import org.iatevale.adk.common.logger.AgentLogger;
 import com.google.adk.sessions.Session;
-import org.iatevale.adk.common.console.Console;
-import org.iatevale.adk.common.console.InputType;
+import org.iatevale.adk.common.console.ConsoleLoop;
+import org.iatevale.adk.common.logger.AgentLogger;
 
+import java.util.function.Consumer;
 import java.util.logging.Level;
 
 public class HelloWeatherAgent {
@@ -33,18 +33,25 @@ public class HelloWeatherAgent {
 
         // Se crea el agente
         final HelloWeatherRunner helloWeatherRunner = new HelloWeatherRunner(runner, session);
+        final HelloWeatherAgent helloWeatherAgent = new HelloWeatherAgent(helloWeatherRunner);
 
         // Consola para interaccion con el usuario
-        try (Console console = new Console(Constants.HELLO, Constants.PROMPT)) {
-            while (switch (console.Input()) {
-                case InputType.Quit quit -> false;
-                case InputType.Empty empty -> true;
-                case InputType.Prompt prompt -> helloWeatherRunner.execute(prompt.text(), console::output);
-            }
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ConsoleLoop.run(
+                Constants.HELLO,
+                Constants.PROMPT,
+                helloWeatherAgent::onInput
+        );
+
+    }
+
+    final HelloWeatherRunner helloWeatherRunner;
+
+    public HelloWeatherAgent(HelloWeatherRunner helloWeatherRunner) {
+        this.helloWeatherRunner = helloWeatherRunner;
+    }
+
+    void onInput(String prompt, Consumer<String> consoleOutput) {
+        helloWeatherRunner.execute(prompt, consoleOutput);
     }
 
 }

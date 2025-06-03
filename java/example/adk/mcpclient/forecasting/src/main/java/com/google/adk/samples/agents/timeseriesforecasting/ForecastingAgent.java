@@ -41,7 +41,6 @@ public class ForecastingAgent {
 
         // Se crea el agente
         final ForecastingRunner forecastingRunner = new ForecastingRunner(runner, session);
-
         final ForecastingAgent forecastingAgent = new ForecastingAgent(forecastingRunner);
 
         // Consola para interaccion con el usuario
