@@ -64,7 +64,7 @@ public class IATevaleConfig {
         final Properties properties = getStaticProperties();
         final String apiKey = Objects.requireNonNull(properties.getProperty("google.cloud.apikey"), "No se ha podido cargar la API Key de GCloud");
         System.setProperty("GOOGLE_API_KEY", apiKey);
-        System.setProperty("GOOGLE_GENAI_USE_VERTEXAI", "TRUE");
+        System.setProperty("GOOGLE_GENAI_USE_VERTEXAI", "FALSE");
     }
 
 }
