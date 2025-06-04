@@ -26,7 +26,7 @@ public class IATevaleConfig {
                 try (FileInputStream propsFile = new FileInputStream(configFile)) {
                     properties.load(propsFile);
                 } catch (IOException e) {
-                    throw new RuntimeException(String.format("No se ha poaido cargar el fichero de configuracion '%s'", configFile), e);
+                    throw new RuntimeException(String.format("No se ha podido cargar el fichero de configuracion '%s'", configFile), e);
                 }
 
             }
@@ -41,8 +41,8 @@ public class IATevaleConfig {
     static public GCloudAuthParameters getGCloudAuthParameters() throws IOException {
         final Properties properties = getProperties();
         return new GCloudAuthParameters(
-                properties.getProperty("project.id"),
-                GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("credentials")))
+                properties.getProperty("gcloud.project_ id"),
+                GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("gcloud.credentials")))
                         .createScoped("https://www.googleapis.com/auth/cloud-platform")
         );
     }
