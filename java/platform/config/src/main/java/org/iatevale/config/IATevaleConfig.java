@@ -47,6 +47,9 @@ public class IATevaleConfig {
         );
     }
 
-
+    static public String getTelegramToken() {
+        final Properties properties = getProperties();
+        return properties.getProperty("telegram.boot_token");
+    }
 
 }

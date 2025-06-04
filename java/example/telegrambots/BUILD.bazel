@@ -6,6 +6,7 @@ java_binary(
     main_class = "org.iatevale.example.telegrambots.TelegrambotsExample",
     visibility = ["//visibility:public"],
     deps = [
+        "//java/platform/config",
         "@maven//:org_telegram_telegrambots_client",
         "@maven//:org_telegram_telegrambots_longpolling",
         "@maven//:org_telegram_telegrambots_meta",
