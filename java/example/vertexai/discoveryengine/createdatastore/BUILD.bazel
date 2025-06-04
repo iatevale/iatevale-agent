@@ -7,7 +7,7 @@ java_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/vertexai/discoveryengine/common",
-        "//java/platform/util/auth",
+        "//java/platform/config",
         "//proto/example/vertexai/discoveryengine:domain_java_proto",
         "@maven//:com_google_api_gax",
         "@maven//:com_google_api_grpc_proto_google_cloud_discoveryengine_v1",

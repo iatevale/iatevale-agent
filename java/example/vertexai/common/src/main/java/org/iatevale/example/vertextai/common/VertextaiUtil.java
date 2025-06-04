@@ -2,8 +2,8 @@ package org.iatevale.example.vertextai.common;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.Candidate;
-import org.iatevale.util.auth.GCloudAuthFactory;
-import org.iatevale.util.auth.GCloudAuthParameters;
+import org.iatevale.config.GCloudAuthParameters;
+import org.iatevale.config.IATevaleConfig;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public class VertextaiUtil {
 
     static public VertexAI.Builder vertexBuilder() throws IOException {
-        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
+        final GCloudAuthParameters parameters = IATevaleConfig.getGCloudAuthParameters();
         return new VertexAI.Builder()
                 .setProjectId(parameters.projectId())
                 .setCredentials(parameters.credentials());

@@ -2,7 +2,7 @@ package org.iatevale.example.vertextai.discoveryengine.createdatastore.common;
 
 import com.google.cloud.discoveryengine.v1.DataStoreServiceClient;
 import com.google.cloud.discoveryengine.v1.DataStoreServiceSettings;
-import org.iatevale.util.auth.GCloudAuthParameters;
+import org.iatevale.config.GCloudAuthParameters;
 
 import java.io.IOException;
 

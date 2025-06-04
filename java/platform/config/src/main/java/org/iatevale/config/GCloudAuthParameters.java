@@ -1,4 +1,4 @@
-package org.iatevale.util.auth;
+package org.iatevale.config;
 
 import com.google.auth.Credentials;
 

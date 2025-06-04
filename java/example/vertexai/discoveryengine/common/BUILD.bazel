@@ -6,7 +6,7 @@ java_library(
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/vertexai/common",
-        "//java/platform/util/auth",
+        "//java/platform/config",
         "//java/platform/util/conversion",
         "//proto/example/vertexai/discoveryengine:domain_java_proto",
         "@maven//:com_google_api_gax",
