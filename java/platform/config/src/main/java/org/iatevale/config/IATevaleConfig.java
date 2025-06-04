@@ -9,23 +9,23 @@ import java.util.Properties;
 
 public class IATevaleConfig {
 
-    static private Properties properties;
+    static private Properties staticProperties;
 
-    static private Properties getProperties() {
+    static private Properties getStaticProperties() {
 
         synchronized (IATevaleConfig.class) {
 
             // Si es la primera vez hay que cargar las propiedades
-            if (properties == null) {
+            if (staticProperties == null) {
 
                 // Ruta al directorio de configuración en el home del usuario
                 final String configFile = System.getProperty("user.home") + "/.iatevale/config.properties";
 
                 // Cargar propiedades desde config.properties
-                properties = new Properties();
+                staticProperties = new Properties();
 
                 try (FileInputStream propsFile = new FileInputStream(configFile)) {
-                    properties.load(propsFile);
+                    staticProperties.load(propsFile);
                 } catch (IOException e) {
                     throw new RuntimeException(String.format("No se ha podido cargar el fichero de configuracion '%s'", configFile), e);
                 }
@@ -33,7 +33,7 @@ public class IATevaleConfig {
             }
 
             // Se retorna
-            return properties;
+            return staticProperties;
 
         }
 
@@ -41,11 +41,11 @@ public class IATevaleConfig {
 
     static public GCloudAuthParameters getGCloudAuthParameters() throws IOException {
 
-        final Properties properties = getProperties();
+        final Properties properties = getStaticProperties();
 
-        final String projectId = Objects.requireNonNull(properties.getProperty("gcloud.project_id"), "No se ha podido cargar el id del proyecto de GCloud");
+        final String projectId = Objects.requireNonNull(properties.getProperty("google.cloud.project"), "No se ha podido cargar el id del proyecto de GCloud");
         final GoogleCredentials googleCredentials = Objects.requireNonNull(
-                GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("gcloud.credentials")))
+                GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("google.cloud.credentials")))
                         .createScoped("https://www.googleapis.com/auth/cloud-platform"),
                 "No se ha podido cargar las credenciales de GCloud"
         );
@@ -55,9 +55,16 @@ public class IATevaleConfig {
     }
 
     static public String getTelegramToken() {
-        final Properties properties = getProperties();
-        final String botToken = Objects.requireNonNull(properties.getProperty("telegram.bot_token"), "No se ha podido cargar el token de Telegram");
+        final Properties properties = getStaticProperties();
+        final String botToken = Objects.requireNonNull(properties.getProperty("telegram.bot.token"), "No se ha podido cargar el token de Telegram");
         return botToken;
+    }
+
+    static public void installGenAIKey() {
+        final Properties properties = getStaticProperties();
+        final String apiKey = Objects.requireNonNull(properties.getProperty("google.cloud.apikey"), "No se ha podido cargar la API Key de GCloud");
+        System.setProperty("GOOGLE_API_KEY", apiKey);
+        System.setProperty("GOOGLE_GENAI_USE_VERTEXAI", "TRUE");
     }
 
 }
