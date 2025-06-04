@@ -2,14 +2,14 @@ package org.iatevale.example.datastore;
 
 import com.google.cloud.datastore.*;
 import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
-import org.iatevale.util.auth.GCloudAuthFactory;
-import org.iatevale.util.auth.GCloudAuthParameters;
+import org.iatevale.config.GCloudAuthParameters;
+import org.iatevale.config.IATevaleConfig;
 
 public class DatastoreExample {
 
     public static void main(String... args) throws Exception {
 
-        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
+        final GCloudAuthParameters parameters = IATevaleConfig.getGCloudAuthParameters();
 
         final Datastore datastore = DatastoreOptions.newBuilder()
                 .setProjectId(parameters.projectId())

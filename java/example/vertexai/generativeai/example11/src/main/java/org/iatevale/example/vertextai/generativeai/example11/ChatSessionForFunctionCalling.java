@@ -14,7 +14,7 @@ import java.util.Collections;
 // Muestra como se implementa una llamada a funcion desde el modelo
 public class ChatSessionForFunctionCalling {
 
-    private static final String MODEL_NAME = "gemini-pro";
+    private static final String MODEL_NAME = "gemini-2.0-flash";
 
     private static final String JSON_STRING_FUNCTION = """
               {

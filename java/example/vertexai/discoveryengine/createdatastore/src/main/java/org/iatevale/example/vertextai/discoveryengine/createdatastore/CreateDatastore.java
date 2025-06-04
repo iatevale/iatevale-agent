@@ -2,9 +2,9 @@ package org.iatevale.example.vertextai.discoveryengine.createdatastore;
 
 import com.google.api.gax.longrunning.OperationFuture;
 import com.google.cloud.discoveryengine.v1.*;
+import org.iatevale.config.GCloudAuthParameters;
+import org.iatevale.config.IATevaleConfig;
 import org.iatevale.example.vertextai.discoveryengine.createdatastore.common.DataStoreServiceClientFactory;
-import org.iatevale.util.auth.GCloudAuthFactory;
-import org.iatevale.util.auth.GCloudAuthParameters;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class CreateDatastore {
 
     public static void createDataStore() throws IOException {
 
-        final GCloudAuthParameters parameters = GCloudAuthFactory.getParameters();
+        final GCloudAuthParameters parameters = IATevaleConfig.getGCloudAuthParameters();
 
         try (DataStoreServiceClient dataStoreServiceClient = DataStoreServiceClientFactory.create(parameters)) {
 

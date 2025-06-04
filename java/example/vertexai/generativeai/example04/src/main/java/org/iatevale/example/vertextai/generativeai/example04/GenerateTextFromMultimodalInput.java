@@ -15,7 +15,7 @@ import java.io.InputStream;
 // Este ejemplo muestra como adjuntar una imagen en el promopt
 public class GenerateTextFromMultimodalInput {
 
-    static final private String MODEL_NAME = "gemini-pro-vision";
+    static final private String MODEL_NAME = "gemini-2.0-flash-vision";
 
     private static final String IMAGE_RESOURCE = "/que_sera.jpg";
 

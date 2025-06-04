@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Main {
 
-    private static final String MODEL_NAME = "gemini-pro";
+    private static final String MODEL_NAME = "gemini-2.0-flash";
 
     public static void main(String[] args) throws Exception {
 

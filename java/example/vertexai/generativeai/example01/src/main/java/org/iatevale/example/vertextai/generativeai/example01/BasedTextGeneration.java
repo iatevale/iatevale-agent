@@ -17,7 +17,7 @@ import java.io.IOException;
 // }
 public class BasedTextGeneration {
 
-    static final private String MODEL_NAME = "gemini-pro";
+    static final private String MODEL_NAME = "gemini-2.0-flash";
 
     public static void main(String[] args) throws IOException {
 

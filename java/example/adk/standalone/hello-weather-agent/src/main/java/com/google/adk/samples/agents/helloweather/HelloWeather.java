@@ -7,11 +7,16 @@ import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.config.IATevaleConfig;
 
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
 public class HelloWeather {
+
+    static {
+        IATevaleConfig.installGenAIKey();
+    }
 
     final private static String USER_ID = "user1234";
 
