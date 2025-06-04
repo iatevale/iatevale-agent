@@ -9,6 +9,7 @@ java_binary(
     visibility = ["//visibility:public"],
     deps = [
         "//java/example/adk/common",
+        "//java/platform/config",
         "@maven//:com_google_adk_google_adk",
         "@maven//:com_google_adk_google_adk_dev",
         "@maven//:com_google_genai_google_genai",

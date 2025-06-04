@@ -8,11 +8,16 @@ import com.google.adk.samples.agents.multitool.tool.WeatherToolFactory;
 import com.google.adk.sessions.Session;
 import org.iatevale.adk.common.console.ConsoleLoop;
 import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.config.IATevaleConfig;
 
 import java.util.function.Consumer;
 import java.util.logging.Level;
 
 public class MultiTool {
+
+    static {
+        IATevaleConfig.installGenAIKey();
+    }
 
     final private static String USER_ID = "student";
 
