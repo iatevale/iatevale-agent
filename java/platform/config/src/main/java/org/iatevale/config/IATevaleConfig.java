@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class IATevaleConfig {
@@ -39,17 +40,24 @@ public class IATevaleConfig {
     }
 
     static public GCloudAuthParameters getGCloudAuthParameters() throws IOException {
+
         final Properties properties = getProperties();
-        return new GCloudAuthParameters(
-                properties.getProperty("gcloud.project_ id"),
+
+        final String projectId = Objects.requireNonNull(properties.getProperty("gcloud.project_id"), "No se ha podido cargar el id del proyecto de GCloud");
+        final GoogleCredentials googleCredentials = Objects.requireNonNull(
                 GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("gcloud.credentials")))
-                        .createScoped("https://www.googleapis.com/auth/cloud-platform")
+                        .createScoped("https://www.googleapis.com/auth/cloud-platform"),
+                "No se ha podido cargar las credenciales de GCloud"
         );
+
+        return new GCloudAuthParameters(projectId, googleCredentials);
+
     }
 
     static public String getTelegramToken() {
         final Properties properties = getProperties();
-        return properties.getProperty("telegram.boot_token");
+        final String botToken = Objects.requireNonNull(properties.getProperty("telegram.boot_token"), "No se ha podido cargar el token de Telegram");
+        return botToken;
     }
 
 }
