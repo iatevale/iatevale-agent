@@ -56,7 +56,7 @@ public class IATevaleConfig {
 
     static public String getTelegramToken() {
         final Properties properties = getProperties();
-        final String botToken = Objects.requireNonNull(properties.getProperty("telegram.boot_token"), "No se ha podido cargar el token de Telegram");
+        final String botToken = Objects.requireNonNull(properties.getProperty("telegram.bot_token"), "No se ha podido cargar el token de Telegram");
         return botToken;
     }
 
