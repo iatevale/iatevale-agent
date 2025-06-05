@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
-import org.iatevale.adk.common.model.GeminiModelUtil;
+import org.iatevale.adk.common.model.AgentConfig;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
@@ -34,8 +34,7 @@ public record AgentFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentFactory instantiate(McpClientToolsFactory mcpClientToolsFactory) {
-        final LlmAgent agent = LlmAgent.builder()
-                .model(GeminiModelUtil.create())
+        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

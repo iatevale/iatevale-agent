@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.adk.common.model.GeminiModelUtil;
+import org.iatevale.adk.common.model.AgentConfig;
 
 import java.util.List;
 
@@ -24,8 +24,7 @@ public record AgentMainFactory(LlmAgent llmAgent) {
             """;
 
     public static AgentMainFactory instantiate(List<BaseTool> tools) {
-        final LlmAgent agent = LlmAgent.builder()
-                .model(GeminiModelUtil.create())
+        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

@@ -2,7 +2,9 @@ package com.google.adk.samples.agents.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
-import org.iatevale.adk.common.model.GeminiModelUtil;
+import org.iatevale.adk.common.model.AgentConfig;
+import org.iatevale.config.AdkParameters;
+import org.iatevale.config.IATevaleConfig;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
@@ -15,8 +17,8 @@ public record AgentFactory(LlmAgent llmAgent) {
             """;
 
     public static AgentFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
-        final LlmAgent agent = LlmAgent.builder()
-                .model(GeminiModelUtil.create())
+        final AdkParameters adkParameters = IATevaleConfig.getAdkParameters();
+        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

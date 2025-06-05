@@ -1,7 +1,7 @@
 load("@rules_java//java:defs.bzl", "java_binary")
 
 java_binary(
-    name = "storage-example",
+    name = "storage",
     srcs = glob(["src/main/java/**/*.java"]),
     main_class = "org.iatevale.example.storage.StorageExample",
     visibility = ["//visibility:public"],

@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.GoogleSearchTool;
-import org.iatevale.adk.common.model.GeminiModelUtil;
+import org.iatevale.adk.common.model.AgentConfig;
 
 public record AgentSearchFactory(LlmAgent llmAgent) {
 
@@ -13,8 +13,7 @@ public record AgentSearchFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentSearchFactory instantiate() {
-        final LlmAgent agent = LlmAgent.builder()
-                .model(GeminiModelUtil.create())
+        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

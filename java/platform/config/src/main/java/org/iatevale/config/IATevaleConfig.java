@@ -66,5 +66,11 @@ public class IATevaleConfig {
         return botToken;
     }
 
+    static public AdkParameters getAdkParameters() {
+        final Properties properties = getStaticProperties();
+        final String modelName = Objects.requireNonNull(properties.getProperty("google.adk.model"), "No se ha podido cargar el nombre del modelo para Adk");
+        final String apiKey = Objects.requireNonNull(properties.getProperty("google.adk.apikey"), "No se ha podido cargar la ApiKey para Adk");
+        return new AdkParameters(modelName, apiKey);
+    }
 
 }
