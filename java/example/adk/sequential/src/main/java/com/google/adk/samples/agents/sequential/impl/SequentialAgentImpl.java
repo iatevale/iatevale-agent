@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.sequential;
+package com.google.adk.samples.agents.sequential.impl;
 
 import com.google.adk.agents.SequentialAgent;
 import com.google.adk.events.Event;

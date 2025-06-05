@@ -1,5 +1,7 @@
 package com.google.adk.samples.agents.sequential;
 
+import com.google.adk.samples.agents.sequential.impl.SequentialAgentImpl;
+
 public class SequentialAgentExample {
 
     public static void main(String[] args) {
