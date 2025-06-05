@@ -40,18 +40,24 @@ public class IATevaleConfig {
 
     }
 
-    static public GCloudAuthParameters getGCloudAuthParameters() throws IOException {
+    static public GCloudAuthParameters getGCloudAuthParameters() {
 
-        final Properties properties = getStaticProperties();
+        try {
 
-        final String projectId = Objects.requireNonNull(properties.getProperty("google.cloud.project"), "No se ha podido cargar el id del proyecto de GCloud");
-        final GoogleCredentials googleCredentials = Objects.requireNonNull(
-                GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("google.cloud.credentials")))
-                        .createScoped("https://www.googleapis.com/auth/cloud-platform"),
-                "No se ha podido cargar las credenciales de GCloud"
-        );
+            final Properties properties = getStaticProperties();
 
-        return new GCloudAuthParameters(projectId, googleCredentials);
+            final String projectId = Objects.requireNonNull(properties.getProperty("google.cloud.project"), "No se ha podido cargar el id del proyecto de GCloud");
+            final GoogleCredentials googleCredentials = Objects.requireNonNull(
+                    GoogleCredentials.fromStream(new FileInputStream(properties.getProperty("google.cloud.credentials")))
+                            .createScoped("https://www.googleapis.com/auth/cloud-platform"),
+                    "No se ha podido cargar las credenciales de GCloud"
+            );
+
+            return new GCloudAuthParameters(projectId, googleCredentials);
+
+        } catch (IOException e) {
+            throw new RuntimeException("No se ha podido cargar las credenciales de GCloud", e);
+        }
 
     }
 
