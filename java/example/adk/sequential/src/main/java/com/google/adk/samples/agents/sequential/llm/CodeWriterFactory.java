@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.sequential.agent;
+package com.google.adk.samples.agents.sequential.llm;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.adk.common.model.AgentConfig;
@@ -19,7 +19,7 @@ public record CodeWriterFactory(LlmAgent llmAgent) {
                         """)
                 .outputKey("generated_code")
                 .build();
-        
+
         return new CodeWriterFactory(agent);
     }
 

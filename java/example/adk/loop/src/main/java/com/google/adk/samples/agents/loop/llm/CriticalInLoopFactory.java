@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.loop.agent;
+package com.google.adk.samples.agents.loop.llm;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.adk.common.model.AgentConfig;

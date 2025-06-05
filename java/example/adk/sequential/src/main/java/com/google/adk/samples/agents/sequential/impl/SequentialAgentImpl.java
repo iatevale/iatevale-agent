@@ -3,9 +3,9 @@ package com.google.adk.samples.agents.sequential.impl;
 import com.google.adk.agents.SequentialAgent;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.sequential.agent.CodeRefactorerFactory;
-import com.google.adk.samples.agents.sequential.agent.CodeReviewerFactory;
-import com.google.adk.samples.agents.sequential.agent.CodeWriterFactory;
+import com.google.adk.samples.agents.sequential.llm.CodeRefactorerFactory;
+import com.google.adk.samples.agents.sequential.llm.CodeReviewerFactory;
+import com.google.adk.samples.agents.sequential.llm.CodeWriterFactory;
 import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
@@ -22,13 +22,12 @@ public class SequentialAgentImpl {
         final CodeReviewerFactory codeReviewerFactory = CodeReviewerFactory.instantiate();
         final CodeRefactorerFactory codeRefactorerFactory = CodeRefactorerFactory.instantiate();
 
-        final SequentialAgent codePipelineAgent =
-                SequentialAgent.builder()
-                        .name(APP_NAME)
-                        .description("Executes a sequence of code writing, reviewing, and refactoring.")
-                        // The agents will run in the order provided: Writer -> Reviewer -> Refactorer
-                        .subAgents(codeWriterFactory.llmAgent(), codeReviewerFactory.llmAgent(), codeRefactorerFactory.llmAgent())
-                        .build();
+        final SequentialAgent codePipelineAgent = SequentialAgent.builder()
+                .name(APP_NAME)
+                .description("Executes a sequence of code writing, reviewing, and refactoring.")
+                // The agents will run in the order provided: Writer -> Reviewer -> Refactorer
+                .subAgents(codeWriterFactory.llmAgent(), codeReviewerFactory.llmAgent(), codeRefactorerFactory.llmAgent())
+                .build();
 
         // Create an InMemoryRunner
         final InMemoryRunner runner = new InMemoryRunner(codePipelineAgent, APP_NAME);
