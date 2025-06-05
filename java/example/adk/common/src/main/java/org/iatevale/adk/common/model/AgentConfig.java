@@ -13,7 +13,8 @@ public class AgentConfig {
                 .modelName(adkParameters.modelName())
                 .apiKey(adkParameters.apiKey())
                 .build();
-        return builder.model(gemini);
+        return builder.model(gemini)
+                .globalInstruction("Answer always in Spanish");
     }
 
 }
