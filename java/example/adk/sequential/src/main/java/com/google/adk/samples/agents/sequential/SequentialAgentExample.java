@@ -36,14 +36,14 @@ public class SequentialAgentExample {
                         .build();
 
         // Create an InMemoryRunner
-        InMemoryRunner runner = new InMemoryRunner(codePipelineAgent, APP_NAME);
+        final InMemoryRunner runner = new InMemoryRunner(codePipelineAgent, APP_NAME);
 
         // InMemoryRunner automatically creates a session service. Create a session using the service
-        Session session = runner.sessionService().createSession(APP_NAME, USER_ID).blockingGet();
-        Content userMessage = Content.fromParts(Part.fromText(prompt));
+        final Session session = runner.sessionService().createSession(APP_NAME, USER_ID).blockingGet();
+        final Content userMessage = Content.fromParts(Part.fromText(prompt));
 
         // Run the agent
-        Flowable<Event> eventStream = runner.runAsync(USER_ID, session.id(), userMessage);
+        final Flowable<Event> eventStream = runner.runAsync(USER_ID, session.id(), userMessage);
 
         // Stream event response
         eventStream.blockingForEach(
@@ -53,5 +53,7 @@ public class SequentialAgentExample {
                     }
                 }
         );
+
     }
+
 }
