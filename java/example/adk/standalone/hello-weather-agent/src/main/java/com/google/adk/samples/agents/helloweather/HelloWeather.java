@@ -14,10 +14,6 @@ import java.util.logging.Level;
 
 public class HelloWeather {
 
-    static {
-        IATevaleConfig.installGenAIKey();
-    }
-
     final private static String USER_ID = "user1234";
 
     public static void main(String[] args) {

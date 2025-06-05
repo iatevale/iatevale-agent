@@ -15,10 +15,6 @@ import java.util.logging.Level;
 
 public class MultiTool {
 
-    static {
-        IATevaleConfig.installGenAIKey();
-    }
-
     final private static String USER_ID = "student";
 
     public static void main(String[] args) {

@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -60,11 +61,5 @@ public class IATevaleConfig {
         return botToken;
     }
 
-    static public void installGenAIKey() {
-        final Properties properties = getStaticProperties();
-        final String apiKey = Objects.requireNonNull(properties.getProperty("google.cloud.apikey"), "No se ha podido cargar la API Key de GCloud");
-        System.setProperty("GOOGLE_API_KEY", apiKey);
-        System.setProperty("GOOGLE_GENAI_USE_VERTEXAI", "FALSE");
-    }
 
 }
