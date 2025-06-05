@@ -2,11 +2,11 @@ package com.google.adk.samples.agents.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
+import org.iatevale.adk.common.model.GeminiModelUtil;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
     private static final String AGENT_NAME = "hello-weather-llmAgent";
-    private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "Hello World";
     private static final String INSTRUCTION = """
                             You are a friendly assistant, answering questions in a concise manner.
@@ -16,9 +16,9 @@ public record AgentFactory(LlmAgent llmAgent) {
 
     public static AgentFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
         final LlmAgent agent = LlmAgent.builder()
+                .model(GeminiModelUtil.create())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
-                .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
                 .tools(helloWeatherTool.functionTool())
                 .build();

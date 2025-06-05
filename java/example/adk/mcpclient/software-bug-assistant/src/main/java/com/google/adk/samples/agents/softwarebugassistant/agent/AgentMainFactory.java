@@ -2,13 +2,13 @@ package com.google.adk.samples.agents.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
+import org.iatevale.adk.common.model.GeminiModelUtil;
 
 import java.util.List;
 
 public record AgentMainFactory(LlmAgent llmAgent) {
 
     private static final String AGENT_NAME = "SoftwareBugAssistant";
-    private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "Helps fix bugs";
     private static final String INSTRUCTION = """
             You are a skilled expert in triaging and debugging software issues for a coffee machine company,QuantumRoast.
@@ -25,9 +25,9 @@ public record AgentMainFactory(LlmAgent llmAgent) {
 
     public static AgentMainFactory instantiate(List<BaseTool> tools) {
         final LlmAgent agent = LlmAgent.builder()
+                .model(GeminiModelUtil.create())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
-                .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
                 .tools(tools)
                 .outputKey("bug_assistant_result")

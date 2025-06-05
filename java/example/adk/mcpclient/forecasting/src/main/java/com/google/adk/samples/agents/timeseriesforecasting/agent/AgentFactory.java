@@ -2,11 +2,11 @@ package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
+import org.iatevale.adk.common.model.GeminiModelUtil;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
     private static final String AGENT_NAME = "time-series-forecasting";
-    private static final String MODEL_NAME = "gemini-2.0-flash";
     private static final String DESCRIPTION = "A general-purpose llmAgent that performs time series forecasting using provided tools.";
     private static final String INSTRUCTION = """
             You are a highly skilled expert at time-series forecasting, possessing strong data science skills. You will be provided with tools to solve specific time series problems.
@@ -35,9 +35,9 @@ public record AgentFactory(LlmAgent llmAgent) {
 
     static public AgentFactory instantiate(McpClientToolsFactory mcpClientToolsFactory) {
         final LlmAgent agent = LlmAgent.builder()
+                .model(GeminiModelUtil.create())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
-                .model(MODEL_NAME)
                 .instruction(INSTRUCTION)
                 .tools(mcpClientToolsFactory.tools())
                 .build();
