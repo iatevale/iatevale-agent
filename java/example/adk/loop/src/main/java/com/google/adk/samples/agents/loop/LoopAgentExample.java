@@ -20,7 +20,8 @@ public class LoopAgentExample {
 
     public static void main(String[] args) {
         LoopAgentExample loopAgentExample = new LoopAgentExample();
-        loopAgentExample.runAgent("Write a document about a woman named Alice.");
+//        loopAgentExample.runAgent("Write a document about a woman named Alice.");
+        loopAgentExample.runInititalWriter("Write a document about a woman named Alice.");
     }
 
     public void runAgent(String prompt) {
@@ -60,6 +61,30 @@ public class LoopAgentExample {
 
         // Stream event response
         eventStream.blockingForEach(
+            event -> {
+                if (event.finalResponse()) {
+                    System.out.println(event.stringifyContent());
+                }
+            }
+        );
+
+    }
+
+    public void runInititalWriter(String prompt) {
+
+        final InitialWriterFactory initialWriterFactory = InitialWriterFactory.instantiate();
+
+        final InMemoryRunner runner = new InMemoryRunner(initialWriterFactory.llmAgent(), APP_NAME);
+
+        // InMemoryRunner automatically creates a session service. Create a session using the service
+        final Session session = runner.sessionService().createSession(APP_NAME, USER_ID).blockingGet();
+        final Content userMessage = Content.fromParts(Part.fromText(prompt));
+
+        // Run the agent
+        final Flowable<Event> eventStream = runner.runAsync(USER_ID, session.id(), userMessage);
+
+        // Stream event response
+        eventStream.blockingForEach(
                 event -> {
                     if (event.finalResponse()) {
                         System.out.println(event.stringifyContent());
@@ -67,5 +92,4 @@ public class LoopAgentExample {
                 });
 
     }
-
 }
