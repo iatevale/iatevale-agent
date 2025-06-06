@@ -7,7 +7,7 @@ java_library(
     deps = [
         "//java/platform/config",
         "//java/platform/util/conversion",
-        "//proto/example/vertexai/discoveryengine:domain_java_proto",
+        "//proto/example/gcloud/discoveryengine:domain_java_proto",
         "@maven//:com_google_api_gax",
         "@maven//:com_google_api_grpc_proto_google_cloud_discoveryengine_v1",
         "@maven//:com_google_cloud_google_cloud_discoveryengine",

@@ -7,7 +7,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
 import com.google.protobuf.Struct;
 import com.google.protobuf.util.JsonFormat;
-import org.iatevale.example.vertextai.discoveryengine.domain.MyProto;
+import org.iatevale.example.gcloud.discoveryengine.domain.MyProto;
 
 import java.io.IOException;
 
