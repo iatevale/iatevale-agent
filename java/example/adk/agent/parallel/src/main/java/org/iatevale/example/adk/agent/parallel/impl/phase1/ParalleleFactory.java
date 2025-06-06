@@ -2,10 +2,10 @@ package org.iatevale.example.adk.agent.parallel.impl.phase1;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.ParallelAgent;
+import com.google.adk.tools.GoogleSearchTool;
 import org.iatevale.example.adk.agent.parallel.impl.phase1.parallel.CarbonCaptureResearcherFactory;
 import org.iatevale.example.adk.agent.parallel.impl.phase1.parallel.EVResearcherFactory;
 import org.iatevale.example.adk.agent.parallel.impl.phase1.parallel.RenewableEnergyResearcherFactory;
-import com.google.adk.tools.GoogleSearchTool;
 
 public class ParalleleFactory {
 

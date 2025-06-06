@@ -3,11 +3,11 @@ package org.iatevale.example.adk.agent.parallel;
 import com.google.adk.agents.SequentialAgent;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import org.iatevale.example.adk.agent.parallel.impl.RootAgentFactory;
 import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
+import org.iatevale.example.adk.agent.parallel.impl.RootAgentFactory;
 
 public class ParallelResearchPipeline {
 

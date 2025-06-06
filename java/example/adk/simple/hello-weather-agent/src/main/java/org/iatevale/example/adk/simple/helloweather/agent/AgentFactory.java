@@ -1,10 +1,10 @@
 package org.iatevale.example.adk.simple.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.simple.helloweather.tool.HelloWeatherToolFactory;
-import org.iatevale.example.adk.common.model.AgentConfig;
 import org.iatevale.config.AdkParameters;
 import org.iatevale.config.IATevaleConfig;
+import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.simple.helloweather.tool.HelloWeatherToolFactory;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
