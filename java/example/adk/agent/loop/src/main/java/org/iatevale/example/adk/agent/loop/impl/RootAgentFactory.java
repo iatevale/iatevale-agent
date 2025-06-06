@@ -6,9 +6,9 @@ import com.google.adk.agents.SequentialAgent;
 import org.iatevale.example.adk.agent.loop.impl.phase1.InitialWriterFactory;
 import org.iatevale.example.adk.agent.loop.impl.phase2.RefinementLoopFactory;
 
-public class RootAgentFactory {
+import static org.iatevale.example.adk.agent.loop.LoopAgentExample.APP_NAME;
 
-    private static final String APP_NAME = "IterativeWritingPipeline";
+public class RootAgentFactory {
 
     static public SequentialAgent instantiate() {
 

@@ -11,8 +11,8 @@ import org.iatevale.example.adk.agent.loop.impl.RootAgentFactory;
 
 public class LoopAgentExample {
 
-    private static final String APP_NAME = "IterativeWritingPipeline";
-    private static final String USER_ID = "test_user_456";
+    static public final String APP_NAME = "IterativeWritingPipeline";
+    static private final String USER_ID = "test_user_456";
 
     public static void main(String[] args) {
         LoopAgentExample.runAgent(
