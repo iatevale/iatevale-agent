@@ -5,13 +5,13 @@ import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record InitialWriterFactory(LlmAgent llmAgent) {
+public class InitialWriterFactory {
 
     public static final String STATE_CURRENT_DOC = "current_document";
 
-    static public InitialWriterFactory instantiate() {
+    static public LlmAgent instantiate() {
 
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        return AgentConfig.apply(LlmAgent.builder())
                 .name("InitialWriterAgent")
                 .description(
                         "Writes the initial document draft based on the topic, aiming for some initial substance.")
@@ -26,8 +26,6 @@ public record InitialWriterFactory(LlmAgent llmAgent) {
                 .outputKey(STATE_CURRENT_DOC)
                 .includeContents(NONE)
                 .build();
-
-        return new InitialWriterFactory(agent);
 
     }
 
