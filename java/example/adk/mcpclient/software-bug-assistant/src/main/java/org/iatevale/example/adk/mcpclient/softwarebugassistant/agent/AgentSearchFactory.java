@@ -1,0 +1,26 @@
+package org.iatevale.example.adk.mcpclient.softwarebugassistant.agent;
+
+import com.google.adk.agents.LlmAgent;
+import com.google.adk.tools.GoogleSearchTool;
+import org.iatevale.example.adk.common.model.AgentConfig;
+
+public record AgentSearchFactory(LlmAgent llmAgent) {
+
+    private static final String AGENT_NAME = "google_search_agent";
+    private static final String DESCRIPTION = "Search Google Search";
+    private static final String INSTRUCTION = """
+                You're a specialist in Google Search
+            """;
+
+    static public AgentSearchFactory instantiate() {
+        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+                .name(AGENT_NAME)
+                .description(DESCRIPTION)
+                .instruction(INSTRUCTION)
+                .tools(new GoogleSearchTool()) // Your Google search tool
+                .outputKey("google_search_result")
+                .build();
+        return new AgentSearchFactory(agent);
+    }
+
+}
