@@ -1,7 +1,6 @@
 package com.google.adk.samples.agents.parallel.impl.phase2;
 
 import com.google.adk.agents.LlmAgent;
-import com.google.adk.tools.GoogleSearchTool;
 import org.iatevale.adk.common.model.AgentConfig;
 
 public class SynthesisFactory {
