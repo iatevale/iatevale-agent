@@ -6,7 +6,6 @@ java_binary(
     main_class = "org.iatevale.example.gcloud.discoveryengine.ingestcontent.IngestContent",
     visibility = ["//visibility:public"],
     deps = [
-        "//java/example/vertexai/common",
         "//java/platform/util/conversion",
         "//proto/example/vertexai/discoveryengine:domain_java_proto",
         "@maven//:com_google_api_grpc_proto_google_cloud_discoveryengine_v1",
