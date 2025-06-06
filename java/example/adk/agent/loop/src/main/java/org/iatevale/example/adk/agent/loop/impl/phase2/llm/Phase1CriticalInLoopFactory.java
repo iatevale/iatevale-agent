@@ -1,15 +1,15 @@
-package org.iatevale.example.adk.agent.loop.impl.llm;
+package org.iatevale.example.adk.agent.loop.impl.phase2.llm;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record CriticalInLoopFactory(LlmAgent llmAgent) {
+public record Phase1CriticalInLoopFactory(LlmAgent llmAgent) {
 
     public static final String STATE_CRITICISM = "criticism";
 
-    static public CriticalInLoopFactory instantiate() {
+    static public Phase1CriticalInLoopFactory instantiate() {
 
         final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name("CriticAgent")
@@ -40,7 +40,7 @@ public record CriticalInLoopFactory(LlmAgent llmAgent) {
                 .includeContents(NONE)
                 .build();
 
-        return new CriticalInLoopFactory(agent);
+        return new Phase1CriticalInLoopFactory(agent);
 
     }
 

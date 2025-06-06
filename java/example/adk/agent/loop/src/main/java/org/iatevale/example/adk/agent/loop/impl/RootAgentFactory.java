@@ -2,9 +2,8 @@ package org.iatevale.example.adk.agent.loop.impl;
 
 import com.google.adk.agents.LoopAgent;
 import com.google.adk.agents.SequentialAgent;
-import org.iatevale.example.adk.agent.loop.impl.llm.CriticalInLoopFactory;
-import org.iatevale.example.adk.agent.loop.impl.llm.InitialWriterFactory;
-import org.iatevale.example.adk.agent.loop.impl.llm.RefinerAgentFactory;
+import org.iatevale.example.adk.agent.loop.impl.phase1.InitialWriterFactory;
+import org.iatevale.example.adk.agent.loop.impl.phase2.RefinementLoopFactory;
 import org.iatevale.example.adk.agent.loop.tool.ExitLoopTool;
 
 public class RootAgentFactory {
@@ -17,23 +16,14 @@ public class RootAgentFactory {
         final ExitLoopTool exitLoopTool = ExitLoopTool.instantiate();
 
         // Se instancian los Llm agents
-        final InitialWriterFactory initialWriterFactory = InitialWriterFactory.instantiate();
-        final CriticalInLoopFactory criticalInLoopFactory = CriticalInLoopFactory.instantiate();
-        final RefinerAgentFactory refinerAgentFactory = RefinerAgentFactory.instantiate(exitLoopTool.functionTool());
-
-        // Bucle de refiniamiento
-        final LoopAgent refinementLoop = LoopAgent.builder()
-                .name("RefinementLoop")
-                .description("Repeatedly refines the document with critique and then exits.")
-                .subAgents(criticalInLoopFactory.llmAgent(), refinerAgentFactory.llmAgent())
-                .maxIterations(5)
-                .build();
+        final InitialWriterFactory phase1 = InitialWriterFactory.instantiate();
+        final LoopAgent phase2 = RefinementLoopFactory.instantiate();
 
         // Agente secuencial que orquesta el flujo principal.
         return SequentialAgent.builder()
                 .name(APP_NAME)
                 .description("Writes an initial document and then iteratively refines it with critique using an exit tool.")
-                .subAgents(initialWriterFactory.llmAgent(), refinementLoop)
+                .subAgents(phase1.llmAgent(), phase2)
                 .build();
 
     }
