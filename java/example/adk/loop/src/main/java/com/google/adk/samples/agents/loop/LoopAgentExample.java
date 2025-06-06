@@ -20,7 +20,7 @@ public class LoopAgentExample {
 
     public static void main(String[] args) {
         LoopAgentExample loopAgentExample = new LoopAgentExample();
-        loopAgentExample.runAgent("Write a document about a cat");
+        loopAgentExample.runAgent("Write a document about a woman named Alice.");
     }
 
     public void runAgent(String prompt) {
@@ -34,21 +34,19 @@ public class LoopAgentExample {
         final RefinerAgentFactory refinerAgentFactory = RefinerAgentFactory.instantiate(exitLoopTool.functionTool());
 
         // Bucle de refiniamiento
-        final LoopAgent refinementLoop =
-                LoopAgent.builder()
-                        .name("RefinementLoop")
-                        .description("Repeatedly refines the document with critique and then exits.")
-                        .subAgents(criticalInLoopFactory.llmAgent(), refinerAgentFactory.llmAgent())
-                        .maxIterations(5)
-                        .build();
+        final LoopAgent refinementLoop = LoopAgent.builder()
+                .name("RefinementLoop")
+                .description("Repeatedly refines the document with critique and then exits.")
+                .subAgents(criticalInLoopFactory.llmAgent(), refinerAgentFactory.llmAgent())
+                .maxIterations(5)
+                .build();
 
         // Agente secuencial que orquesta el flujo principal.
-        final SequentialAgent iterativeWriterAgent =
-                SequentialAgent.builder()
-                        .name(APP_NAME)
-                        .description("Writes an initial document and then iteratively refines it with critique using an exit tool.")
-                        .subAgents(initialWriterFactory.llmAgent(), refinementLoop)
-                        .build();
+        final SequentialAgent iterativeWriterAgent = SequentialAgent.builder()
+                .name(APP_NAME)
+                .description("Writes an initial document and then iteratively refines it with critique using an exit tool.")
+                .subAgents(initialWriterFactory.llmAgent(), refinementLoop)
+                .build();
 
         // Create an InMemoryRunner
         final InMemoryRunner runner = new InMemoryRunner(iterativeWriterAgent, APP_NAME);
