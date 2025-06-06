@@ -1,14 +1,10 @@
 package com.google.adk.samples.agents.parallel;
 
-import com.google.adk.agents.LlmAgent;
-import com.google.adk.agents.ParallelAgent;
 import com.google.adk.agents.SequentialAgent;
 import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
-import com.google.adk.samples.agents.parallel.phase1.ParalleleFactory;
-import com.google.adk.samples.agents.parallel.phase2.SynthesisFactory;
+import com.google.adk.samples.agents.parallel.impl.RootAgentFactory;
 import com.google.adk.sessions.Session;
-import com.google.adk.tools.GoogleSearchTool;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
@@ -17,21 +13,9 @@ public class ParallelResearchPipeline {
 
     private static final String APP_NAME = "parallel_research_app";
     private static final String USER_ID = "research_user_01";
-    private static final String GEMINI_MODEL = "gemini-2.0-flash";
 
     public static void main(String[] args) {
-        runAgent(rootAgent(), "Summarize recent sustainable tech advancements.");
-    }
-
-    public static SequentialAgent rootAgent() {
-        final GoogleSearchTool googleSearchTool = new GoogleSearchTool();
-        final ParallelAgent parallelAgents = ParalleleFactory.instantiate(googleSearchTool);
-        final LlmAgent systhesisAgent = SynthesisFactory.instantiate();
-        return SequentialAgent.builder()
-                .name("ResearchAndSynthesisPipeline")
-                .subAgents(parallelAgents, systhesisAgent) // Run parallel research first, then merge
-                .description("Coordinates parallel research and synthesizes the results.")
-                .build();
+        runAgent(RootAgentFactory.instantiate(), "Summarize recent sustainable tech advancements.");
     }
 
     public static void runAgent(SequentialAgent sequentialPipelineAgent, String query) {

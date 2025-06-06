@@ -1,4 +1,4 @@
-package com.google.adk.samples.agents.parallel.phase1.llm;
+package com.google.adk.samples.agents.parallel.impl.phase1.parallel;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.GoogleSearchTool;

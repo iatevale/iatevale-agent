@@ -1,10 +1,10 @@
-package com.google.adk.samples.agents.parallel.phase1;
+package com.google.adk.samples.agents.parallel.impl.phase1;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.ParallelAgent;
-import com.google.adk.samples.agents.parallel.phase1.llm.CarbonCaptureResearcherFactory;
-import com.google.adk.samples.agents.parallel.phase1.llm.EVResearcherFactory;
-import com.google.adk.samples.agents.parallel.phase1.llm.RenewableEnergyResearcherFactory;
+import com.google.adk.samples.agents.parallel.impl.phase1.parallel.CarbonCaptureResearcherFactory;
+import com.google.adk.samples.agents.parallel.impl.phase1.parallel.EVResearcherFactory;
+import com.google.adk.samples.agents.parallel.impl.phase1.parallel.RenewableEnergyResearcherFactory;
 import com.google.adk.tools.GoogleSearchTool;
 
 public class ParalleleFactory {
