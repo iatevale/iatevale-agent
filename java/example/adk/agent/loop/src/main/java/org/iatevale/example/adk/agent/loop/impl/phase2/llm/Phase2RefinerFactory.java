@@ -6,13 +6,13 @@ import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record Phase2RefinerFactory(LlmAgent llmAgent) {
+public class Phase2RefinerFactory {
 
     private static final String STATE_CURRENT_DOC = "current_document";
 
-    static public Phase2RefinerFactory instantiate(BaseTool baseTool) {
+    static public LlmAgent instantiate(BaseTool baseTool) {
 
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        return AgentConfig.apply(LlmAgent.builder())
                 .name("RefinerAgent")
                 .description(
                         "Refines the document based on critique, or calls exitLoop if critique indicates"
@@ -40,8 +40,6 @@ public record Phase2RefinerFactory(LlmAgent llmAgent) {
                 .includeContents(NONE)
                 .tools(baseTool)
                 .build();
-
-        return new Phase2RefinerFactory(agent);
 
     }
 

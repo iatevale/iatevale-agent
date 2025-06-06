@@ -1,5 +1,6 @@
 package org.iatevale.example.adk.agent.loop.impl.phase2;
 
+import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.LoopAgent;
 import org.iatevale.example.adk.agent.loop.impl.phase2.llm.Phase1CriticalFactory;
 import org.iatevale.example.adk.agent.loop.impl.phase2.llm.Phase2RefinerFactory;
@@ -11,13 +12,13 @@ public class RefinementLoopFactory {
 
         final ExitLoopTool exitLoopTool = ExitLoopTool.instantiate();
 
-        final Phase1CriticalFactory phase1 = Phase1CriticalFactory.instantiate();
-        final Phase2RefinerFactory phase2 = Phase2RefinerFactory.instantiate(exitLoopTool.functionTool());
+        final LlmAgent phase1 = Phase1CriticalFactory.instantiate();
+        final LlmAgent phase2 = Phase2RefinerFactory.instantiate(exitLoopTool.functionTool());
 
         return LoopAgent.builder()
                 .name("RefinementLoop")
                 .description("Repeatedly refines the document with critique and then exits.")
-                .subAgents(phase1.llmAgent(), phase2.llmAgent())
+                .subAgents(phase1, phase2)
                 .maxIterations(5)
                 .build();
 

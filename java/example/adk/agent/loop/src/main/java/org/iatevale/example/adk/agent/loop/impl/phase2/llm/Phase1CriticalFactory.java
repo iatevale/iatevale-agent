@@ -5,13 +5,12 @@ import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record Phase1CriticalFactory(LlmAgent llmAgent) {
+public class Phase1CriticalFactory {
 
     public static final String STATE_CRITICISM = "criticism";
 
-    static public Phase1CriticalFactory instantiate() {
-
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+    static public LlmAgent instantiate() {
+        return AgentConfig.apply(LlmAgent.builder())
                 .name("CriticAgent")
                 .description(
                         "Reviews the current draft, providing critique if clear improvements are needed,"
@@ -39,9 +38,6 @@ public record Phase1CriticalFactory(LlmAgent llmAgent) {
                 .outputKey(STATE_CRITICISM)
                 .includeContents(NONE)
                 .build();
-
-        return new Phase1CriticalFactory(agent);
-
     }
 
 }

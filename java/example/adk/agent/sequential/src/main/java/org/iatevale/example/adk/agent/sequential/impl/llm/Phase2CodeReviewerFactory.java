@@ -1,12 +1,12 @@
-package org.iatevale.example.adk.agent.sequential.llm;
+package org.iatevale.example.adk.agent.sequential.impl.llm;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.example.adk.common.model.AgentConfig;
 
-public record CodeReviewerFactory(LlmAgent llmAgent) {
+public class Phase2CodeReviewerFactory {
 
-    static public CodeReviewerFactory instantiate() {
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+    static public LlmAgent instantiate() {
+        return AgentConfig.apply(LlmAgent.builder())
                 .name("CodeReviewerAgent")
                 .description("Reviews code and provides feedback.")
                 .instruction(
@@ -33,9 +33,6 @@ public record CodeReviewerFactory(LlmAgent llmAgent) {
                         """)
                 .outputKey("review_comments")
                 .build();
-
-        return new CodeReviewerFactory(agent);
-
     }
 
 }
