@@ -1,4 +1,4 @@
-package org.iatevale.example.datastore;
+package org.iatevale.example.gcloud.datastore;
 
 import com.google.cloud.datastore.*;
 import com.google.cloud.datastore.StructuredQuery.PropertyFilter;
