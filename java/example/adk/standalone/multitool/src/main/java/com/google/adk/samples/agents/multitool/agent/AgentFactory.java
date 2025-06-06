@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.multitool.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.AgentConfig;
 
 public record AgentFactory(LlmAgent llmAgent) {
 

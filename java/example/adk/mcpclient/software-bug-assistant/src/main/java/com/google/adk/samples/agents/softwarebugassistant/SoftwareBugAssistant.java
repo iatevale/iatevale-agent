@@ -4,9 +4,9 @@ import com.google.adk.samples.agents.softwarebugassistant.agent.AgentMainFactory
 import com.google.adk.samples.agents.softwarebugassistant.agent.AgentSearchFactory;
 import com.google.adk.tools.AgentTool;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.adk.common.mcpclient.McpClientConfig;
-import org.iatevale.adk.common.mcpclient.McpClientException;
-import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
+import org.iatevale.example.adk.common.mcpclient.McpClientConfig;
+import org.iatevale.example.adk.common.mcpclient.McpClientException;
+import org.iatevale.example.adk.common.mcpclient.McpClientToolsFactory;
 
 import java.util.List;
 

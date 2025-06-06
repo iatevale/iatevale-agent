@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.GoogleSearchTool;
-import org.iatevale.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.AgentConfig;
 
 public record AgentSearchFactory(LlmAgent llmAgent) {
 

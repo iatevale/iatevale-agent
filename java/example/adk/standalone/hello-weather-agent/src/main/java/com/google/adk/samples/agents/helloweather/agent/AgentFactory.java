@@ -2,7 +2,7 @@ package com.google.adk.samples.agents.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
-import org.iatevale.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.AgentConfig;
 import org.iatevale.config.AdkParameters;
 import org.iatevale.config.IATevaleConfig;
 

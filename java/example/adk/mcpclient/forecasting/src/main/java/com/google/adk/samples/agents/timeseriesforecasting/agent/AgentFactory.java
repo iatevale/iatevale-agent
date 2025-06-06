@@ -1,8 +1,8 @@
 package com.google.adk.samples.agents.timeseriesforecasting.agent;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
-import org.iatevale.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.mcpclient.McpClientToolsFactory;
+import org.iatevale.example.adk.common.model.AgentConfig;
 
 public record AgentFactory(LlmAgent llmAgent) {
 

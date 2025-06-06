@@ -6,8 +6,8 @@ import com.google.adk.samples.agents.multitool.runner.MultiToolRunner;
 import com.google.adk.samples.agents.multitool.tool.CurrentTimeToolFactory;
 import com.google.adk.samples.agents.multitool.tool.WeatherToolFactory;
 import com.google.adk.sessions.Session;
-import org.iatevale.adk.common.console.ConsoleLoop;
-import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.example.adk.common.console.ConsoleLoop;
+import org.iatevale.example.adk.common.logger.AgentLogger;
 
 import java.util.function.Consumer;
 import java.util.logging.Level;

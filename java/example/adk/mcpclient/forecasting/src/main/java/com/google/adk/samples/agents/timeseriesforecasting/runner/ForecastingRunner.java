@@ -8,7 +8,7 @@ import com.google.genai.types.Content;
 import com.google.genai.types.FunctionResponse;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
-import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.example.adk.common.logger.AgentLogger;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;

@@ -4,11 +4,11 @@ import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.samples.agents.timeseriesforecasting.agent.AgentFactory;
 import com.google.adk.samples.agents.timeseriesforecasting.runner.ForecastingRunner;
 import com.google.adk.sessions.Session;
-import org.iatevale.adk.common.console.ConsoleLoop;
-import org.iatevale.adk.common.logger.AgentLogger;
-import org.iatevale.adk.common.mcpclient.McpClientConfig;
-import org.iatevale.adk.common.mcpclient.McpClientException;
-import org.iatevale.adk.common.mcpclient.McpClientToolsFactory;
+import org.iatevale.example.adk.common.console.ConsoleLoop;
+import org.iatevale.example.adk.common.logger.AgentLogger;
+import org.iatevale.example.adk.common.mcpclient.McpClientConfig;
+import org.iatevale.example.adk.common.mcpclient.McpClientException;
+import org.iatevale.example.adk.common.mcpclient.McpClientToolsFactory;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;

@@ -5,8 +5,8 @@ import com.google.adk.samples.agents.helloweather.agent.AgentFactory;
 import com.google.adk.samples.agents.helloweather.runner.HelloWeatherRunner;
 import com.google.adk.samples.agents.helloweather.tool.HelloWeatherToolFactory;
 import com.google.adk.sessions.Session;
-import org.iatevale.adk.common.console.ConsoleLoop;
-import org.iatevale.adk.common.logger.AgentLogger;
+import org.iatevale.example.adk.common.console.ConsoleLoop;
+import org.iatevale.example.adk.common.logger.AgentLogger;
 
 import java.util.function.Consumer;
 import java.util.logging.Level;
