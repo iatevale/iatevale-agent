@@ -1,7 +1,7 @@
-package org.iatevale.example.telegrambots;
+package org.iatevale.example.telegram.simplebot;
 
 import org.iatevale.config.IATevaleConfig;
-import org.iatevale.example.telegrambots.impl.MyAmazingBot;
+import org.iatevale.example.telegram.simplebot.impl.MyAmazingBot;
 import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 
 public class TelegrambotsExample {

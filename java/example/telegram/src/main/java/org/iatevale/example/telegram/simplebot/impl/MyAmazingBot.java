@@ -1,4 +1,4 @@
-package org.iatevale.example.telegrambots.impl;
+package org.iatevale.example.telegram.simplebot.impl;
 
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;

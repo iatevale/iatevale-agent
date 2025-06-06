@@ -3,7 +3,7 @@ load("@rules_java//java:defs.bzl", "java_binary")
 java_binary(
     name = "telegrambots",
     srcs = glob(["src/main/java/**/*.java"]),
-    main_class = "org.iatevale.example.telegrambots.TelegrambotsExample",
+    main_class = "org.iatevale.example.telegram.simplebot.TelegrambotsExample",
     visibility = ["//visibility:public"],
     deps = [
         "//java/platform/config",
