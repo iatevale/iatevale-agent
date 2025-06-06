@@ -5,11 +5,11 @@ import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record Phase1CriticalInLoopFactory(LlmAgent llmAgent) {
+public record Phase1CriticalFactory(LlmAgent llmAgent) {
 
     public static final String STATE_CRITICISM = "criticism";
 
-    static public Phase1CriticalInLoopFactory instantiate() {
+    static public Phase1CriticalFactory instantiate() {
 
         final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name("CriticAgent")
@@ -40,7 +40,7 @@ public record Phase1CriticalInLoopFactory(LlmAgent llmAgent) {
                 .includeContents(NONE)
                 .build();
 
-        return new Phase1CriticalInLoopFactory(agent);
+        return new Phase1CriticalFactory(agent);
 
     }
 

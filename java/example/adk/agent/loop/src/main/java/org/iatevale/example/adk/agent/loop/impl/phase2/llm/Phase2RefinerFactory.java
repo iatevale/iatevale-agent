@@ -6,11 +6,11 @@ import org.iatevale.example.adk.common.model.AgentConfig;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
-public record Phase2RefinerAgentFactory(LlmAgent llmAgent) {
+public record Phase2RefinerFactory(LlmAgent llmAgent) {
 
     private static final String STATE_CURRENT_DOC = "current_document";
 
-    static public Phase2RefinerAgentFactory instantiate(BaseTool baseTool) {
+    static public Phase2RefinerFactory instantiate(BaseTool baseTool) {
 
         final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
                 .name("RefinerAgent")
@@ -41,7 +41,7 @@ public record Phase2RefinerAgentFactory(LlmAgent llmAgent) {
                 .tools(baseTool)
                 .build();
 
-        return new Phase2RefinerAgentFactory(agent);
+        return new Phase2RefinerFactory(agent);
 
     }
 
