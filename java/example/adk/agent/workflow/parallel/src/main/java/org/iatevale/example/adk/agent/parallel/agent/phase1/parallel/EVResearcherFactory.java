@@ -7,7 +7,7 @@ import org.iatevale.example.adk.common.model.LlmAgentFactory;
 public class EVResearcherFactory {
 
     static public LlmAgent instantiate(GoogleSearchTool googleSearchTool) {
-        return LlmAgentFactory.child()
+        return LlmAgentFactory.root()
                 .name("EVResearcher")
                 .instruction("""
                      You are an AI Research Assistant specializing in transportation.

@@ -6,7 +6,7 @@ import org.iatevale.example.adk.common.model.LlmAgentFactory;
 public class Phase1CodeWriterFactory {
 
     static public LlmAgent instantiate() {
-        return LlmAgentFactory.child()
+        return LlmAgentFactory.root()
                 .name("CodeWriterAgent")
                 .description("Writes initial Java code based on a specification.")
                 .instruction(

@@ -6,7 +6,7 @@ import org.iatevale.example.adk.common.model.LlmAgentFactory;
 public class Phase2CodeReviewerFactory {
 
     static public LlmAgent instantiate() {
-        return LlmAgentFactory.child()
+        return LlmAgentFactory.root()
                 .name("CodeReviewerAgent")
                 .description("Reviews code and provides feedback.")
                 .instruction(
