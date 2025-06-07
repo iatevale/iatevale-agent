@@ -16,6 +16,7 @@ public class RootAgentFactory {
                     When asked about weather information, you MUST use the `getWeather` function.
                     """)
                 .tools(helloWeatherTool)
+                .includeContents(LlmAgent.IncludeContents.DEFAULT)
                 .build();
     }
 
