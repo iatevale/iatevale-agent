@@ -11,7 +11,7 @@ public class HelloWeatherToolFactory {
         return FunctionTool.create(HelloWeatherToolImpl.class, "getWeather");
     }
 
-    static private class HelloWeatherToolImpl {
+    static public class HelloWeatherToolImpl {
 
         @Annotations.Schema(description = "Get the weather forecast for a given city")
         public static Map<String, String> getWeather(
