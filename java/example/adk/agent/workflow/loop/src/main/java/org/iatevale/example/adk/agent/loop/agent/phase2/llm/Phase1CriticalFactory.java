@@ -1,7 +1,7 @@
 package org.iatevale.example.adk.agent.loop.agent.phase2.llm;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
@@ -10,7 +10,7 @@ public class Phase1CriticalFactory {
     public static final String STATE_CRITICISM = "criticism";
 
     static public LlmAgent instantiate() {
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("CriticAgent")
                 .description(
                         "Reviews the current draft, providing critique if clear improvements are needed,"

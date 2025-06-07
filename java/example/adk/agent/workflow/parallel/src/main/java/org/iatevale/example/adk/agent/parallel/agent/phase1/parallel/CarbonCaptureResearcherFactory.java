@@ -2,12 +2,12 @@ package org.iatevale.example.adk.agent.parallel.agent.phase1.parallel;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.GoogleSearchTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public class CarbonCaptureResearcherFactory {
 
     static public LlmAgent instantiate(GoogleSearchTool googleSearchTool) {
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("CarbonCaptureResearcher")
                 .instruction("""
                      You are an AI Research Assistant specializing in climate solutions.

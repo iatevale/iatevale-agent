@@ -2,12 +2,12 @@ package org.iatevale.example.adk.simple.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.FunctionTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public class RootAgentFactory {
 
     public static LlmAgent instantiate(FunctionTool helloWeatherTool) {
-        return AgentConfig.applyToRootModel(LlmAgent.builder())
+        return LlmAgentFactory.root()
                 .name("hello-weather-llmAgent")
                 .description("Hello World")
                 .instruction("""

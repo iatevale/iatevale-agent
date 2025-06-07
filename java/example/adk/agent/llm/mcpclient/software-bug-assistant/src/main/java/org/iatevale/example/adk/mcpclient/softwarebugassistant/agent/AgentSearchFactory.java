@@ -2,7 +2,7 @@ package org.iatevale.example.adk.mcpclient.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.GoogleSearchTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public record AgentSearchFactory(LlmAgent llmAgent) {
 
@@ -13,7 +13,7 @@ public record AgentSearchFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentSearchFactory instantiate() {
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        final LlmAgent agent = LlmAgentFactory.child()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

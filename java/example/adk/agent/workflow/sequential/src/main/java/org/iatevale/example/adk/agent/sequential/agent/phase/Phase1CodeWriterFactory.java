@@ -1,12 +1,12 @@
 package org.iatevale.example.adk.agent.sequential.agent.phase;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public class Phase1CodeWriterFactory {
 
     static public LlmAgent instantiate() {
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("CodeWriterAgent")
                 .description("Writes initial Java code based on a specification.")
                 .instruction(

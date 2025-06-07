@@ -1,12 +1,12 @@
 package org.iatevale.example.adk.agent.parallel.agent.phase2;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public class SynthesisFactory {
 
     static public LlmAgent instantiate() {
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("SynthesisAgent")
                 .instruction(
                         """

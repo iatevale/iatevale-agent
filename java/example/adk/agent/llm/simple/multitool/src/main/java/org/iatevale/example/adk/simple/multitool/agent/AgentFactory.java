@@ -2,7 +2,7 @@ package org.iatevale.example.adk.simple.multitool.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
@@ -13,7 +13,7 @@ public record AgentFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentFactory instantiate(BaseTool... tools) {
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        final LlmAgent agent = LlmAgentFactory.child()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

@@ -2,7 +2,7 @@ package org.iatevale.example.adk.mcpclient.softwarebugassistant.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public record AgentMainFactory(LlmAgent llmAgent) {
             """;
 
     public static AgentMainFactory instantiate(List<BaseTool> tools) {
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        final LlmAgent agent = LlmAgentFactory.child()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

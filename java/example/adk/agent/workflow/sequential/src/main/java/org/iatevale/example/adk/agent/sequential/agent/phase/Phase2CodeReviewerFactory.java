@@ -1,12 +1,12 @@
 package org.iatevale.example.adk.agent.sequential.agent.phase;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public class Phase2CodeReviewerFactory {
 
     static public LlmAgent instantiate() {
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("CodeReviewerAgent")
                 .description("Reviews code and provides feedback.")
                 .instruction(

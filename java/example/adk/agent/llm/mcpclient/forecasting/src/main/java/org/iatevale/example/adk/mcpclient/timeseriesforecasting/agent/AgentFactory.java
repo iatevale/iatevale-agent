@@ -2,7 +2,7 @@ package org.iatevale.example.adk.mcpclient.timeseriesforecasting.agent;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.example.adk.common.mcpclient.McpClientToolsFactory;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 public record AgentFactory(LlmAgent llmAgent) {
 
@@ -34,7 +34,7 @@ public record AgentFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentFactory instantiate(McpClientToolsFactory mcpClientToolsFactory) {
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+        final LlmAgent agent = LlmAgentFactory.child()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)

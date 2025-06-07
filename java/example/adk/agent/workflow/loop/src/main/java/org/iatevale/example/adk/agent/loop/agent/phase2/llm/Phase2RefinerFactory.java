@@ -2,7 +2,7 @@ package org.iatevale.example.adk.agent.loop.agent.phase2.llm;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
@@ -12,7 +12,7 @@ public class Phase2RefinerFactory {
 
     static public LlmAgent instantiate(BaseTool baseTool) {
 
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("RefinerAgent")
                 .description(
                         "Refines the document based on critique, or calls exitLoop if critique indicates"

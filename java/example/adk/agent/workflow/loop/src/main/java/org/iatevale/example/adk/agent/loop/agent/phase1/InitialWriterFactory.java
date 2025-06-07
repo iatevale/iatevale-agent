@@ -1,7 +1,7 @@
 package org.iatevale.example.adk.agent.loop.agent.phase1;
 
 import com.google.adk.agents.LlmAgent;
-import org.iatevale.example.adk.common.model.AgentConfig;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
 
 import static com.google.adk.agents.LlmAgent.IncludeContents.NONE;
 
@@ -11,7 +11,7 @@ public class InitialWriterFactory {
 
     static public LlmAgent instantiate() {
 
-        return AgentConfig.apply(LlmAgent.builder())
+        return LlmAgentFactory.child()
                 .name("InitialWriterAgent")
                 .description(
                         "Writes the initial document draft based on the topic, aiming for some initial substance.")
