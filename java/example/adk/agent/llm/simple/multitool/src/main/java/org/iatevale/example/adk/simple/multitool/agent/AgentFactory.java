@@ -13,7 +13,7 @@ public record AgentFactory(LlmAgent llmAgent) {
             """;
 
     static public AgentFactory instantiate(BaseTool... tools) {
-        final LlmAgent agent = LlmAgentFactory.child()
+        final LlmAgent agent = LlmAgentFactory.root()
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)
