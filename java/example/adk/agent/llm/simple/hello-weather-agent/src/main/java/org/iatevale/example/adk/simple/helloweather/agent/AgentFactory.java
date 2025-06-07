@@ -1,12 +1,13 @@
 package org.iatevale.example.adk.simple.helloweather.agent;
 
 import com.google.adk.agents.LlmAgent;
+import com.google.adk.tools.FunctionTool;
 import org.iatevale.config.AdkParameters;
 import org.iatevale.config.IATevaleConfig;
 import org.iatevale.example.adk.common.model.AgentConfig;
 import org.iatevale.example.adk.simple.helloweather.tool.HelloWeatherToolFactory;
 
-public record AgentFactory(LlmAgent llmAgent) {
+public class AgentFactory {
 
     private static final String AGENT_NAME = "hello-weather-llmAgent";
     private static final String DESCRIPTION = "Hello World";
@@ -16,15 +17,13 @@ public record AgentFactory(LlmAgent llmAgent) {
                             When asked about weather information, you MUST use the `getWeather` function.
             """;
 
-    public static AgentFactory instantiate(HelloWeatherToolFactory helloWeatherTool) {
-        final AdkParameters adkParameters = IATevaleConfig.getAdkParameters();
-        final LlmAgent agent = AgentConfig.apply(LlmAgent.builder())
+    public static LlmAgent instantiate(FunctionTool helloWeatherTool) {
+        return AgentConfig.applyToRootModel(LlmAgent.builder())
                 .name(AGENT_NAME)
                 .description(DESCRIPTION)
                 .instruction(INSTRUCTION)
-                .tools(helloWeatherTool.functionTool())
+                .tools(helloWeatherTool)
                 .build();
-        return new AgentFactory(agent);
     }
 
 }

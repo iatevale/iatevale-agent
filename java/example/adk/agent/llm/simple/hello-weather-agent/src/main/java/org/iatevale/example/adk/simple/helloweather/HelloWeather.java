@@ -1,7 +1,9 @@
 package org.iatevale.example.adk.simple.helloweather;
 
+import com.google.adk.agents.LlmAgent;
 import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.sessions.Session;
+import com.google.adk.tools.FunctionTool;
 import org.iatevale.example.adk.common.console.ConsoleLoop;
 import org.iatevale.example.adk.common.logger.AgentLogger;
 import org.iatevale.example.adk.simple.helloweather.agent.AgentFactory;
@@ -20,11 +22,11 @@ public class HelloWeather {
         AgentLogger.setLevel(Level.WARNING);
 
         // Se ensambla el agente
-        final HelloWeatherToolFactory helloWeatherTool = HelloWeatherToolFactory.instantiate();
-        final AgentFactory agentFactory = AgentFactory.instantiate(helloWeatherTool);
+        final FunctionTool helloWeatherTool = HelloWeatherToolFactory.instantiate();
+        final LlmAgent agentFactory = AgentFactory.instantiate(helloWeatherTool);
 
         // Se crea en runner el agente, con las herramientas cargadas
-        final InMemoryRunner runner = new InMemoryRunner(agentFactory.llmAgent());
+        final InMemoryRunner runner = new InMemoryRunner(agentFactory);
 
         // Se crea una sesión temporal para el agente
         final Session session =  runner.sessionService()

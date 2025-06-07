@@ -5,11 +5,10 @@ import com.google.adk.tools.FunctionTool;
 
 import java.util.Map;
 
-public record HelloWeatherToolFactory(FunctionTool functionTool) {
+public class HelloWeatherToolFactory {
 
-    static public HelloWeatherToolFactory instantiate() {
-        FunctionTool functionTool = FunctionTool.create(HelloWeatherToolImpl.class, "getWeather");
-        return new HelloWeatherToolFactory(functionTool);
+    static public FunctionTool instantiate() {
+        return FunctionTool.create(HelloWeatherToolImpl.class, "getWeather");
     }
 
     static private class HelloWeatherToolImpl {

@@ -13,8 +13,17 @@ public class AgentConfig {
                 .modelName(adkParameters.modelName())
                 .apiKey(adkParameters.apiKey())
                 .build();
+        return builder.model(gemini);
+    }
+
+    static public LlmAgent.Builder applyToRootModel(LlmAgent.Builder builder) {
+        final AdkParameters adkParameters = IATevaleConfig.getAdkParameters();
+        final Gemini gemini = Gemini.builder()
+                .modelName(adkParameters.modelName())
+                .apiKey(adkParameters.apiKey())
+                .build();
         return builder.model(gemini)
-                .globalInstruction("Answer always in Spanish");
+                .globalInstruction("**Answer always in Spanish** ");
     }
 
 }
