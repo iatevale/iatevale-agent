@@ -1,10 +1,10 @@
-package org.iatevale.example.adk.agent.loop.impl;
+package org.iatevale.example.adk.agent.loop.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.LoopAgent;
 import com.google.adk.agents.SequentialAgent;
-import org.iatevale.example.adk.agent.loop.impl.phase1.InitialWriterFactory;
-import org.iatevale.example.adk.agent.loop.impl.phase2.RefinementLoopFactory;
+import org.iatevale.example.adk.agent.loop.agent.phase1.InitialWriterFactory;
+import org.iatevale.example.adk.agent.loop.agent.phase2.RefinementLoopFactory;
 
 import static org.iatevale.example.adk.agent.loop.LoopAgentExample.APP_NAME;
 

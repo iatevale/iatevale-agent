@@ -1,4 +1,4 @@
-package org.iatevale.example.adk.agent.parallel.impl.phase2;
+package org.iatevale.example.adk.agent.parallel.agent.phase2;
 
 import com.google.adk.agents.LlmAgent;
 import org.iatevale.example.adk.common.model.AgentConfig;

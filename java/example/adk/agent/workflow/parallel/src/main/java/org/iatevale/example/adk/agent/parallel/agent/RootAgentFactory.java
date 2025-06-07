@@ -1,11 +1,11 @@
-package org.iatevale.example.adk.agent.parallel.impl;
+package org.iatevale.example.adk.agent.parallel.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.ParallelAgent;
 import com.google.adk.agents.SequentialAgent;
 import com.google.adk.tools.GoogleSearchTool;
-import org.iatevale.example.adk.agent.parallel.impl.phase1.ParalleleFactory;
-import org.iatevale.example.adk.agent.parallel.impl.phase2.SynthesisFactory;
+import org.iatevale.example.adk.agent.parallel.agent.phase1.ParalleleFactory;
+import org.iatevale.example.adk.agent.parallel.agent.phase2.SynthesisFactory;
 
 public class RootAgentFactory {
 

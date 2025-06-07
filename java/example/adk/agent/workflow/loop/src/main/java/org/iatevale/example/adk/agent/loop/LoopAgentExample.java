@@ -7,7 +7,7 @@ import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
-import org.iatevale.example.adk.agent.loop.impl.RootAgentFactory;
+import org.iatevale.example.adk.agent.loop.agent.RootAgentFactory;
 
 public class LoopAgentExample {
 

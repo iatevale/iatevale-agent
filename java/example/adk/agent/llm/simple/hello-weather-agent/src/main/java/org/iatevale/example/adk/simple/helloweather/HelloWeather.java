@@ -6,7 +6,7 @@ import com.google.adk.sessions.Session;
 import com.google.adk.tools.FunctionTool;
 import org.iatevale.example.adk.common.console.ConsoleLoop;
 import org.iatevale.example.adk.common.logger.AgentLogger;
-import org.iatevale.example.adk.simple.helloweather.agent.AgentFactory;
+import org.iatevale.example.adk.simple.helloweather.agent.RootAgentFactory;
 import org.iatevale.example.adk.simple.helloweather.runner.HelloWeatherRunner;
 import org.iatevale.example.adk.simple.helloweather.tool.HelloWeatherToolFactory;
 
@@ -23,7 +23,7 @@ public class HelloWeather {
 
         // Se ensambla el agente
         final FunctionTool helloWeatherTool = HelloWeatherToolFactory.instantiate();
-        final LlmAgent agentFactory = AgentFactory.instantiate(helloWeatherTool);
+        final LlmAgent agentFactory = RootAgentFactory.instantiate(helloWeatherTool);
 
         // Se crea en runner el agente, con las herramientas cargadas
         final InMemoryRunner runner = new InMemoryRunner(agentFactory);
@@ -38,7 +38,7 @@ public class HelloWeather {
         final HelloWeather helloWeather = new HelloWeather(helloWeatherRunner);
 
         // Consola para interaccion con el usuario
-        ConsoleLoop.run(Constants.HELLO, Constants.PROMPT, helloWeather::onInput);
+        ConsoleLoop.run("", "\nYou > ", helloWeather::onInput);
 
     }
 

@@ -1,10 +1,10 @@
-package org.iatevale.example.adk.agent.sequential.impl;
+package org.iatevale.example.adk.agent.sequential.agent;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.agents.SequentialAgent;
-import org.iatevale.example.adk.agent.sequential.impl.llm.Phase1CodeWriterFactory;
-import org.iatevale.example.adk.agent.sequential.impl.llm.Phase2CodeReviewerFactory;
-import org.iatevale.example.adk.agent.sequential.impl.llm.Phase3CodeRefactorerFactory;
+import org.iatevale.example.adk.agent.sequential.agent.phase.Phase1CodeWriterFactory;
+import org.iatevale.example.adk.agent.sequential.agent.phase.Phase2CodeReviewerFactory;
+import org.iatevale.example.adk.agent.sequential.agent.phase.Phase3CodeRefactorerFactory;
 
 import static org.iatevale.example.adk.agent.sequential.SequentialAgentExample.APP_NAME;
 

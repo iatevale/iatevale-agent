@@ -1,4 +1,4 @@
-package org.iatevale.example.adk.agent.loop.impl.phase2.llm;
+package org.iatevale.example.adk.agent.loop.agent.phase2.llm;
 
 import com.google.adk.agents.LlmAgent;
 import com.google.adk.tools.BaseTool;
