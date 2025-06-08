@@ -11,6 +11,8 @@ import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
+import org.iatevale.example.adk.common.model.LlmAgentFactory;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,6 @@ public class StoryFlowAgentExample extends BaseAgent {
     private static final String APP_NAME = "story_app";
     private static final String USER_ID = "user_12345";
     private static final String SESSION_ID = "session_123344";
-    private static final String MODEL_NAME = "gemini-2.0-flash"; // Ensure this model is available
 
     private static final Logger logger = Logger.getLogger(StoryFlowAgentExample.class.getName());
 
@@ -33,15 +34,14 @@ public class StoryFlowAgentExample extends BaseAgent {
     private final LoopAgent loopAgent;
     private final SequentialAgent sequentialAgent;
 
-    public StoryFlowAgentExample(
-            String name, LlmAgent storyGenerator, LoopAgent loopAgent, SequentialAgent sequentialAgent) {
+    public StoryFlowAgentExample(String name, LlmAgent storyGenerator, LoopAgent loopAgent, SequentialAgent sequentialAgent) {
         super(
-                name,
-                "Orchestrates story generation, critique, revision, and checks.",
-                List.of(storyGenerator, loopAgent, sequentialAgent),
-                null,
-                null);
-
+            name,
+            "Orchestrates story generation, critique, revision, and checks.",
+            List.of(storyGenerator, loopAgent, sequentialAgent),
+            null,
+            null
+        );
         this.storyGenerator = storyGenerator;
         this.loopAgent = loopAgent;
         this.sequentialAgent = sequentialAgent;
@@ -50,9 +50,8 @@ public class StoryFlowAgentExample extends BaseAgent {
     public static void main(String[] args) {
 
         // --- Define the individual LLM agents ---
-        LlmAgent storyGenerator = LlmAgent.builder()
+        LlmAgent storyGenerator = LlmAgentFactory.root()
                 .name("StoryGenerator")
-                .model(MODEL_NAME)
                 .description("Generates the initial story.")
                 .instruction(
                         """
@@ -63,9 +62,8 @@ public class StoryFlowAgentExample extends BaseAgent {
                 .outputKey("current_story") // Key for storing output in session state
                 .build();
 
-        LlmAgent critic = LlmAgent.builder()
+        LlmAgent critic = LlmAgentFactory.root()
                 .name("Critic")
-                .model(MODEL_NAME)
                 .description("Critiques the story.")
                 .instruction(
                         """
@@ -77,9 +75,8 @@ public class StoryFlowAgentExample extends BaseAgent {
                 .outputKey("criticism") // Key for storing criticism in session state
                 .build();
 
-        LlmAgent reviser = LlmAgent.builder()
+        LlmAgent reviser = LlmAgentFactory.root()
                 .name("Reviser")
-                .model(MODEL_NAME)
                 .description("Revises the story based on criticism.")
                 .instruction(
                         """
@@ -91,9 +88,8 @@ public class StoryFlowAgentExample extends BaseAgent {
                 .outputKey("current_story") // Overwrites the original story
                 .build();
 
-        LlmAgent grammarCheck = LlmAgent.builder()
+        LlmAgent grammarCheck = LlmAgentFactory.root()
                 .name("GrammarCheck")
-                .model(MODEL_NAME)
                 .description("Checks grammar and suggests corrections.")
                 .instruction(
                         """
@@ -104,9 +100,8 @@ public class StoryFlowAgentExample extends BaseAgent {
                 .outputKey("grammar_suggestions")
                 .build();
 
-        LlmAgent toneCheck = LlmAgent.builder()
+        LlmAgent toneCheck = LlmAgentFactory.root()
                 .name("ToneCheck")
-                .model(MODEL_NAME)
                 .description("Analyzes the tone of the story.")
                 .instruction(
                         """
@@ -170,12 +165,11 @@ public class StoryFlowAgentExample extends BaseAgent {
         eventStream.blockingForEach(event -> {
                     if (event.finalResponse() && event.content().isPresent()) {
                         String author = event.author() != null ? event.author() : "UNKNOWN_AUTHOR";
-                        Optional<String> textOpt =
-                                event
-                                        .content()
-                                        .flatMap(Content::parts)
-                                        .filter(parts -> !parts.isEmpty())
-                                        .map(parts -> parts.get(0).text().orElse(""));
+                        Optional<String> textOpt = event
+                                .content()
+                                .flatMap(Content::parts)
+                                .filter(parts -> !parts.isEmpty())
+                                .map(parts -> parts.get(0).text().orElse(""));
 
                         logger.log(Level.INFO, () ->
                                 String.format("Potential final response from [%s]: %s", author, textOpt.orElse("N/A")));
