@@ -27,15 +27,15 @@ public class LongRunningFunctionExample {
 
         final LlmAgent agent = RootAgentFactory.instantiate();
 
-        Runner runner = new InMemoryRunner(agent);
-        Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
+        final Runner runner = new InMemoryRunner(agent);
+
+        final Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
 
         // --- Turn 1: User requests ticket ---
         System.out.println("\n--- Turn 1: User Request ---");
-        Content initialUserMessage =
-                Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
+        Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
 
-        AtomicReference<String> funcCallIdRef = new AtomicReference<>();
+        final AtomicReference<String> funcCallIdRef = new AtomicReference<>();
         runner
                 .runAsync(USER_ID, session.id(), initialUserMessage)
                 .blockingForEach(
