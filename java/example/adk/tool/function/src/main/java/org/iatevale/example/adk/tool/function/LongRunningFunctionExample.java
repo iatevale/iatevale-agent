@@ -14,6 +14,8 @@ import com.google.genai.types.Content;
 import com.google.genai.types.FunctionCall;
 import com.google.genai.types.FunctionResponse;
 import com.google.genai.types.Part;
+import org.iatevale.example.adk.tool.function.tool.CreateTicketTool;
+
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
@@ -23,41 +25,17 @@ public class LongRunningFunctionExample {
 
     private static String USER_ID = "user123";
 
-    @Schema(
-            name = "create_ticket_long_running",
-            description = """
-          Creates a new support ticket with a specified urgency level.
-          Examples of urgency are 'high', 'medium', or 'low'.
-          The ticket creation is a long-running process, and its ID will be provided when ready.
-      """)
-    public static void createTicketAsync(
-            @Schema(
-                    name = "urgency",
-                    description =
-                            "The urgency level for the new ticket, such as 'high', 'medium', or 'low'.")
-            String urgency,
-            @Schema(name = "toolContext") // Ensures ADK injection
-            ToolContext toolContext) {
-        System.out.printf(
-                "TOOL_EXEC: 'create_ticket_long_running' called with urgency: %s (Call ID: %s)%n",
-                urgency, toolContext.functionCallId().orElse("N/A"));
-    }
-
     public static void main(String[] args) {
-        LlmAgent agent =
-                LlmAgent.builder()
+
+        LlmAgent agent = LlmAgent.builder()
                         .name("ticket_agent")
                         .description("Agent for creating tickets via a long-running task.")
                         .model("gemini-2.0-flash")
-                        .tools(
-                                ImmutableList.of(
-                                        LongRunningFunctionTool.create(
-                                                LongRunningFunctionExample.class, "createTicketAsync")))
+                        .tools(ImmutableList.of(CreateTicketTool.instantiate()))
                         .build();
 
         Runner runner = new InMemoryRunner(agent);
-        Session session =
-                runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
+        Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
 
         // --- Turn 1: User requests ticket ---
         System.out.println("\n--- Turn 1: User Request ---");
