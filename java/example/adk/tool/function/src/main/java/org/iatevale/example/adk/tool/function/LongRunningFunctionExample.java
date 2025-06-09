@@ -5,16 +5,14 @@ import com.google.adk.events.Event;
 import com.google.adk.runner.InMemoryRunner;
 import com.google.adk.runner.Runner;
 import com.google.adk.sessions.Session;
-import com.google.adk.tools.Annotations.Schema;
-import com.google.adk.tools.LongRunningFunctionTool;
-import com.google.adk.tools.ToolContext;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.genai.types.Content;
 import com.google.genai.types.FunctionCall;
 import com.google.genai.types.FunctionResponse;
 import com.google.genai.types.Part;
-import org.iatevale.example.adk.tool.function.tool.CreateTicketTool;
+import org.iatevale.example.adk.tool.function.agent.RootAgentFactory;
+import org.iatevale.example.adk.tool.function.tool.CreateTicketToolFactory;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -27,12 +25,7 @@ public class LongRunningFunctionExample {
 
     public static void main(String[] args) {
 
-        LlmAgent agent = LlmAgent.builder()
-                        .name("ticket_agent")
-                        .description("Agent for creating tickets via a long-running task.")
-                        .model("gemini-2.0-flash")
-                        .tools(ImmutableList.of(CreateTicketTool.instantiate()))
-                        .build();
+        final LlmAgent agent = RootAgentFactory.instantiate();
 
         Runner runner = new InMemoryRunner(agent);
         Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();

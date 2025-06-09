@@ -4,10 +4,10 @@ import com.google.adk.tools.Annotations;
 import com.google.adk.tools.LongRunningFunctionTool;
 import com.google.adk.tools.ToolContext;
 
-public class CreateTicketTool {
+public class CreateTicketToolFactory {
 
     static public LongRunningFunctionTool instantiate() {
-        return LongRunningFunctionTool.create(CreateTicketTool.class, "createTicketAsync");
+        return LongRunningFunctionTool.create(CreateTicketToolFactory.class, "createTicketAsync");
     }
 
     @Annotations.Schema(
