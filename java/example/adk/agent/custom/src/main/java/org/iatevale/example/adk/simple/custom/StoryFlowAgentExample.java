@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 
 public class StoryFlowAgentExample {
 
-    // --- Constants ---
     private static final String APP_NAME = "story_app";
     private static final String USER_ID = "user_12345";
     private static final String SESSION_ID = "session_123344";
@@ -26,36 +25,32 @@ public class StoryFlowAgentExample {
     private static final Logger logger = Logger.getLogger(StoryFlowAgentExample.class.getName());
 
     public static void main(String[] args) {
-        final StoryFlowAgentExample storyFlowAgentExample1 = new StoryFlowAgentExample();
         runAgent("a lonely robot finding a friend in a junkyard");
     }
 
 
-    // --- Function to Interact with the Agent ---
-    // Sends a new topic to the agent (overwriting the initial one if needed)
-    // and runs the workflow.
     public static void runAgent(String userTopic) {
 
+        // Se crea una instancia de nuestr agente a medida
         final CustomAgentImpl customAgent = RootAgentFactory.instantiate();
 
-        InMemoryRunner runner = new InMemoryRunner(customAgent);
+        // Se crea un Runner para nuestro nuevo agente
+        final InMemoryRunner runner = new InMemoryRunner(customAgent);
 
-        Map<String, Object> initialState = new HashMap<>();
+        // Gestion de una nueva sesion
+        final Map<String, Object> initialState = new HashMap<>();
         initialState.put("topic", "a brave kitten exploring a haunted house");
-
-        Session session = runner
+        final Session session = runner
                 .sessionService()
                 .createSession(APP_NAME, USER_ID, new ConcurrentHashMap<>(initialState), SESSION_ID)
                 .blockingGet();
         logger.log(Level.INFO, () -> String.format("Initial session state: %s", session.state()));
-
-        session.state().put("topic", userTopic); // Update the state in the retrieved session
+        session.state().put("topic", userTopic);
         logger.log(Level.INFO, () -> String.format("Updated session state topic to: %s", userTopic));
+        final Content userMessage = Content.fromParts(Part.fromText("Generate a story about: " + userTopic));
 
-        Content userMessage = Content.fromParts(Part.fromText("Generate a story about: " + userTopic));
-        // Use the modified session object for the run
-        Flowable<Event> eventStream = runner.runAsync(USER_ID, session.id(), userMessage);
-
+        // Se utiliza la sesion que acabamos de crear y modificar para lanzar el agente
+        final Flowable<Event> eventStream = runner.runAsync(USER_ID, session.id(), userMessage);
         final String[] finalResponse = {"No final response captured."};
         eventStream.blockingForEach(event -> {
                     if (event.finalResponse() && event.content().isPresent()) {
@@ -72,19 +67,18 @@ public class StoryFlowAgentExample {
                     }
                 }
         );
-
         System.out.println("\n--- Agent Interaction Result ---");
         System.out.println("Agent Final Response: " + finalResponse[0]);
 
-        // Retrieve session again to see the final state after the run
-        Session finalSession = runner
+        // Se recupera la sesion para ver el resultado despues de la ejecucion
+        final Session finalSession = runner
                 .sessionService()
                 .getSession(APP_NAME, USER_ID, SESSION_ID, Optional.empty())
                 .blockingGet();
-
         assert finalSession != null;
         System.out.println("Final Session State:" + finalSession.state());
         System.out.println("-------------------------------\n");
+
     }
 
 
