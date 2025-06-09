@@ -31,15 +31,16 @@ public class CustomAgentImpl extends BaseAgent {
 
     @Override
     protected Flowable<Event> runAsyncImpl(InvocationContext invocationContext) {
+
         // Implements the custom orchestration logic for the story workflow.
         // Uses the instance attributes assigned by Pydantic (e.g., self.story_generator).
         logger.log(Level.INFO, () -> String.format("[%s] Starting story generation workflow.", name()));
 
         // Stage 1. Initial Story Generation
-        Flowable<Event> storyGenFlow = runStage(storyGenerator, invocationContext, "StoryGenerator");
+        final Flowable<Event> storyGenFlow = runStage(storyGenerator, invocationContext, "StoryGenerator");
 
         // Stage 2: Critic-Reviser Loop (runs after story generation completes)
-        Flowable<Event> criticReviserFlow = Flowable.defer(() -> {
+        final Flowable<Event> criticReviserFlow = Flowable.defer(() -> {
                     if (!isStoryGenerated(invocationContext)) {
                         logger.log(Level.SEVERE,() -> String.format("[%s] Failed to generate initial story. Aborting after StoryGenerator.", name()));
                         return Flowable.empty(); // Stop further processing if no story
@@ -50,7 +51,7 @@ public class CustomAgentImpl extends BaseAgent {
         );
 
         // Stage 3: Post-Processing (runs after critic-reviser loop completes)
-        Flowable<Event> postProcessingFlow = Flowable.defer(() -> {
+        final Flowable<Event> postProcessingFlow = Flowable.defer(() -> {
                     logger.log(Level.INFO, () -> String.format("[%s] Story state after loop: %s",
                             name(), invocationContext.session().state().get("current_story"))
                     );
@@ -59,8 +60,8 @@ public class CustomAgentImpl extends BaseAgent {
         );
 
         // Stage 4: Conditional Regeneration (runs after post-processing completes)
-        Flowable<Event> conditionalRegenFlow = Flowable.defer(() -> {
-                    String toneCheckResult = (String) invocationContext.session().state().get("tone_check_result");
+        final Flowable<Event> conditionalRegenFlow = Flowable.defer(() -> {
+                    final String toneCheckResult = (String) invocationContext.session().state().get("tone_check_result");
                     logger.log(Level.INFO, () -> String.format("[%s] Tone check result: %s", name(), toneCheckResult));
 
                     if ("negative".equalsIgnoreCase(toneCheckResult)) {
@@ -93,7 +94,7 @@ public class CustomAgentImpl extends BaseAgent {
     }
 
     private boolean isStoryGenerated(InvocationContext ctx) {
-        Object currentStoryObj = ctx.session().state().get("current_story");
+        final Object currentStoryObj = ctx.session().state().get("current_story");
         return currentStoryObj != null && !String.valueOf(currentStoryObj).isEmpty();
     }
 
