@@ -51,12 +51,12 @@ public class LongRunningFunctionExample {
 
         // --- Turn 1: User requests ticket ---
         System.out.println("\n--- Turn 1: User Request ---");
-        final Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
 
+        final Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
         final Flowable<Event> eventFlowable = runner.runAsync(USER_ID, session.id(), initialUserMessage);
-        //eventFlowable.blockingForEach(event -> {});
+
         eventFlowable.blockingForEach(event -> {
-                    //printEventSummary(event, "T1");
+                    printEventSummary(event, "T1");
                     if (funcCallIdRef.get() == null) { // Capture the first relevant function call ID
                         event.content().flatMap(Content::parts).orElse(ImmutableList.of()).stream()
                                 .map(Part::functionCall)
@@ -81,6 +81,7 @@ public class LongRunningFunctionExample {
 
         // --- Turn 2: App provides initial ticket_id (simulating async tool completion) ---
         System.out.println("\n--- Turn 2: App provides ticket_id ---");
+
         final String ticketId = "TICKET-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         final FunctionResponse ticketCreatedFuncResponse = FunctionResponse.builder()
                 .name("create_ticket_long_running")
@@ -91,7 +92,6 @@ public class LongRunningFunctionExample {
                 .parts(ImmutableList.of(Part.builder().functionResponse(ticketCreatedFuncResponse).build()))
                 .role("user")
                 .build();
-
         runner
                 .runAsync(USER_ID, session.id(), appResponseWithTicketId)
                 .blockingForEach(event -> printEventSummary(event, "T2"));
