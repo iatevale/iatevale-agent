@@ -24,19 +24,22 @@ public class LongRunningFunctionExample {
     final private static String USER_ID = "user123";
 
     public static void main(String[] args) {
+
         final LlmAgent agent = RootAgentFactory.instantiate();
         final Runner runner = new InMemoryRunner(agent);
         final Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
         final LongRunningFunctionExample example = new LongRunningFunctionExample(runner, session);
+
         example.turn1();
         final String ticketId = example.turn2();
         example.turn3(ticketId);
         System.out.println("Long running function completed successfully.");
+
     }
 
     final private Runner runner;
     final private Session session;
-    final AtomicReference<String> funcCallIdRef;
+    final private AtomicReference<String> funcCallIdRef;
 
     public LongRunningFunctionExample(Runner runner, Session session) {
         this.runner = runner;
@@ -48,7 +51,7 @@ public class LongRunningFunctionExample {
 
         // --- Turn 1: User requests ticket ---
         System.out.println("\n--- Turn 1: User Request ---");
-        Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
+        final Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
 
         final Flowable<Event> eventFlowable = runner.runAsync(USER_ID, session.id(), initialUserMessage);
         //eventFlowable.blockingForEach(event -> {});
@@ -78,7 +81,7 @@ public class LongRunningFunctionExample {
 
         // --- Turn 2: App provides initial ticket_id (simulating async tool completion) ---
         System.out.println("\n--- Turn 2: App provides ticket_id ---");
-        String ticketId = "TICKET-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        final String ticketId = "TICKET-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         final FunctionResponse ticketCreatedFuncResponse = FunctionResponse.builder()
                 .name("create_ticket_long_running")
                 .id(funcCallIdRef.get())
@@ -102,13 +105,13 @@ public class LongRunningFunctionExample {
     private void turn3(String ticketId) {
         // --- Turn 3: App provides ticket status update ---
         System.out.println("\n--- Turn 3: App provides ticket status ---");
-        FunctionResponse ticketStatusFuncResponse =
+        final FunctionResponse ticketStatusFuncResponse =
                 FunctionResponse.builder()
                         .name("create_ticket_long_running")
                         .id(funcCallIdRef.get())
                         .response(ImmutableMap.of("status", "approved", "ticket_id", ticketId))
                         .build();
-        Content appResponseWithStatus =
+        final Content appResponseWithStatus =
                 Content.builder()
                         .parts(
                                 ImmutableList.of(Part.builder().functionResponse(ticketStatusFuncResponse).build()))
