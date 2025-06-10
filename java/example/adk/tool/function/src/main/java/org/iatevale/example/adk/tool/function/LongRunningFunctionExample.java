@@ -124,30 +124,30 @@ public class LongRunningFunctionExample {
     private static void printEventSummary(Event event, String turnLabel) {
         event
                 .content()
-                .ifPresent(
-                        content -> {
-                            String text =
-                                    content.parts().orElse(ImmutableList.of()).stream()
-                                            .map(part -> part.text().orElse(""))
-                                            .filter(s -> !s.isEmpty())
-                                            .collect(Collectors.joining(" "));
-                            if (!text.isEmpty()) {
-                                System.out.printf("[%s][%s_TEXT]: %s%n", turnLabel, event.author(), text);
-                            }
-                            content.parts().orElse(ImmutableList.of()).stream()
-                                    .map(Part::functionCall)
-                                    .flatMap(Optional::stream)
-                                    .findFirst() // Assuming one function call per relevant event for simplicity
-                                    .ifPresent(
-                                            fc ->
-                                                    System.out.printf(
-                                                            "[%s][%s_CALL]: %s(%s) ID: %s%n",
-                                                            turnLabel,
-                                                            event.author(),
-                                                            fc.name().orElse("N/A"),
-                                                            fc.args().orElse(ImmutableMap.of()),
-                                                            fc.id().orElse("N/A")));
-                        });
+                .ifPresent(content -> {
+                        String text = content.parts().orElse(ImmutableList.of()).stream()
+                                .map(part -> part.text().orElse(""))
+                                .filter(s -> !s.isEmpty())
+                                .collect(Collectors.joining(" "));
+                        if (!text.isEmpty()) {
+                            System.out.printf("[%s][%s_TEXT]: %s%n", turnLabel, event.author(), text);
+                        }
+                        content.parts().orElse(ImmutableList.of()).stream()
+                                .map(Part::functionCall)
+                                .flatMap(Optional::stream)
+                                .findFirst() // Assuming one function call per relevant event for simplicity
+                                .ifPresent(fc ->
+                                        System.out.printf(
+                                                "[%s][%s_CALL]: %s(%s) ID: %s%n",
+                                                turnLabel,
+                                                event.author(),
+                                                fc.name().orElse("N/A"),
+                                                fc.args().orElse(ImmutableMap.of()),
+                                                fc.id().orElse("N/A")
+                                        )
+                                );
+                        }
+                );
     }
 
 }
