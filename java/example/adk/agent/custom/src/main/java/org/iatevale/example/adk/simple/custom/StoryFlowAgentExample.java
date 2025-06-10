@@ -6,8 +6,8 @@ import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
-import org.iatevale.example.adk.simple.custom.agent.impl.CustomAgentImpl;
 import org.iatevale.example.adk.simple.custom.agent.RootAgentFactory;
+import org.iatevale.example.adk.simple.custom.agent.impl.CustomAgentImpl;
 
 import java.util.HashMap;
 import java.util.Map;
