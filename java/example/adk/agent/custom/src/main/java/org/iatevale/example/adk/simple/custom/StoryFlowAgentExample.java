@@ -6,7 +6,7 @@ import com.google.adk.sessions.Session;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
-import org.iatevale.example.adk.simple.custom.agent.CustomAgentImpl;
+import org.iatevale.example.adk.simple.custom.agent.impl.CustomAgentImpl;
 import org.iatevale.example.adk.simple.custom.agent.RootAgentFactory;
 
 import java.util.HashMap;
@@ -60,7 +60,6 @@ public class StoryFlowAgentExample {
                                 .flatMap(Content::parts)
                                 .filter(parts -> !parts.isEmpty())
                                 .map(parts -> parts.get(0).text().orElse(""));
-
                         logger.log(Level.INFO, () ->
                                 String.format("Potential final response from [%s]: %s", author, textOpt.orElse("N/A")));
                         textOpt.ifPresent(text -> finalResponse[0] = text);

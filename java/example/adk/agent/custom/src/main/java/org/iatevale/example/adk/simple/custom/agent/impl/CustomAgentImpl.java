@@ -1,4 +1,4 @@
-package org.iatevale.example.adk.simple.custom.agent;
+package org.iatevale.example.adk.simple.custom.agent.impl;
 
 import com.google.adk.agents.*;
 import com.google.adk.events.Event;
