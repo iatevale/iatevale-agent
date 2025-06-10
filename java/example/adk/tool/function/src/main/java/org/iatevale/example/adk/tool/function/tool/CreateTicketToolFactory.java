@@ -23,11 +23,11 @@ public class CreateTicketToolFactory {
         @Annotations.Schema(
                 name = "urgency",
                 description ="The urgency level for the new ticket, such as 'high', 'medium', or 'low'."
-        ) String urgency,
+            ) String urgency,
         @Annotations.Schema(
                 name = "toolContext" // Ensures ADK injection
-        ) ToolContext toolContext)
-    {
+            ) ToolContext toolContext) {
+        // Codigo del metodo
         System.out.printf(
                 "TOOL_EXEC: 'create_ticket_long_running' called with urgency: %s (Call ID: %s)%n",
                 urgency,

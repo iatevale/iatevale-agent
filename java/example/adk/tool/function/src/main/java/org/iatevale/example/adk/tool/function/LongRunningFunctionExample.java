@@ -11,6 +11,7 @@ import com.google.genai.types.Content;
 import com.google.genai.types.FunctionCall;
 import com.google.genai.types.FunctionResponse;
 import com.google.genai.types.Part;
+import io.reactivex.rxjava3.core.Flowable;
 import org.iatevale.example.adk.tool.function.agent.RootAgentFactory;
 import org.iatevale.example.adk.tool.function.tool.CreateTicketToolFactory;
 
@@ -36,21 +37,21 @@ public class LongRunningFunctionExample {
         Content initialUserMessage = Content.fromParts(Part.fromText("Create a high urgency ticket for me."));
 
         final AtomicReference<String> funcCallIdRef = new AtomicReference<>();
-        runner
-                .runAsync(USER_ID, session.id(), initialUserMessage)
-                .blockingForEach(
-                        event -> {
-                            printEventSummary(event, "T1");
-                            if (funcCallIdRef.get() == null) { // Capture the first relevant function call ID
-                                event.content().flatMap(Content::parts).orElse(ImmutableList.of()).stream()
-                                        .map(Part::functionCall)
-                                        .flatMap(Optional::stream)
-                                        .filter(fc -> "create_ticket_long_running".equals(fc.name().orElse("")))
-                                        .findFirst()
-                                        .flatMap(FunctionCall::id)
-                                        .ifPresent(funcCallIdRef::set);
-                            }
-                        });
+        final Flowable<Event> eventFlowable = runner.runAsync(USER_ID, session.id(), initialUserMessage);
+        //eventFlowable.blockingForEach(event -> {});
+        eventFlowable.blockingForEach(event -> {
+                //printEventSummary(event, "T1");
+                if (funcCallIdRef.get() == null) { // Capture the first relevant function call ID
+                    event.content().flatMap(Content::parts).orElse(ImmutableList.of()).stream()
+                            .map(Part::functionCall)
+                            .flatMap(Optional::stream)
+                            .filter(fc -> "create_ticket_long_running".equals(fc.name().orElse("")))
+                            .findFirst()
+                            .flatMap(FunctionCall::id)
+                            .ifPresent(funcCallIdRef::set);
+                }
+            }
+        );
 
         if (funcCallIdRef.get() == null) {
             System.out.println("ERROR: Tool 'create_ticket_long_running' not called in Turn 1.");
@@ -61,23 +62,20 @@ public class LongRunningFunctionExample {
         // --- Turn 2: App provides initial ticket_id (simulating async tool completion) ---
         System.out.println("\n--- Turn 2: App provides ticket_id ---");
         String ticketId = "TICKET-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
-        FunctionResponse ticketCreatedFuncResponse =
-                FunctionResponse.builder()
-                        .name("create_ticket_long_running")
-                        .id(funcCallIdRef.get())
-                        .response(ImmutableMap.of("ticket_id", ticketId))
-                        .build();
-        Content appResponseWithTicketId =
-                Content.builder()
-                        .parts(
-                                ImmutableList.of(
-                                        Part.builder().functionResponse(ticketCreatedFuncResponse).build()))
-                        .role("user")
-                        .build();
+        final FunctionResponse ticketCreatedFuncResponse = FunctionResponse.builder()
+                .name("create_ticket_long_running")
+                .id(funcCallIdRef.get())
+                .response(ImmutableMap.of("ticket_id", ticketId))
+                .build();
+        final Content appResponseWithTicketId = Content.builder()
+                .parts(ImmutableList.of(Part.builder().functionResponse(ticketCreatedFuncResponse).build()))
+                .role("user")
+                .build();
 
         runner
                 .runAsync(USER_ID, session.id(), appResponseWithTicketId)
                 .blockingForEach(event -> printEventSummary(event, "T2"));
+
         System.out.println("ACTION: Sent ticket_id " + ticketId + " to agent.");
 
         // --- Turn 3: App provides ticket status update ---
