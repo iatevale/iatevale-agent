@@ -11,10 +11,8 @@ public class RootAgentFactory {
         return LlmAgentFactory.root()
                 .name("ticket_agent")
                 .description("Agent for creating tickets via a long-running task.")
-                .model("gemini-2.0-flash")
                 .tools(ImmutableList.of(CreateTicketToolFactory.instantiate()))
                 .build();
-
     }
 
 }

@@ -59,7 +59,6 @@ public class GoogleSearchAgentApp {
 
         final BaseAgent rootAgent = LlmAgentFactory.root()
                 .name("basic_search_agent")
-                .model("gemini-2.0-flash") // Ensure to use a Gemini 2.0 model for Google Search Tool
                 .description("Agent to answer questions using Google Search.")
                 .instruction("I can answer your questions by searching the internet. Just ask me anything!")
                 .tools(ImmutableList.of(googleSearchTool))
@@ -72,5 +71,5 @@ public class GoogleSearchAgentApp {
         // Agent Interaction
         callAgent(runner, "what's the latest ai news?");
     }
-    
+
 }
