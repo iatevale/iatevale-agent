@@ -29,8 +29,8 @@ public class LongRunningFunctionExample {
         final Session session = runner.sessionService().createSession(agent.name(), USER_ID, null, null).blockingGet();
         final LongRunningFunctionExample example = new LongRunningFunctionExample(runner, session);
         example.turn1();
-        example.turn2();
-        example.turn3();
+        final String ticketId = example.turn2();
+        example.turn3(ticketId);
         System.out.println("Long running function completed successfully.");
     }
 
@@ -74,7 +74,7 @@ public class LongRunningFunctionExample {
 
     }
 
-    private void turn2() {
+    private String turn2() {
 
         // --- Turn 2: App provides initial ticket_id (simulating async tool completion) ---
         System.out.println("\n--- Turn 2: App provides ticket_id ---");
@@ -95,10 +95,11 @@ public class LongRunningFunctionExample {
 
         System.out.println("ACTION: Sent ticket_id " + ticketId + " to agent.");
 
+        return ticketId;
 
     }
 
-    private void turn3() {
+    private void turn3(String ticketId) {
         // --- Turn 3: App provides ticket status update ---
         System.out.println("\n--- Turn 3: App provides ticket status ---");
         FunctionResponse ticketStatusFuncResponse =
